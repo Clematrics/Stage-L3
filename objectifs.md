@@ -10,27 +10,28 @@
 
 ### Liste de programmes à coder en assembleur
 
-- [ ] Arithmétique :
+- [x] Arithmétique :
   - [x] Calcul de `x -> (0x5e301a8b + x) <<< 5 - (x & 0x3309)`
-  - [ ] Expression pour des nombres aléatoires avec un Linear Congruential Generator
-  - [ ] Calcul du miroir d'un registre
+  - [x] Expression pour des nombres aléatoires avec un Linear Congruential Generator
 
-- [ ] Tests :
-  - [ ] Un simple match sur les valeurs de `x` : `x < 0`, `0 <= x < 10`, `10 <= x < 20`, `20 <= x < 30`,`30 <= x < 40`,`40 <= x < 50`,`50 <= x`
+- [x] Tests :
+  - [x] Un simple match sur les valeurs de `x` : `x < 0`, `0 <= x < 100`, `100 <= x`
 
 - [ ] Boucles :
+  - [x] Calcul du miroir d'un registre
+  - [ ] Calculer la suite de Fibonnaci en temps $\mathcal{O}(n)$ et espace $\mathcal{O}(1)$
   - [ ] Un jeu de + ou -
-  - [ ] Calculer la suite de Fibonnaci en temps O(n) et espace O(1)
 
 - [ ] Fonctions :
   - [x] Appel à `scanf` et `printf` pour récupérer un entier et afficher un entier
-  - [ ] Initialisation d'un tableau
+  - [ ] Initialisation d'un tableau par une fonction du second ordre
   - [ ] Somme d'un tableau d'une taille donnée
   - [ ] Fibonnaci récursif et non optimal
   - [ ] Calcul de la factorielle en récursif
 
-- Tableaux :
-  - Calcul de la suite de Fibonnaci avec mémoïsation
+- [ ] Tableaux :
+  - [ ] Comparaison de chaînes de caractères
+  - [ ] Calcul de la suite de Fibonnaci avec mémoïsation
 
 ## Phase 1 : Étude de la micro-architecture avec pipeline out-of-order
 
