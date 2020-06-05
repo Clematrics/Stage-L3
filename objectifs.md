@@ -2,11 +2,11 @@
 
 ## Phase 0 : Familiarisation avec RISC-V (environ une semaine)
 
-- [x] Lire la spécification du RISC-V (le bloc 32I seulement)  
-- [x] Comprendre l'encodage des instructions en binaire  
-- [x] Installer un environnement RISC-V (Cross-compiler + simulateur)  
-- [ ] Transcrire du code C simple en instructions assembleur RISC et le tester.
-(Reprendre un cours classique d'assembleur et l'adapter pour couvrir : arithmétique entière, expressions, tests, boucles, fonctions et tableaux)  
+- [x] Lire la spécification du RISC-V (le bloc 32I seulement)
+- [x] Comprendre l'encodage des instructions en binaire
+- [x] Installer un environnement RISC-V (Cross-compiler + simulateur)
+- [ ] Transcrire du code C simple en instructions assembleur RISC et le tester.(Reprendre un cours classique d'assembleur et l'adapter pour couvrir : arithmétique entière, expressions, tests, boucles, fonctions et tableaux)
+- [ ] Faire une ébauche de décodage d'instructions binaires
 
 ### Liste de programmes à coder en assembleur
 
@@ -19,19 +19,19 @@
 
 - [ ] Boucles :
   - [x] Calcul du miroir d'un registre
-  - [ ] Calculer la suite de Fibonnaci en temps $\mathcal{O}(n)$ et espace $\mathcal{O}(1)$
+  - [ ] Calculer la suite de Fibonacci en temps $\mathcal{O}(n)$ et espace $\mathcal{O}(1)$
   - [ ] Un jeu de + ou -
 
 - [ ] Fonctions :
   - [x] Appel à `scanf` et `printf` pour récupérer un entier et afficher un entier
   - [ ] Initialisation d'un tableau par une fonction du second ordre
   - [ ] Somme d'un tableau d'une taille donnée
-  - [ ] Fibonnaci récursif et non optimal
+  - [ ] Fibonacci récursif et non optimal
   - [ ] Calcul de la factorielle en récursif
 
 - [ ] Tableaux :
   - [ ] Comparaison de chaînes de caractères
-  - [ ] Calcul de la suite de Fibonnaci avec mémoïsation
+  - [ ] Calcul de la suite de Fibonacci avec mémoïsation
 
 ## Phase 1 : Étude de la micro-architecture avec pipeline out-of-order
 

@@ -1,5 +1,31 @@
 # Journal de stage
 
+## 05/06/2020
+
+Création d'un décodeur d'instructions RISC-V selon l'architecture `rv32im`.
+Le décodage des *immdiates* est incorrect cependant. L'opération effectuée semble être celle d'encodage plutôt que de décodage. De plus, la conversion de valeurs hexadécimales en binaire ne semble pas correspondre. Problème d'*endianness* ? Le nombre de bits set est différent aussi...
+
+## 04/06/2020
+
+Conversion en assembleur de certains programmes C :
+
+- [x] Arithmétique :
+  - [x] Calcul de `x -> (0x5e301a8b + x) <<< 5 - (x & 0x3309)`
+  - [x] Expression pour des nombres aléatoires avec un Linear Congruential Generator
+
+- [x] Tests :
+  - [x] Un simple match sur les valeurs de `x` : `x < 0`, `0 <= x < 100`, `100 <= x`
+
+- [ ] Boucles :
+  - [x] Calcul du miroir d'un registre
+
+- [ ] Fonctions :
+  - [x] Appel à `scanf` et `printf` pour récupérer un entier et afficher un entier
+
+> J'ai mis en place le git, disponible ici : [lien](https://github.com/Clematrics/Stage-L3)
+> Ma journée se résume à la mise en place de celui-ci et d'écrire les documents pour qu'il soit lisible.
+> J'ai aussi commencé à convertir les programmes C en assembleur. Ce que je fais, c'est que je code un programme en C qui fait ce que j'ai écrit dans le fichier ojectifs.md, je vérifie qu'il se comporte bien, puis je code l'assembleur. Suite à mes entraînements d'hier, je ne ressens plus le besoin de regarder ce que le compilateur crée comme assembleur pour le comparer au mien. Je vérifie ensuite que mon code se comporte comme celui du programme C.
+
 ## 03/06/2020
 
 Pour compiler en 32 bits sur la toolchain **64 bits** : `-march=rv32im -mabi=ilp32`
