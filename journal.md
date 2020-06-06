@@ -3,7 +3,9 @@
 ## 05/06/2020
 
 Création d'un décodeur d'instructions RISC-V selon l'architecture `rv32im`.
-Le décodage des *immdiates* est incorrect cependant. L'opération effectuée semble être celle d'encodage plutôt que de décodage. De plus, la conversion de valeurs hexadécimales en binaire ne semble pas correspondre. Problème d'*endianness* ? Le nombre de bits set est différent aussi...
+Le décodage des *immediates* est incorrect cependant. L'opération effectuée semble être celle d'encodage plutôt que de décodage. De plus, la conversion de valeurs hexadécimales en binaire ne semble pas correspondre.
+
+Note du lendemain matin : À part l'extension de signe des immédiats qui n'était pas réalisée, finalement, tout est correct. L'immédiat donné pour les branches et les jumps dans *objdump* sont les adresses absolues, mais dans le binaire, les adresses sont **relatives**.
 
 ## 04/06/2020
 

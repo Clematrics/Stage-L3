@@ -6,7 +6,7 @@
 - [x] Comprendre l'encodage des instructions en binaire
 - [x] Installer un environnement RISC-V (Cross-compiler + simulateur)
 - [ ] Transcrire du code C simple en instructions assembleur RISC et le tester.(Reprendre un cours classique d'assembleur et l'adapter pour couvrir : arithmétique entière, expressions, tests, boucles, fonctions et tableaux)
-- [ ] Faire une ébauche de décodage d'instructions binaires
+- [x] Faire une ébauche de décodage d'instructions binaires
 
 ### Liste de programmes à coder en assembleur
 

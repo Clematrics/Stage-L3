@@ -93,10 +93,11 @@ void decodeIType(Instruction& instr){
 	uint32_t func3 			= (instr.raw & 0x00007000) >> 12;
 	uint32_t source1 		= (instr.raw & 0x000F8000) >> 15;
 	uint32_t imm_11_0 		= (instr.raw & 0xFFF00000) >> 20;
+	uint32_t sign_extension = (instr.raw & 0x80000000) >> 31 ? 0xFFFFF000 : 0x00000000;
 
 	instr.destination	= static_cast<Register>(destination);
 	instr.source1 		= static_cast<Register>(source1);
-	instr.immediate		= { imm_11_0, 0x00000FFF };
+	instr.immediate		= { sign_extension | imm_11_0, 0x00000FFF };
 
 	if (instr.opcode == Opcode::FENCE && func3 == 0b000) {
 		instr.name = InstructionName::FENCE;
@@ -127,16 +128,17 @@ void decodeIType(Instruction& instr){
 }
 
 void decodeSType(Instruction& instr){
-	uint32_t imm_4_0 	= (instr.raw & 0x00000F80) >>  7;
-	uint32_t func3 		= (instr.raw & 0x00007000) >> 12;
-	uint32_t source1 	= (instr.raw & 0x000F8000) >> 15;
-	uint32_t source2 	= (instr.raw & 0x01F00000) >> 20;
-	uint32_t imm_11_5 	= (instr.raw & 0xFE000000) >> 25;
+	uint32_t imm_4_0 		= (instr.raw & 0x00000F80) >>  7;
+	uint32_t func3 			= (instr.raw & 0x00007000) >> 12;
+	uint32_t source1 		= (instr.raw & 0x000F8000) >> 15;
+	uint32_t source2 		= (instr.raw & 0x01F00000) >> 20;
+	uint32_t imm_11_5 		= (instr.raw & 0xFE000000) >> 25;
+	uint32_t sign_extension = (instr.raw & 0x80000000) >> 31 ? 0xFFFFF000 : 0x00000000;
 
 	instr.func3 		= func3;
 	instr.source1 		= static_cast<Register>(source1);
 	instr.source2 		= static_cast<Register>(source2);
-	instr.immediate		= { (imm_11_5 << 5) + imm_4_0, 0x00000FFF };
+	instr.immediate		= { sign_extension | (imm_11_5 << 5) | imm_4_0, 0x00000FFF };
 
 
 	if (instr.opcode == Opcode::STORE && func3 == 0b000) { instr.name = InstructionName::SB; return; }
@@ -153,11 +155,12 @@ void decodeBType(Instruction& instr){
 	uint32_t source2 	= (instr.raw & 0x01F00000) >> 20;
 	uint32_t imm_10_5 	= (instr.raw & 0x7E000000) >> 25;
 	uint32_t imm_12 	= (instr.raw & 0x80000000) >> 31;
+	uint32_t sign_extension = imm_12 ? 0xFFFFE000 : 0x00000000;
 
 	instr.func3 		= func3;
 	instr.source1 		= static_cast<Register>(source1);
 	instr.source2 		= static_cast<Register>(source2);
-	instr.immediate		= { (imm_12 << 12) + (imm_11 << 11) + (imm_10_5 << 5) + (imm_4_1 << 1), 0x00001FFE };
+	instr.immediate		= { sign_extension | (imm_12 << 12) | (imm_11 << 11) | (imm_10_5 << 5) | (imm_4_1 << 1), 0x00001FFE };
 
 
 	if (instr.opcode == Opcode::BRANCH && func3 == 0b000) { instr.name = InstructionName::BEQ;	return; }
@@ -187,10 +190,11 @@ void decodeJType(Instruction& instr){
 	uint32_t imm_11 		= (instr.raw & 0x00100000) >> 20;
 	uint32_t imm_10_1 		= (instr.raw & 0x7FE00000) >> 21;
 	uint32_t imm_20 		= (instr.raw & 0x80000000) >> 31;
+	uint32_t sign_extension = imm_20 ? 0xFFE00000 : 0x00000000;
 
 	instr.name = InstructionName::JAL;
 	instr.destination = static_cast<Register>(destination);
-	instr.immediate	= { (imm_20 << 20) + (imm_19_12 << 12) + (imm_11 << 11) + (imm_10_1 << 1), 0x001FFFFE };
+	instr.immediate	= { sign_extension | (imm_20 << 20) | (imm_19_12 << 12) | (imm_11 << 11) | (imm_10_1 << 1), 0x001FFFFE };
 }
 
 void dispatchDecode(Instruction& instr){
@@ -247,8 +251,46 @@ std::ostream& operator<<(std::ostream& stream, Opcode& code){
 }
 
 std::ostream& operator<<(std::ostream& stream, const Register& reg){
+	switch (reg) {
+	case Register::x0: 	stream << "x0"; 	break;
+	case Register::x1: 	stream << "ra"; 	break;
+	case Register::x2: 	stream << "sp"; 	break;
+	case Register::x3: 	stream << "gp"; 	break;
+	case Register::x4: 	stream << "tp"; 	break;
+	case Register::x5: 	stream << "t0"; 	break;
+	case Register::x6: 	stream << "t1"; 	break;
+	case Register::x7: 	stream << "t2"; 	break;
+	case Register::x8: 	stream << "s0"; 	break;
+	case Register::x9: 	stream << "s1"; 	break;
+	case Register::x10: stream << "a0"; 	break;
+	case Register::x11: stream << "a1"; 	break;
+	case Register::x12: stream << "a2"; 	break;
+	case Register::x13: stream << "a3"; 	break;
+	case Register::x14: stream << "a4"; 	break;
+	case Register::x15: stream << "a5"; 	break;
+	case Register::x16: stream << "a6"; 	break;
+	case Register::x17: stream << "a7"; 	break;
+	case Register::x18: stream << "s2"; 	break;
+	case Register::x19: stream << "s3"; 	break;
+	case Register::x20: stream << "s4"; 	break;
+	case Register::x21: stream << "s5"; 	break;
+	case Register::x22: stream << "s6"; 	break;
+	case Register::x23: stream << "s7"; 	break;
+	case Register::x24: stream << "s8"; 	break;
+	case Register::x25: stream << "s9"; 	break;
+	case Register::x26: stream << "s10"; 	break;
+	case Register::x27: stream << "s11"; 	break;
+	case Register::x28: stream << "t3"; 	break;
+	case Register::x29: stream << "t4"; 	break;
+	case Register::x30: stream << "t5"; 	break;
+	case Register::x31: stream << "t6"; 	break;
+	default:
+		stream << "unknown";
+		break;
+	}
+
 	uint32_t nb = static_cast<uint32_t>(reg);
-	stream << 'x' << nb;
+	stream << "(x" << nb << ')';
 	return stream;
 }
 
@@ -259,7 +301,7 @@ std::ostream& operator<<(std::ostream& stream, const Immediate& imm){
 				(imm.immediate & mask ? '1' : '0')
 			:	'-');
 	}
-	stream << '(' << "0x" << std::hex << imm.immediate << "; " << std::dec << imm.immediate << ')';
+	stream << '(' << "0x" << std::hex << imm.immediate << "; " << std::dec << static_cast<int32_t>(imm.immediate) << ')';
 	return stream;
 }
 
@@ -395,18 +437,7 @@ std::ostream& operator<<(std::ostream& stream, const Instruction& instr){
 			<< "Raw : " <<  instr.raw;
 		break;
 	}
-	stream << " }";
-	// Special cases
-	// if (instr.name == InstructionName::FENCE) {
-	// 	/* code */
-	// 	return stream;
-	// }
-	// if (	instr.name == InstructionName::EBREAK
-	// 	||	instr.name == InstructionName::ECALL)
-	// {
-	// 	/* code */
-	// 	return stream;
-	// }
+	stream << " }\n";
 
 	return stream;
 }
