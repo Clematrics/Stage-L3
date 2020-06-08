@@ -1,0 +1,100 @@
+\documentclass[a4paper]{article}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm, paperwidth=35cm]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{backgrounds,arrows.meta}
+\usepackage{minted}
+
+\newcommand{\asm}{\mintinline{asm}}
+
+\begin{document}
+
+\raisebox{0.5ex}{\tikz{\draw[->, >=latex] (0,0) -- (2,0);}} représente les dépendances de registres.
+
+\raisebox{0.5ex}{\tikz{\draw[->, >=latex, dashed] (0,0) -- (2,0);}} représente les dépendances mémoires. Je suppose ici que les adresses ne sont pas calculées ni comparées entre elles, donc les écritures, écritures après lectures et lectures après écritures doivent se faire dans l'ordre.
+
+\raisebox{0.5ex}{\tikz{\draw[->, >=latex, dotted] (0,0) -- (2,0);}} représente les dépendances lors d'un changement de contexte : saut conditionnel ou inconditionnel (appel de fonction, boucle, ...). Cela permet de supposer que du code inconnu a été exécuté entre.
+
+\begin{center}
+\begin{tikzpicture}[>=latex, every node/.style={draw, fill=white}]
+	\node (c1) at ( +6,  2) {\asm|{ sp → r0 , ra → r1 , s0 → r2 , a0 → r3 , a1 → r4 , x0 → r5 , x1 → r6 }|};
+
+	\node  (0) at ( +6,  0) {(0) \asm|addi r7, r0, -16|};
+	\node  (1) at (  0, -2) {(1) \asm|sw r8, 12(r7)   |};
+	\node  (2) at (  0, -4) {(2) \asm|sw r9, 8(r7)    |};
+	\node  (3) at ( +6, -2) {(3) \asm|addi r10, r7, 16|};
+
+	\node  (4) at ( +6, -4) {(4) \asm|addi r11, r10, -12|};
+	\node  (5) at ( -6, -6) {(5) \asm|lui r12, %hi(get) |};
+	\node  (6) at ( -6, -8) {(6) \asm|addi r13, r12, %lo(get)|};
+	\node  (7) at (  0, -6) {(7) \asm|auipc r14, %hi(scanf)  |};
+	\node  (8) at (  0, -8) {(8) \asm|jalr r15, %lo(scanf)(r14)|};
+
+	\node (c2) at ( +6,-10) {\asm|{ sp → r16, ra → r17, s0 → r18, a0 → r19, a1 → r20, x0 → r21, x1 → r22 }|};
+	\node[above of=c2] (c2top) {};
+	\node[below of=c2] (c2bot) {};
+
+	\node  (9) at ( -6,-12) {(9)  \asm|lw r23, -12(r18) |};
+	\node (10) at (  0,-12) {(10) \asm|lui r24, %hi(prt) |};
+	\node (11) at (  0,-14) {(11) \asm|addi r25, r24, %lo(prt)|};
+	\node (12) at ( +6,-12) {(12) \asm|auipc r26, %hi(printf) |};
+	\node (13) at ( +6,-14) {(13) \asm|jalr r27, %lo(printf)(r26)|};
+
+	\node (c3) at ( +6,-16) {\asm|{ sp → r28, ra → r29, s0 → r30, a0 → r31, a1 → r32, x0 → r33, x1 → r34 }|};
+	\node[above of=c3] (c3top) {};
+	\node[below of=c3] (c3bot) {};
+
+	\node (14) at ( -6,-18) {(14) \asm|lui r34, 0      |};
+	\node (15) at (  0,-18) {(15) \asm|lw r35, 12(r28) |};
+	\node (16) at ( +6,-18) {(16) \asm|lw r36, 8(r28)  |};
+	\node (17) at (+12,-18) {(17) \asm|addi r37, r28, 16|};
+	\node (18) at (  0,-20) {(18) \asm|jalr r38, 0(r35) |};
+
+	\begin{scope}[on background layer]
+		\draw[->, dotted] (c1) -| (0);
+
+		\draw[dotted] (4) -- (c2top);
+		\draw[dotted] (6) |- (c2top);
+		\draw[dotted] (8) |- (c2top);
+		\draw[->, dotted] (c2top) -- (c2);
+
+		\draw[dotted] (c2) -- (c2bot);
+		\draw[->, dotted] (c2bot) -| (9);
+		\draw[->, dotted] (c2bot) -| (10);
+		\draw[->, dotted] (c2bot) -| (12);
+
+		\draw[dotted] (11) |- (c3top);
+		\draw[dotted] (13) |- (c3top);
+		\draw[->, dotted] (c3top) -- (c3);
+
+		\draw[dotted] (c3) -- (c3bot);
+		\draw[->, dotted] (c3bot) -| (14);
+		\draw[->, dotted] (c3bot) -| (15);
+		\draw[->, dotted] (c3bot) -| (16);
+		\draw[->, dotted] (c3bot) -| (17);
+	\end{scope}
+
+	\draw[->] (0) -- (1);
+	\draw[->] (0) -- (3);
+
+	\draw[->, dashed] (1) -- (2);
+
+	\draw[->, dashed] (2) -- (5);
+	\draw[->, dashed] (2) -- (7);
+
+	\draw[->] (3) -- (4);
+
+	\draw[->] (5) -- (6);
+
+	\draw[->] (7) -- (8);
+
+	\draw[->] (10) -- (11);
+
+	\draw[->] (12) -- (13);
+
+	\draw[->] (15) -- (18);
+
+\end{tikzpicture}
+\end{center}
+
+\end{document}
