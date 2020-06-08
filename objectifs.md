@@ -31,7 +31,7 @@
 
 - [ ] Tableaux :
   - [ ] Comparaison de chaînes de caractères
-  - [ ] Calcul de la suite de Fibonacci avec mémoïsation
+  - [x] Calcul de la suite de Fibonacci avec mémoïsation
 
 ## Phase 1 : Étude de la micro-architecture avec pipeline out-of-order
 

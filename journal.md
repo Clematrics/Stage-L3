@@ -1,11 +1,42 @@
 # Journal de stage
 
+## 08/06/2020
+
+Renommage des registres dans l'exemple `appel_asm.s` et création d'un graphe de dépendance entre les différentes instructions. Ces dépendances sont soit issues des registres, soit de le mémoire, soit d'un contexte différent.
+
+Conversion en assembleur du programme de calcul de la suite de Fibonacci :
+
+- [ ] Tableaux :
+  - [x] Calcul de la suite de Fibonacci avec mémoïsation
+
+Ceci a été fait pour illustrer le problème des différents types de dépendances lors du renommage.
+
+Quelques recherches supplémentaires ont été faites sur le renommage des registres et les différents problèmes que cela soulève. Quelques exemples :
+
+- Les écritures en mémoire doivent se faire dans le bon ordre. Un modèle (quoique complexe à mettre en place à première vue) est de renommer les adresses mémoires lors du décodage : les adresses doivent donc être calculées à cette étape puis rangées dans une structure capable de les retrouver rapidement
+- De la même manière, une écriture après lecture doit se faire dans le bon ordre, ainsi qu'une lecture après écriture.
+- Si une exception est levée par le processeur (instruction non reconnue, division par zéro, ...), la bonne table d'association (*i.e.* les bons registres) doit être rétablie pour qu'elle corresponde au programme s'il avait été fait dans l'ordre. Par exemple
+
+    ```asm
+    addi a0, x0, 10
+    addi t1, x0, 0
+    addi t2, x0, 4
+    div t1, t2, t1 # t1 <- 4/0 lève une exception
+    add a0, t2, 1 # indépendant de l'instruction précédente, et peut-être calculée avant. Lorsque l'exception est levée, a0 doit être rétabli à sa valeur précédente
+    ```
+
 ## 05/06/2020
 
 Création d'un décodeur d'instructions RISC-V selon l'architecture `rv32im`.
 Le décodage des *immediates* est incorrect cependant. L'opération effectuée semble être celle d'encodage plutôt que de décodage. De plus, la conversion de valeurs hexadécimales en binaire ne semble pas correspondre.
 
 Note du lendemain matin : À part l'extension de signe des immédiats qui n'était pas réalisée, finalement, tout est correct. L'immédiat donné pour les branches et les jumps dans *objdump* sont les adresses absolues, mais dans le binaire, les adresses sont **relatives**.
+
+> J'ai effectivement embrayé sur le décodeur hier, comme conseillé.
+> J'ai choisi de le faire en C++ avec une approche très fortement typée pour éviter des erreurs bêtes et d'être sûr de bien comprendre les détails. Ça a été payant, car le compilateur m'a évité pas mal d'erreurs.
+> Cependant, dans ma version d'hier, il restait deux problèmes, que j'ai résolu ce matin : le premier était que je n'effectuais pas l'extension de signe des immédiats, c'est corrigé maintenant. Le second était que mon programme était correct, mais que je ne comprenais pas pourquoi : il se trouve que objdump affiche (et c'est logique) les addresses des sauts et branchement en mode absolu, alors que l'encodage se fait avec du relatif. Je ne voyais donc pas pourquoi les valeurs données ne correspondaient pas.
+> Je referai peut-être certaines fonctions pour les rendre plus légères.
+> (merci d'ailleurs pour la typo, c'est effectivement Fibonacci)
 
 ## 04/06/2020
 
