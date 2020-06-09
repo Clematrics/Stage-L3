@@ -1,5 +1,12 @@
 # Journal de stage
 
+## 09/06/2020
+
+Conversion en assembleur du programme calculant la suite de Fibonacci récursivement, puis construction de la trace du code assembleur avec renommage et table d'association lors du calcul de `fib(3)`.
+
+- [ ] Fonctions :
+  - [x] Fibonacci récursif
+
 ## 08/06/2020
 
 Renommage des registres dans l'exemple `appel_asm.s` et création d'un graphe de dépendance entre les différentes instructions. Ces dépendances sont soit issues des registres, soit de le mémoire, soit d'un contexte différent.
@@ -24,6 +31,16 @@ Quelques recherches supplémentaires ont été faites sur le renommage des regis
     div t1, t2, t1 # t1 <- 4/0 lève une exception
     add a0, t2, 1 # indépendant de l'instruction précédente, et peut-être calculée avant. Lorsque l'exception est levée, a0 doit être rétabli à sa valeur précédente
     ```
+
+> Je me suis concentré aujourd'hui sur le renommage des registres et leurs conséquences sur le réordonnancement des instructions, dans quels cas peut-on effectivement changer l'ordre, ... en faisant l'hypothèse d'une infinité de registres physiques.
+> J'ai donc fait un exemple de renommage avec table d'association sur un programme relativement simple (celui d'appel de deux fonctions de la bibliothèque standard) et j'ai fait un graphe des dépendances entre instructions, prenant en compte les dépendances de registres, mémoire, et en prenant en compte l'exécution de code inconnu. Ce n'est pas le cas du processeur bien sûr, mais c'était pour me poser les questions sur les branches, et comment elles doivent être gérées. Pour l'instant, à moins d'avoir un prédicteur de branche, je ne vois que deux solutions possibles :
+>
+> - soit l'exécution est mise en pause le temps de résoudre le branchement
+> - soit les deux branches sont exécutées en "parallèle", avec deux tables d'associations différentes, et lors du branchement, la bonne est conservée.
+>
+> J'ai également converti un programme C vers assembleur en faisant exprès de faire des écritures et lectures successives en mémoire pour faire ressortir les problèmes de WAR et RAW. Je n'ai pas fait de graphe de dépendance au propre cependant. Pour l'instant la seule idée qui me vient pour éviter d'arrêter l'exécution à chaque lecture / écriture est soit de faire un renommage des adresses mémoire, soit d'avoir recours à une file stockant les adresses occupées (cela me semble plus simple, mais n'enlève pas les dépendances). Dans les deux cas cependant, cela signifie pouvoir calculer les adresses lors du décodage.
+> J'ai noté aussi, même si ce n'est pas prioritaire, que les exceptions peuvent poser problème car la table d'association après la levée doit correspondre à celle attendue par le code non réordonné.
+> Je me concentrerai demain sur le cas avec nombre limité de registres physiques.
 
 ## 05/06/2020
 

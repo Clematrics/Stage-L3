@@ -26,7 +26,7 @@
   - [x] Appel à `scanf` et `printf` pour récupérer un entier et afficher un entier
   - [ ] Initialisation d'un tableau par une fonction du second ordre
   - [ ] Somme d'un tableau d'une taille donnée
-  - [ ] Fibonacci récursif et non optimal
+  - [x] Fibonacci récursif
   - [ ] Calcul de la factorielle en récursif
 
 - [ ] Tableaux :
