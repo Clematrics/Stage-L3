@@ -1,5 +1,6 @@
+% !TEX encoding = UTF-8 Unicode
 \documentclass[a4paper]{article}
-\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm, paperwidth=35cm]{geometry}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm, paperwidth=80cm]{geometry}
 
 \usepackage{tikz}
 \usetikzlibrary{backgrounds,arrows.meta}
@@ -63,6 +64,7 @@
 		\draw[->, dotted] (c2bot) -| (10);
 		\draw[->, dotted] (c2bot) -| (12);
 
+		\draw[dotted] (9) |- (c3top);
 		\draw[dotted] (11) |- (c3top);
 		\draw[dotted] (13) |- (c3top);
 		\draw[->, dotted] (c3top) -- (c3);
@@ -94,6 +96,377 @@
 
 	\draw[->] (15) -- (18);
 
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[>=latex, every node/.style={draw, fill=white}]
+	\node (00) at ( 0,  -0) {(00) \asm|lw r007, -12(r002)      |};
+	\node (01) at ( 6,  -0) {(01) \asm|addi r008, r006, 0        |};
+	\node (02) at (12,  -0) {(02) \asm|addi r009, r006, 1        |};
+	\node (03) at (18,  -0) {(03) \asm|auipc r010, %hi(fib)       |};
+	\node (05) at (24,  -0) {(05) \asm|addi r012, r000, -16      |};
+	\node (45) at (30,  -0) {(45) \asm|jal r052, .fibL2         |};
+	\node (50) at (36,  -0) {(50) \asm|jal r057, .fibL2         |};
+	\node (55) at (42,  -0) {(55) \asm|jal r062, .fibL2         |};
+	\node (13) at (48,  -0) {(13) \asm|auipc r020, %hi(fib)       |};
+	\node (23) at (54,  -0) {(23) \asm|auipc r030, %hi(fib)       |};
+	\node (33) at (60,  -0) {(33) \asm|auipc r040, %hi(fib)       |};
+
+	\node (09) at ( 0,  -3) {(09) \asm|beq r007, r006, .fibL1   |};
+	\node (10) at ( 6,  -3) {(10) \asm|addi r017, r007, -1       |};
+	\node (11) at (12,  -3) {(11) \asm|add r018, r008, r009     |};
+	\node (04) at (18,  -3) {(04) \asm|jalr r011, %lo(fib)(r010) |};
+	\node (06) at (24,  -3) {(06) \asm|sw r013, 12(r012)       |};
+	\node (07) at (30,  -3) {(07) \asm|sw r014, 8(r012)        |};
+	\node (08) at (36,  -3) {(08) \asm|addi r015, r012, 16       |};
+	\node (15) at (42,  -3) {(15) \asm|addi r022, r012, -16      |};
+	\node (14) at (48,  -3) {(14) \asm|jalr r021, %lo(fib)(r020) |};
+	\node (24) at (54,  -3) {(24) \asm|jalr r031, %lo(fib)(r030) |};
+	\node (34) at (60,  -3) {(34) \asm|jalr r041, %lo(fib)(r040) |};
+
+	\node (19) at ( 0,  -6) {(19) \asm|beq r017, r006, .fibL1   |};
+	\node (20) at ( 6,  -6) {(20) \asm|addi r027, r017, -1       |};
+	\node (12) at (12,  -6) {(12) \asm|sub r019, r018, r018     |};
+	\node (25) at (30,  -6) {(25) \asm|addi r032, r022, -16      |};
+	\node (16) at (36,  -6) {(16) \asm|sw r023, 12(r022)       |};
+	\node (17) at (42,  -6) {(17) \asm|sw r024, 8(r022)        |};
+	\node (18) at (48,  -6) {(18) \asm|addi r025, r022, 16       |};
+
+	\node (29) at ( 6,  -9) {(29) \asm|beq r027, r006, .fibL1   |};
+	\node (21) at (12,  -9) {(21) \asm|add r028, r019, r018     |};
+	\node (26) at (18,  -9) {(26) \asm|sw r033, 12(r032)       |};
+	\node (27) at (24,  -9) {(27) \asm|sw r034, 8(r032)        |};
+	\node (28) at (30,  -9) {(28) \asm|addi r035, r032, 16       |};
+	\node (35) at (36,  -9) {(35) \asm|addi r042, r032, -16      |};
+
+	\node (30) at ( 0, -12) {(30) \asm|addi r037, r027, -1       |};
+	\node (22) at ( 6, -12) {(22) \asm|sub r029, r028, r019     |};
+	\node (43) at (24, -12) {(43) \asm|addi r050, r042, 16       |};
+	\node (36) at (30, -12) {(36) \asm|sw r043, 12(r042)       |};
+	\node (37) at (36, -12) {(37) \asm|sw r044, 8(r042)        |};
+	\node (38) at (42, -12) {(38) \asm|addi r045, r042, 16       |};
+
+	\node (39) at ( 0, -15) {(39) \asm|beq r037, r006, .fibL1   |};
+	\node (31) at ( 6, -15) {(31) \asm|add r038, r029, r028     |};
+	\node (46) at (18, -15) {(46) \asm|lw r053, 12(r050)       |};
+	\node (47) at (24, -15) {(47) \asm|lw r054, 8(r050)        |};
+	\node (48) at (30, -15) {(48) \asm|addi r055, r050, 16       |};
+	\node (41) at (36, -15) {(41) \asm|lw r048, 12(r042)       |};
+	\node (42) at (42, -15) {(42) \asm|lw r049, 8(r042)        |};
+
+	\node (32) at ( 0, -18) {(32) \asm|sub r039, r038, r029     |};
+	\node (49) at (12, -18) {(49) \asm|jalr r056, 0(r053)        |};
+	\node (51) at (18, -18) {(51) \asm|lw r058, 12(r055)       |};
+	\node (52) at (24, -18) {(52) \asm|lw r059, 8(r055)        |};
+	\node (53) at (30, -18) {(53) \asm|addi r060, r055, 16       |};
+	\node (44) at (36, -18) {(44) \asm|jalr r051, 0(r048)        |};
+
+	\node (40) at ( 0, -21) {(40) \asm|addi r047, r039, 0        |};
+	\node (54) at (12, -21) {(54) \asm|jalr r061, 0(r058)        |};
+	\node (56) at (18, -21) {(56) \asm|lw r063, 12(r060)       |};
+	\node (57) at (24, -21) {(57) \asm|lw r064, 8(r060)        |};
+	\node (58) at (30, -21) {(58) \asm|addi r065, r060, 16       |};
+
+	\node (59) at (18, -24) {(59) \asm|jalr r066, 0(r063)        |};
+
+	%----------------------------------
+	\draw[->] (00.south) -- (09.north);
+	\draw[->] (00.south) -- (10.north);
+
+	\draw[->] (01.south) -- (11.north);
+
+	\draw[->] (02.south) -- (11.north);
+
+	\draw[->] (03.south) -- (04.north);
+
+	\draw[->] (05.south) -- (06.north);
+	\draw[->] (05.south) -- (07.north);
+	\draw[->] (05.south) -- (08.north);
+	\draw[->] (05.south) -- (15.north);
+
+	\draw[->] (13.south) -- (14.north);
+
+	\draw[->] (23.south) -- (24.north);
+
+	\draw[->] (33.south) -- (34.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (10.south) -- (19.north);
+	\draw[->] (10.south) -- (20.north);
+
+	\draw[->] (11.south) -- (12.north);
+	\draw[->] (11.south) -- (15, -6) -- (21.north);
+
+	\draw[->] (15.south) -- (16.north);
+	\draw[->] (15.south) -- (17.north);
+	\draw[->] (15.south) -- (18.north);
+	\draw[->] (15.south) -- (25.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (12.south) -- (21.north);
+	\draw[->] (12.south) -- (22.north);
+
+	\draw[->] (20.south) -- (29.north);
+	\draw[->] (20.south) -- (30.north);
+
+	\draw[->] (25.south) -- (26.north);
+	\draw[->] (25.south) -- (27.north);
+	\draw[->] (25.south) -- (28.north);
+	\draw[->] (25.south) -- (35.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (21.south) -- (22.north);
+	\draw[->] (21.south) -- (31.north);
+
+	\draw[->] (35.south) -- (36.north);
+	\draw[->] (35.south) -- (37.north);
+	\draw[->] (35.south) -- (38.north);
+	\draw[->] (35.south) -- (43.north);
+
+	\draw[->, dashed] (36.south) -- (41.north);
+	\draw[->, dashed] (37.south) -- (42.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (22.south) -- (31.north);
+	\draw[->] (22.south) -- (32.north);
+
+	\draw[->] (30.south) -- (39.north);
+
+	\draw[->] (41.south) -- (44.north);
+
+	\draw[->] (43.south) -- (46.north);
+	\draw[->] (43.south) -- (47.north);
+	\draw[->] (43.south) -- (48.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (31.south) -- (32.north);
+
+	\draw[->] (46.south) -- (49.north);
+
+	\draw[->] (48.south) -- (51.north);
+	\draw[->] (48.south) -- (52.north);
+	\draw[->] (48.south) -- (53.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (32.south) -- (40.north);
+
+	\draw[->] (51.south) -- (54.north);
+
+	\draw[->] (53.south) -- (56.north);
+	\draw[->] (53.south) -- (57.north);
+	\draw[->] (53.south) -- (58.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (56.south) -- (59.north);
+	%----------------------------------
+\end{tikzpicture}
+\end{center}
+
+
+\begin{center}
+\begin{tikzpicture}[>=latex, every node/.style={draw, fill=white}]
+	\node (00) at ( 0,  -0) {(00) \asm|lw r007, -12(r002)      |};
+	\node (01) at ( 6,  -0) {(01) \asm|addi r008, r006, 0        |};
+	\node (02) at (12,  -0) {(02) \asm|addi r009, r006, 1        |};
+	\node (45) at (30,  -0) {(45) \asm|jal r052, .fibL2         |};
+	\node (50) at (36,  -0) {(50) \asm|jal r057, .fibL2         |};
+	\node (55) at (42,  -0) {(55) \asm|jal r062, .fibL2         |};
+
+	\node (09) at ( 0,  -3) {(09) \asm|beq r007, r006, .fibL1   |};
+	\node (10) at ( 6,  -3) {(10) \asm|addi r017, r007, -1       |};
+	\node (11) at (12,  -3) {(11) \asm|add r018, r008, r009     |};
+	\node (06) at (24,  -3) {(06) \asm|sw r013, 12(r012)       |};
+	\node (07) at (30,  -3) {(07) \asm|sw r014, 8(r012)        |};
+	\node (08) at (36,  -3) {(08) \asm|addi r015, r012, 16       |};
+
+	\node (19) at ( 0,  -6) {(19) \asm|beq r017, r006, .fibL1   |};
+	\node (20) at ( 6,  -6) {(20) \asm|addi r027, r017, -1       |};
+	\node (12) at (12,  -6) {(12) \asm|sub r019, r018, r018     |};
+	\node (16) at (36,  -6) {(16) \asm|sw r023, 12(r022)       |};
+	\node (17) at (42,  -6) {(17) \asm|sw r024, 8(r022)        |};
+	\node (18) at (48,  -6) {(18) \asm|addi r025, r022, 16       |};
+
+	\node (29) at ( 6,  -9) {(29) \asm|beq r027, r006, .fibL1   |};
+	\node (21) at (12,  -9) {(21) \asm|add r028, r019, r018     |};
+	\node (26) at (18,  -9) {(26) \asm|sw r033, 12(r032)       |};
+	\node (27) at (24,  -9) {(27) \asm|sw r034, 8(r032)        |};
+	\node (28) at (30,  -9) {(28) \asm|addi r035, r032, 16       |};
+
+	\node (30) at ( 0, -12) {(30) \asm|addi r037, r027, -1       |};
+	\node (22) at ( 6, -12) {(22) \asm|sub r029, r028, r019     |};
+	\node (36) at (30, -12) {(36) \asm|sw r043, 12(r042)       |};
+	\node (37) at (36, -12) {(37) \asm|sw r044, 8(r042)        |};
+	\node (38) at (42, -12) {(38) \asm|addi r045, r042, 16       |};
+
+	\node (39) at ( 0, -15) {(39) \asm|beq r037, r006, .fibL1   |};
+	\node (31) at ( 6, -15) {(31) \asm|add r038, r029, r028     |};
+	\node (47) at (24, -15) {(47) \asm|lw r054, 8(r050)        |};
+	\node (42) at (42, -15) {(42) \asm|lw r049, 8(r042)        |};
+
+	\node (32) at ( 0, -18) {(32) \asm|sub r039, r038, r029     |};
+	\node (49) at (12, -18) {(49) \asm|jalr r056, 0(r053)        |};
+	\node (52) at (24, -18) {(52) \asm|lw r059, 8(r055)        |};
+	\node (44) at (36, -18) {(44) \asm|jalr r051, 0(r048)        |};
+
+	\node (40) at ( 0, -21) {(40) \asm|addi r047, r039, 0        |};
+	\node (54) at (12, -21) {(54) \asm|jalr r061, 0(r058)        |};
+	\node (57) at (24, -21) {(57) \asm|lw r064, 8(r060)        |};
+
+	\node (59) at (18, -24) {(59) \asm|jalr r066, 0(r063)        |};
+
+	%----------------------------------
+	\draw[->] (00.south) -- (09.north);
+	\draw[->] (00.south) -- (10.north);
+
+	\draw[->] (01.south) -- (11.north);
+
+	\draw[->] (02.south) -- (11.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (10.south) -- (19.north);
+	\draw[->] (10.south) -- (20.north);
+
+	\draw[->] (11.south) -- (12.north);
+	\draw[->] (11.south) -- (15, -6) -- (21.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (12.south) -- (21.north);
+	\draw[->] (12.south) -- (22.north);
+
+	\draw[->] (20.south) -- (29.north);
+	\draw[->] (20.south) -- (30.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (21.south) -- (22.north);
+	\draw[->] (21.south) -- (31.north);
+
+	\draw[->, dashed] (37.south) -- (42.north);
+	%----------------------------------
+
+	%----------------------------------
+	\draw[->] (22.south) -- (31.north);
+	\draw[->] (22.south) -- (32.north);
+
+	\draw[->] (30.south) -- (39.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (31.south) -- (32.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (32.south) -- (40.north);
+	%----------------------------------
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[>=latex, every node/.style={draw, fill=white}]
+	\node (09) at (-6,  -0) {(09) \asm|beq r007, r006, .fibL1   |};
+	\node (10) at ( 0,  -0) {(10) \asm|addi r017, r007, -1       |};
+	\node (01) at ( 6,  -0) {(01) \asm|addi r008, r006, 0        |};
+	\node (02) at (12,  -0) {(02) \asm|addi r009, r006, 1        |};
+	\node (45) at (30,  -0) {(45) \asm|jal r052, .fibL2         |};
+	\node (50) at (36,  -0) {(50) \asm|jal r057, .fibL2         |};
+	\node (55) at (42,  -0) {(55) \asm|jal r062, .fibL2         |};
+
+	\node (19) at ( 0,  -3) {(19) \asm|beq r017, r006, .fibL1   |};
+	\node (20) at ( 6,  -3) {(20) \asm|addi r027, r017, -1       |};
+	\node (11) at (12,  -3) {(11) \asm|add r018, r008, r009     |};
+	\node (08) at (36,  -3) {(08) \asm|addi r015, r012, 16       |};
+
+	\node (29) at ( 6,  -6) {(29) \asm|beq r027, r006, .fibL1   |};
+	\node (12) at (12,  -6) {(12) \asm|sub r019, r018, r018     |};
+	\node (18) at (48,  -6) {(18) \asm|addi r025, r022, 16       |};
+
+	\node (30) at ( 0,  -9) {(30) \asm|addi r037, r027, -1       |};
+	\node (21) at (12,  -9) {(21) \asm|add r028, r019, r018     |};
+	\node (28) at (30,  -9) {(28) \asm|addi r035, r032, 16       |};
+
+	\node (39) at ( 0, -12) {(39) \asm|beq r037, r006, .fibL1   |};
+	\node (22) at ( 6, -12) {(22) \asm|sub r029, r028, r019     |};
+	\node (38) at (42, -12) {(38) \asm|addi r045, r042, 16       |};
+
+	\node (31) at ( 6, -15) {(31) \asm|add r038, r029, r028     |};
+
+	\node (32) at ( 0, -18) {(32) \asm|sub r039, r038, r029     |};
+	\node (49) at (12, -18) {(49) \asm|jalr r056, 0(r053)        |};
+	\node (44) at (36, -18) {(44) \asm|jalr r051, 0(r048)        |};
+
+	\node (40) at ( 0, -21) {(40) \asm|addi r047, r039, 0        |};
+	\node (54) at (12, -21) {(54) \asm|jalr r061, 0(r058)        |};
+
+	\node (59) at (18, -24) {(59) \asm|jalr r066, 0(r063)        |};
+
+	%----------------------------------
+	\draw[->] (01.south) -- (11.north);
+
+	\draw[->] (02.south) -- (11.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (10.south) -- (19.north);
+	\draw[->] (10.south) -- (20.north);
+
+	\draw[->] (11.south) -- (12.north);
+	\draw[->] (11.south) -- (15, -6) -- (21.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (12.south) -- (21.north);
+	\draw[->] (12.south) -- (22.north);
+
+	\draw[->] (20.south) -- (29.north);
+	\draw[->] (20.south) -- (30.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (21.south) -- (22.north);
+	\draw[->] (21.south) -- (31.north);
+	%----------------------------------
+
+	%----------------------------------
+	\draw[->] (22.south) -- (31.north);
+	\draw[->] (22.south) -- (32.north);
+
+	\draw[->] (30.south) -- (39.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (31.south) -- (32.north);
+	%----------------------------------
+
+
+	%----------------------------------
+	\draw[->] (32.south) -- (40.north);
+	%----------------------------------
 \end{tikzpicture}
 \end{center}
 
