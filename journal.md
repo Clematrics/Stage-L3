@@ -1,11 +1,51 @@
 # Journal de stage
 
+## 12/06/2020
+
+Programmation de trois programmes utilisant OpenMP :
+
+- Un "hello world" affiché par plusieurs threads simultanément
+- Un programme pour calculer la somme d'un tableau (ici la somme des premiers entiers naturels)
+- Un calcul de la suite de Fibonacci de manière naïve. Seule les valeurs au-dessus de 20 ont été parallélisées pour permettre d'éviter la création de trop nombreuses *tasks*. Grâce à cela, l'amélioration des performances est nette pour `n = 40`.
+
+Lecture plus en profondeur de la documentation de *X_PAR*.
+
+Conversion du programme "hello world" en assembleur RISC-V avec l'extension *X_PAR*.
+
+## 11/06/2020
+
+Début du brouillon pour construire un pipeline complet. Seul l'étape de fetch et decoding a vraiment été traitée. L'issue, le writeback et le commit ont été traitées seulement superficiellement pour l'instant.
+
+Lecture de cours sur OpenMP, comme la parallélisation est organisée par le compilateur lorsque l'information est disponible statiquement.
+
+> Je n'ai rien eu de concret à commit sur le répertoire git :
+>
+> En effet, j'ai passé la matinée à faire des brouillons pour schématiser le pipeline out-of-order, mais je pense être encore loin d'avoir quelque chose de potable.
+> Sinon, l'après-midi, je me suis documenté sur OpenMP. Je vais essayer de produire du code aujourd'hui avec GCC classique pour tester ce que j'ai appris hier, et je vais essayer de voir comment faire le lien avec les différentes instructions spécifiques au LBP. Je ne pourrai pas vérifier mon code directement cependant.
+
+## 10/06/2020
+
+Reprise de la trace de `fib(3)` : construction du diagramme des dépendances en LaTeX des dépendances avec dans un premier temps le diagramme complet, puis le diagramme ne prenant en compte que les instructions autres que `sp ± k` ou modifiant `ra`. Enfin, le diagramme ne prenant en compte aucune instruction pour gérer le stack et la sauvegarde / le chargement des valeurs sur celui-ci.
+Correction mineure de la trace par ailleurs.
+
+> Ce que j'ai fait m'a permis de bien comprendre l'intérêt d'avoir plusieurs hart pour des appels successifs :
+>
+> on voit clairement que le nombre d'instructions à exécuter diminue drastiquement dès qu'on ne se charge plus du stack. (Du moins pour cette fonction simple. Je me doute qu'elle n'est pas représentative de ce qui est habituellement exécuté, mais ça donne une bonne idée de ce qu'il est possible de faire et de son intérêt).
+> J'ai passé pas mal de temps à éplucher aussi certaines références que vous m'avez données, notamment la solution proposée par Tomasulo, nom que j'ai vu revenir plusieurs fois dans mes recherches d'ailleurs.
+> J'ai commencé ce matin à faire une synthèse du pipeline out-of-order tel que je l'implémenterai, malheureusement sans pouvoir utiliser plusieurs harts puisque l'on reste sur du monocœur. Je vais essayer, je pense, d'en faire une rapide implémentation en python avec une architecture très restreinte : saut, load, store, addition de deux registres et d'un registre avec un immédiat.
+
 ## 09/06/2020
 
 Conversion en assembleur du programme calculant la suite de Fibonacci récursivement, puis construction de la trace du code assembleur avec renommage et table d'association lors du calcul de `fib(3)`.
 
 - [ ] Fonctions :
   - [x] Fibonacci récursif
+
+> Aujourd'hui, j'ai continué le travail sur les traces, notamment en faisant la trace d'un appel de fibonacci récursif.
+> J'en ai profité pour rapidement coder l'ensemble du programme en assembleur afin de vérifier que c'était correct.
+> Mes conclusions sont que les instructions après un saut ne devraient pas être renommées et réserver un registre physique dans le fichier de registres : cela peut conduire à un blocage du pipeline si les instructions après le call sont renommées, remplissant au fur et à mesure le fichier de registre. Un saut, conditionnel ou non, et un appel apparaissent donc pour moi comme des instructions bloquant tout renommage, afin d'en garantir la séquentialité ainsi que celle des dépendances.
+> J'ai réfléchi aussi à la phase du commit dans le cas où le fichier de registres est limité : il apparaît évident qu'il faille désallouer certains registres physiques lorsqu'il n'y en a plus besoin. La règle que j'ai déduite est qu'un registre peut être désalloué lorsqu'aucune instruction dans la liste d'attente ou en cours d'exécution n'a besoin de ce registre en entrée, et que le registre physique n'est pas présent dans la table d'association. Par exemple, si les registres utilisés sont r1, r2, r3, r4, et que la table d'association est { x1 -> r1, x2 -> r3, x3 -> r4 }, alors r2 peut-être désalloué s'il n'est pas requis par une instruction en attente / en cours d'exécution.
+> Enfin, j'ai essayé de m'amuser un peu avec Vivado HLS en regardant les exemples et essayer de les simuler. Malheureusement, j'ai un problème : aucun fichier csim.tcl n'existe dans les solutions, ce qui semble empêcher la co-simulation. J'ai rapidement cherché sur internet, sans trouver de réponses. J'ai l'impression qu'il s'agit d'un module que je n'ai pas coché lors de l'installation.
 
 ## 08/06/2020
 
@@ -142,6 +182,7 @@ Installation des outils pour travailler avec l'architecture RISC-V : ont été i
 - `riscv-isa-tools`
 
 Le `PATH` a été modifié dans `.zshrc` ainsi :
+
 ```bash
     export RISC=/opt/riscv
     path+=("$RISCV/bin")
