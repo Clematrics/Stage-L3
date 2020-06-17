@@ -4,3 +4,12 @@
 **/appel_dep.aux
 **/appel_dep.log
 **/appel_dep.synctex.gz
+**/.*/
+**/.project
+**/.vitis_hls_log_all.xml
+**/csim
+**/impl
+**/syn
+**/*_data.json
+**/*.log
+**/*.funcunit
