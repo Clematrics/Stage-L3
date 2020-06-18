@@ -1,9 +1,9 @@
 .vscode
 **/a.out
 **/_minted-appel_dep
-**/appel_dep.aux
-**/appel_dep.log
-**/appel_dep.synctex.gz
+**/*.aux
+**/*.log
+**/*.synctex.gz
 **/.*/
 **/.project
 **/.vitis_hls_log_all.xml

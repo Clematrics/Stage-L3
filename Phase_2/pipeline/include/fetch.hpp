@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.hpp"
+#include "../include/common.hpp"
 
 class Fetch {
 	word_t program_counter;
