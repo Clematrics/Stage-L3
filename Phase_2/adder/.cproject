@@ -53,8 +53,6 @@
                                     									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
                                     									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
-                                    									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/auto_cc/include"/>
@@ -88,8 +86,6 @@
                                 <option id="gnu.c.compiler.option.include.paths.1932972431" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
                                     									
@@ -255,8 +251,6 @@
                                     									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
                                     									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
-                                    									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/auto_cc/include"/>
@@ -280,8 +274,6 @@
                                 <option id="gnu.c.compiler.option.include.paths.1236828078" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
                                     									
