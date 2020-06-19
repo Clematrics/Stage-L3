@@ -19,14 +19,8 @@ int main() {
 	memory[4 * 10 + 2] = 0xff;
 	memory[4 * 10 + 3] = 0xff;
 
-	Pipeline pipeline;
-
 	uint32_t cycles = 0;
-	bool stop = false;
-	while (!stop) {
-		pipeline.pipeline(memory, &stop);
-		cycles++;
-	}
+	pipeline(memory, &cycles);
 
 	std::cout << "Cycles count : " << cycles << '\n';
 

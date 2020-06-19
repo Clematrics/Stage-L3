@@ -5,19 +5,19 @@
 ############################################################
 open_project pipeline
 set_top pipeline
-add_files pipeline/include/common.hpp
-add_files pipeline/include/config.hpp
-add_files pipeline/src/decode.cpp
-add_files pipeline/include/decode.hpp
-add_files pipeline/src/fetch.cpp
-add_files pipeline/include/fetch.hpp
-add_files pipeline/src/pipeline.cpp
 add_files pipeline/include/pipeline.hpp
-add_files -tb pipeline/tb/decode_tb.cpp
-add_files -tb pipeline/tb/fetch_tb.cpp
-add_files -tb pipeline/tb/pipeline_tb.cpp
+add_files pipeline/src/pipeline.cpp
+add_files pipeline/include/fetch.hpp
+add_files pipeline/src/fetch.cpp
+add_files pipeline/include/decode.hpp
+add_files pipeline/src/decode.cpp
+add_files pipeline/include/config.hpp
+add_files pipeline/include/common.hpp
+add_files -tb pipeline/tb/pipeline_tb.cpp -cflags "-Wno-unknown-pragmas" -csimflags "-Wno-unknown-pragmas"
+add_files -tb pipeline/tb/fetch_tb.cpp -cflags "-Wno-unknown-pragmas" -csimflags "-Wno-unknown-pragmas"
+add_files -tb pipeline/tb/decode_tb.cpp -cflags "-Wno-unknown-pragmas" -csimflags "-Wno-unknown-pragmas"
 open_solution "pipeline" -flow_target vivado
-set_part {xc7z020clg484-1}
+set_part {xc7z020-clg484-1}
 create_clock -period 10 -name default
 source "./pipeline/pipeline/directives.tcl"
 csim_design

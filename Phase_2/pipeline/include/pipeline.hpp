@@ -14,3 +14,5 @@ public:
 	Pipeline(word_t initial_program_counter = 0);
 	void pipeline(memory_t memory, bool* stop);
 };
+
+void pipeline(memory_t memory, uint32_t* cycles);

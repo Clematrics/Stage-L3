@@ -5,21 +5,6 @@
                 <option name="name" value="pipeline"/>
             </pragma>
         </directive>
-        <directive functionName="pipeline" label="" functionLabel="">
-            <pragma name="TOP">
-                <option name="name" value="pipeline"/>
-            </pragma>
-        </directive>
-        <directive functionName="pipeline" label="" functionLabel="">
-            <pragma name="TOP">
-                <option name="name" value="pipeline"/>
-            </pragma>
-        </directive>
-        <directive functionName="pipeline" label="" functionLabel="">
-            <pragma name="TOP">
-                <option name="name" value="pipeline"/>
-            </pragma>
-        </directive>
     </sourceFile>
 </AutoPilot:ProjectResources>
 

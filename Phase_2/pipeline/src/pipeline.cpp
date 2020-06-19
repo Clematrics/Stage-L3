@@ -18,10 +18,14 @@ void Pipeline::pipeline(memory_t memory, bool* stop) {
 // top function
 #include "../include/config.hpp"
 
-void pipeline() {
-	uint8_t memory[memory_bytes];
-	bool stop;
-
+void pipeline(memory_t memory, uint32_t* cycles) {
+	#pragma HLS INTERFACE s_axilite port=memory
+	#pragma HLS INTERFACE s_axilite port=cycle
+	#pragma HLS INTERFACE ap_ctrl_none port=return
 	Pipeline pipeline;
-	pipeline.pipeline(memory, &stop);
+	bool stop;
+	while(!stop) {
+		pipeline.pipeline(memory, &stop);
+		(*cycles)++;
+	}
 }

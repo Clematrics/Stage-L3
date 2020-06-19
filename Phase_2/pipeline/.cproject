@@ -161,6 +161,96 @@
                         					
                     </folderInfo>
                     					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.debug.1024134474.650960066" name="fetch_tb.cpp" rcbsApplicability="disable" resourcePath="testbench/fetch_tb.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991.1588818553">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991.1588818553" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1095847487" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.1165837343" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/systemc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.1560886309" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-Wno-unknown-pragmas -c -fmessage-length=0" valueType="string"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.968699481" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
+                    					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.debug.1024134474.364873744" name="pipeline_tb.cpp" rcbsApplicability="disable" resourcePath="testbench/pipeline_tb.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991.409286813">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991.409286813" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.805441942" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.2053886100" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/systemc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.1028494854" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-Wno-unknown-pragmas -c -fmessage-length=0" valueType="string"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.168398450" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
+                    					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.debug.1024134474.1843475678" name="decode_tb.cpp" rcbsApplicability="disable" resourcePath="testbench/decode_tb.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991.1039760432">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991.1039760432" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2146636991">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1403972974" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.1721945959" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/systemc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.1956407839" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-Wno-unknown-pragmas -c -fmessage-length=0" valueType="string"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.952867200" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
+                    					
                     <sourceEntries>
                         						
                         <entry excluding=".apc|.settings|pipeline|*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
@@ -312,6 +402,96 @@
                         </toolChain>
                         					
                     </folderInfo>
+                    					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.release.1078608029.135595883" name="fetch_tb.cpp" rcbsApplicability="disable" resourcePath="testbench/fetch_tb.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941.62315358">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941.62315358" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1566757689" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.1853164498" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/systemc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.1080680288" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-Wno-unknown-pragmas -c -fmessage-length=0" valueType="string"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.66361476" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
+                    					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.release.1078608029.2004096072" name="pipeline_tb.cpp" rcbsApplicability="disable" resourcePath="testbench/pipeline_tb.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941.1270841804">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941.1270841804" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.626157477" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.1465871979" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/systemc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.1568808581" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-Wno-unknown-pragmas -c -fmessage-length=0" valueType="string"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.558116783" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
+                    					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.release.1078608029.378504501" name="decode_tb.cpp" rcbsApplicability="disable" resourcePath="testbench/decode_tb.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941.1054968638">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941.1054968638" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.880178941">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1998024045" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.2058908265" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/win64/tools/systemc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Vitis/2020.1/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.1921206123" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-Wno-unknown-pragmas -c -fmessage-length=0" valueType="string"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.815829378" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
                     					
                     <sourceEntries>
                         						
