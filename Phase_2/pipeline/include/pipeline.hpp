@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../include/common.hpp"
+#include "../include/config.hpp"
 #include "../include/fetch.hpp"
 #include "../include/decode.hpp"
 

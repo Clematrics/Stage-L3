@@ -6,7 +6,7 @@
 #include "../include/pipeline.hpp"
 
 int main() {
-	uint8_t memory[memory_bytes];
+	memory_t memory;
 
 	for (std::size_t i = 0; i < memory_words; i++) {
 		memory[4 * i]     = 0;

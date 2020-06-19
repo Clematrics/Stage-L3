@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstdint>
+typedef unsigned char uint8_t;
+typedef unsigned int uint32_t;
 
-using memory_t = uint8_t*;
-using word_t = uint32_t;
+typedef uint32_t word_t;
