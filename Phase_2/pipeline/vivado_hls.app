@@ -1,4 +1,4 @@
-<project xmlns="com.autoesl.autopilot.project" top="pipeline" name="pipeline">
+<project xmlns="com.autoesl.autopilot.project" name="pipeline" top="pipeline">
     <includePaths/>
     <libraryPaths/>
     <Simulation>
@@ -12,7 +12,6 @@
         <file name="pipeline/src/fetch.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
         <file name="pipeline/include/decode.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
         <file name="pipeline/src/decode.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
-        <file name="pipeline/include/config.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
         <file name="pipeline/include/common.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
     </files>
     <solutions xmlns="">
