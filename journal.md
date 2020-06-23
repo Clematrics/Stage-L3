@@ -1,5 +1,63 @@
 # Journal de stage
 
+## 23/06/2020
+
+
+## 22/06/2020
+
+Implémentation de plusieurs versions de l'étage de décodage et comparaison des ressources utilisées à la synthèse dans Vivado HLS.
+
+> Je me suis concentré aujourd'hui sur de l'expérimentation et le décodage.
+> Dans un premier temps, j'ai essayé de changer les types natifs par ceux fournis dans ap_cint.h. Cependant, même si tout se passait bien à la simulation, il m'était impossible de faire la synthèse : il semble que ce soit hard-codé dans la bibliothèque dès que du C++ est utilisé. J'ai vu qu'il existait ap_uint.h, compatible avec le C++. La simulation et la synthsèe fonctionnent bien avec, cependant j'ai des warnings pénibles à cause de #define redéfinis et j'ai perdu du temps à essayer de résoudre ce problème (sans succès malheureusement).
+> L'expérimentation a surtout consisté à comparer les résultats d'analyse de la synthèse, entre un programme avec et sans un pragma spécifique ou entre deux implémentations différentes. J'ai laissé quelques comparaisons sur le git.  J'ai également essayé de comprendre le principe des ports et comment ruser pour accéder à quatres valeurs en mémoire simultanément (ou en tout cas sans warnings).
+> J'ai aussi implémenté le décodage, et j'ai gardé deux versions : la première est plus proche de celle que j'avais faite en C++ au début du stage, tandis que la deuxième est plus concise et cherche à minimiser la latence. Cette dernière utilise un poil plus de ressources dans le rapport cependant, ce qui je pense s'explique par l'absence de résolution du nom de l'instruction. Je rajouterai ça demain pour vérifier mes dires.
+D'ailleurs, avec l'implémentation du décodage, je me retrouve avec un nombre de cycles doublés. Je comprend pourquoi mais je n'ai pas d'idées pour l'instant de comment le résoudre (ni de savoir si c'est possible).
+
+## 19/06/2020
+
+Recherche de l'origine du problème empêchant de synthétiser.
+L'installation de la version antérieure 2019.2 a résolu le problème, permettant la synthèse. Comme cette version ne supporte pas le standard C++14, le code du pipeline a été converti au standard C++11 pour être simulé et synthétiser.
+
+## 18/06/2020
+
+Première implémentation des deux premiers étages de pipeline. La simulation fonctionne mais pas la synthèse (la fonction top `pipeline` n'est pas détectée).
+
+> Je rencontre plusieurs difficultés :
+> - la première est que je n'arrive pas à sélectionner comme fonction top une fonction membre d'une classe : Vivado me sort une erreur lors de la synthèse, et n'arrive pas à faire une simulation C. J'ai donc fait une fonction auxiliaire 'pipeline' pour cela : elle me permet de lancer la simulation C. Cependant, je n'arrive toujours pas à faire de synthèse : "Cannot find the top function 'pipeline' in the design. Possible causes are: (1) the top function name is misspelled; (2) the top function is nonexistent or declared as static." est l'erreur qu'il me donne, cependant la fonction existe bien, et dans les paramètres de synthèse du projet, c'est bien cette fonction qui est sélectionnée.
+> - la deuxième difficulté est sur les timings : dans mon testbench, le nombre de cycles est deux fois plus grand que ce qu'il devrait être, le souci étant je pense dans la fonction 'Pipeline::pipeline' : j'ai rajouté des pragmas, notamment la pragma PIPELINE pour essayer d'exécuter les deux étages en parallèle, seulement les valeurs des variables ne se mettent pas à jour comme je me l'imaginais (je pense que je reste trop attaché à la philosophie SystemC) : en effet, je crois que les valeurs 'instructions' et 'program_counter', même si elles sont mises à jour par 'fetch_stage', ce sont les anciennes valeurs de ces deux variables qui sont prises dans 'decode_stage'. Je pensais que ces variables agiraient comme un fil reliant les deux blocs, mais il semblerait qu'elles servent plus de registre tampon, et je ne trouve pas en ligne comment résoudre ce problème (ou a minima je ne cherche pas au bon endroit).
+>
+> Je crois que j'ai compris par contre le coup de la boucle while à l'intérieur de l'IP : il faudrait que je la mette à l'intérieur de ma fonction top 'pipeline' ? Donc aussi la variable 'cycles' ? Et dans ce cas le testbench se contente seulement d'initialiser la mémoire et d'appeler la fonction 'pipeline'.
+
+## 17/06/2020
+
+Modification du programme assembleur "Hello world" parallélisé pour répartir les harts par groupe de quatre par cœurs. Comme les fonctions appelées dans le corps utilisent le stack, un système de pile locale par hart a été implémenté. Note : l'appel aux fonctions `printf` ou autres fonctions d'*input/output* ne seront de toute façon pas disponible sur le FPGA.
+
+Implémentation en assembleur du programme "sum" pour sommer en parallèle les valeurs d'un tableau.
+
+Essais sur Vitis HLS avec un mini-projet d'additionneur pour s'initier aux outils et vérifier que la simulation et la synthèse fonctionnent.
+
+> Aujourd'hui j'ai surtout continué à implémenter les programmes avec x_par :
+> - j'ai amélioré "hello" pour qu'il occupe en priorité les harts sur le même cœur avant de passer au suivant, en faisant l'hypothèse de 4 harts par cœurs. Je me suis d'ailleurs rendu compte hier que mes appels de printf sont caduques car ils utilisent la pile, et ce sur tous les harts, ce qui est problématique. De plus, je me suis dit que même si printf est modifiée pour ne pas utiliser le stack, il reste fort probable qu'elle ait besoin d'appeler d'autres fonctions. J'ai donc palié au problème en donnant à chaque hart un pointeur de pile différent, en soustrayant au sp du hart appelant une valeur qui est la taille maximale supposée du stack utilisé par un hart (en y pensant, je me rends compte que dans mon code, j'ajoute à sp alors que je devrais soustraire à sp). Étant donné qu'on a pas de virtualisation de la mémoire, je vois difficilement comment faire autrement.
+> - j'ai aussi implémenté "sum" pour remplir un tableau avec 0, 1, 2, ... et ensuite calculer la somme des valeurs. Je découpe pour cela le tableau en autant de morceaux que de threads, et chaque thread se charge de calculer la somme de sa portion puis de la ranger dans un tableau (afin d'éviter les écritures au même emplacement). Le thread principal se charge ensuite de calculer la somme de ces sommes partielles, avant d'afficher le résultat. Ici aussi, l'allocation des harts se fait en priorité sur le même cœur.
+>
+> Enfin, je me suis familiarisé avec Vivado HLS (qui d'ailleurs chez moi s'appelle Vitis HLS), en faisant un mini-projet d'additionneur. J'ai pu résoudre les problèmes de la dernière fois, et j'arrive maintenant à simuler et synthétiser un projet : le souci était simplement qu'il n'aimait pas les accents dans les chemins de fichier.
+Je commence demain à implémenter les deux premiers étages du pipeline.
+
+## 15/06/2020
+
+Étude de la méthde typique dont sont dispatchés les harts avec les instructions *X_PAR* et comment se propagent les identifiants des threads (celui du premier thread se propageant sur toute la chaîne) et l'adresse de retour. Étude du mécanisme de join grâce à l'instruction `p_ret`.
+
+Reprise du programme assembleur "hello world" parallélisé pour corriger l'utilisation des instructions *X_PAR* et la façon dont les threads sont alloués.
+
+> J'ai repris aujourd'hui le code assembleur de la dernière fois, afin d'y apporter les corrections nécessaires.
+> J'ai eu des difficultés lorsque j'ai essayé de respecter la convention utilisant ra, t0 et t6 : comme ra, t0 et t6 ne sont pas sauvegardés lors des appels, j'essayai de les empiler sur la pile, sauf que chaque hart devait s'en charger pour appeler printf, ce qui conduisait à des accès concurrents à la pile. J'ai fini par résoudre le problème en utilisant plutôt s1, s2 et s3, mais cela m'a perturbé dans l'utilisation des instructions de x_par, me forçant à réécrire plusieurs fois le programme.
+> J'ai l'impression par contre que le -1 ne sert que dans certains cas, car si je comprends bien la description de p_jalr, quand rd = 0, rs1 = 0 et rs2 = -1, il y a un exit, que j'interpète comme l'arrêt simple du programme tout entier (de la même façon que le exit(0); en C). J'ai donc précisé en commentaire les modifications à effectuer selon l'environnement d'exécution pour utiliser le -1 ou non.
+> Merci d'ailleurs pour le programme, comme je n'avais pas lu correctement le papier, j'ai pu y voir plus clair grâce à lui.
+> Je me rends compte aussi que ma question à propos du stack avait effectivement une réponse évidente, j'aurais dû penser aux contraintes de l'implémentation empêchant ce genre de comportement. Petite question par curiosité d'ailleurs, quelle est la taille du buffer pour transférer des valeurs entre harts avec p_swcv, ... ?
+>
+> Je prévois comme prochaines tâches de convertir les deux programmes sum (pour répartir des harts sur une boucle for) et fibonacci (pour répartir plusieurs tâches récursives entre des harts), mais aussi d'adapter hello afin qu'il favorise d'abord les harts d'un même cœur avant d'allouer un hart sur le cœur suivant. Enfin, je simulerai les fetchs sur ces programmes.
+
+
 ## 12/06/2020
 
 Programmation de trois programmes utilisant OpenMP :
@@ -11,6 +69,20 @@ Programmation de trois programmes utilisant OpenMP :
 Lecture plus en profondeur de la documentation de *X_PAR*.
 
 Conversion du programme "hello world" en assembleur RISC-V avec l'extension *X_PAR*.
+
+> J'ai publié sur le git ce que j'ai fait aujourd'hui :
+>
+> J'ai codé trois programmes simples avec OpenMP en essayant de les rendre réellement plus efficace que leur contre-partie single-threaded.
+> J'ai ensuite essayé de coder celui affichant "hello world" par plusieurs threads en assembleur avec X_PAR.
+> J'ai eu quelques difficultés à comprendre certaines instructions car les exemples de code dans le papier ne suivaient pas le tableau donné sur le site (ici : http://perso.numericable.fr/bernard.goossens/riscv_xpar_as.html), j'ai notamment mis du temps à comprendre que les opérandes rs1 et rs2 étaient inversées entre les deux versions. À part cela, ça s'est bien passé.
+> Quelques notes et questions :
+> - Dans mon programme, je me suis basé sur la syntaxe du site plutôt que sur celle du papier.
+> - J'ai seulement considéré les forks sur les cœurs suivants, par simplicité.
+> - Au vu des exemples du papier et de la sémantique de p_jalr x0, ra, t0, j'en suis venu à interpréter p_merge comme un constructeur de couple (id du thread père, id du thread fils) pour se souvenir du lien entre deux threads. J'en ai d'ailleurs déduit que les ids sont sur les 16 lower bits du mot uniquement. Est-ce correct ?
+> - Puisqu'il est possible d'envoyer des valeurs via le stack, cela signifie-t-il que la totalité du stack de chaque hart est copié lors d'un fork ? Ou alors le mot stack est utilisé plutôt pour désigner un buffer, plus petit, entre les deux harts ?
+> - Si le stack est copié, est-ce que le transfère de valeurs sur le stack via p_swcv se fait par rapport à sp ? J'ai considéré que p_swcv t1, 0(t6) faisait l'équivalent d'un sw t1, 0(sp) sur le thread alloué si c'était le cas.
+>
+> J'essaierai de convertir les deux autres programmes prochainement.
 
 ## 11/06/2020
 

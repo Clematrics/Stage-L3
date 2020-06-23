@@ -10,9 +10,10 @@ add_files pipeline/src/decode.cpp
 add_files pipeline/include/decode.hpp
 add_files pipeline/src/fetch.cpp
 add_files pipeline/include/fetch.hpp
+add_files pipeline/include/instructions.hpp
 add_files pipeline/src/pipeline.cpp
 add_files pipeline/include/pipeline.hpp
-add_files -tb pipeline/tb/pipeline_tb.cpp -cflags "-Wno-unknown-pragmas"
+add_files -tb pipeline/tb/pipeline_tb.cpp -cflags "-Wno-unknown-pragmas" -csimflags "-Wno-unknown-pragmas"
 open_solution "solution1"
 set_part {xc7z020-clg484-1}
 create_clock -period 10 -name default

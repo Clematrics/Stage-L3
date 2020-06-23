@@ -14,7 +14,7 @@ int main() {
 		memory[4 * i + 3] = 0;
 	}
 
-	// add x4; x5, x19 : 0b 0000'000 1'0011' 0010'1 000' 0010'0 011'0011 = 0x01 32 82 33
+	// add x4, x5, x19 : 0b 0000'000 1'0011' 0010'1 000' 0010'0 011'0011 = 0x01 32 82 33
 	memory[4 *  0]     = 0x33;
 	memory[4 *  0 + 1] = 0x82;
 	memory[4 *  0 + 2] = 0x32;
@@ -53,7 +53,7 @@ int main() {
 
 	word_t cycles = 0;
 	// pipeline(memory, memory, memory, memory, &cycles);
-	pipeline(memory, memory, &cycles);
+	pipeline(memory, memory, memory, memory, &cycles);
 
 	std::cout << "Cycles count : " << cycles << '\n';
 

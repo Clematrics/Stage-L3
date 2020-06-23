@@ -1,8 +1,9 @@
 #pragma once
 
 #include "../include/common.hpp"
+#include "../include/instructions.hpp"
 
-#define ITERATION2
+#define ITERATION3
 
 #ifdef ITERATION1
 enum InstructionType {
@@ -23,7 +24,6 @@ struct DecodedInstruction {
 #endif
 
 #ifdef ITERATION2
-
 namespace Instruction {
 	enum Name {
 		LUI, AUIPC,
@@ -45,6 +45,32 @@ struct DecodedInstruction {
 	ap_uint<5> dest;
 	ap_uint<5> reg1;
 	ap_uint<5> reg2;
+	word_t immediate;
+};
+#endif
+
+#ifdef ITERATION3
+namespace Instruction {
+	enum Name {
+		LUI, AUIPC,
+		JAL, JALR,
+		BEQ, BNE, BLT, BGE, BLTU, BGEU,
+		LB, LH, LW, LBU, LHU,
+		SB, SH, SW,
+		ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,
+		ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND,
+		FENCE,
+		ECALL, EBREAK,
+		MUL, MULH, MULHSU, MULHU, DIV, DIVU, REM, REMU,
+		Unknown
+	};
+}
+
+struct DecodedInstruction {
+	Instruction::Name name;
+	reg_t dest;
+	reg_t reg1;
+	reg_t reg2;
 	word_t immediate;
 };
 #endif
