@@ -3,7 +3,7 @@
 #include "../include/common.hpp"
 #include "../include/instructions.hpp"
 
-#define ITERATION3
+#define ITERATION4
 
 #ifdef ITERATION1
 enum InstructionType {
@@ -23,8 +23,68 @@ struct DecodedInstruction {
 };
 #endif
 
-#ifdef ITERATION2
+// #ifdef ITERATION2
+// namespace Instruction {
+// 	enum Name {
+// 		LUI, AUIPC,
+// 		JAL, JALR,
+// 		BEQ, BNE, BLT, BGE, BLTU, BGEU,
+// 		LB, LH, LW, LBU, LHU,
+// 		SB, SH, SW,
+// 		ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,
+// 		ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND,
+// 		FENCE,
+// 		ECALL, EBREAK,
+// 		MUL, MULH, MULHSU, MULHU, DIV, DIVU, REM, REMU,
+// 		Unknown
+// 	};
+// }
+
+// struct DecodedInstruction {
+// 	Instruction::Name name;
+// 	ap_uint<5> dest;
+// 	ap_uint<5> reg1;
+// 	ap_uint<5> reg2;
+// 	word_t immediate;
+// };
+// #endif
+
+// #ifdef ITERATION3
+// namespace Instruction {
+// 	enum Name {
+// 		LUI, AUIPC,
+// 		JAL, JALR,
+// 		BEQ, BNE, BLT, BGE, BLTU, BGEU,
+// 		LB, LH, LW, LBU, LHU,
+// 		SB, SH, SW,
+// 		ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,
+// 		ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND,
+// 		FENCE,
+// 		ECALL, EBREAK,
+// 		MUL, MULH, MULHSU, MULHU, DIV, DIVU, REM, REMU,
+// 		Unknown
+// 	};
+// }
+
+// struct DecodedInstruction {
+// 	Instruction::Name name;
+// 	reg_t dest;
+// 	reg_t reg1;
+// 	reg_t reg2;
+// 	word_t immediate;
+// };
+// #endif
+
+#if defined(ITERATION2) || defined(ITERATION3) || defined(ITERATION4) || defined(ITERATION5)
+#include <string>
+
 namespace Instruction {
+	enum Type {
+		R, I, S, B, U, J, UnknownType
+	};
+
+	std::string getType(Type type);
+
 	enum Name {
 		LUI, AUIPC,
 		JAL, JALR,
@@ -36,35 +96,12 @@ namespace Instruction {
 		FENCE,
 		ECALL, EBREAK,
 		MUL, MULH, MULHSU, MULHU, DIV, DIVU, REM, REMU,
-		Unknown
+		UnknownName
 	};
+
+	std::string getName(Name name);
 }
 
-struct DecodedInstruction {
-	Instruction::Name name;
-	ap_uint<5> dest;
-	ap_uint<5> reg1;
-	ap_uint<5> reg2;
-	word_t immediate;
-};
-#endif
-
-#ifdef ITERATION3
-namespace Instruction {
-	enum Name {
-		LUI, AUIPC,
-		JAL, JALR,
-		BEQ, BNE, BLT, BGE, BLTU, BGEU,
-		LB, LH, LW, LBU, LHU,
-		SB, SH, SW,
-		ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,
-		ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND,
-		FENCE,
-		ECALL, EBREAK,
-		MUL, MULH, MULHSU, MULHU, DIV, DIVU, REM, REMU,
-		Unknown
-	};
-}
 
 struct DecodedInstruction {
 	Instruction::Name name;

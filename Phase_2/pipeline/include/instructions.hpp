@@ -1,10 +1,14 @@
 #pragma once
 
+#include <string>
+
 #include "common.hpp"
 
 typedef ap_uint<7> opcode_t;
 typedef ap_uint<2> opcode_prefix_t;
 typedef ap_uint<5> opcode_suffix_t;
+typedef ap_uint<3> opcode_low_t;
+typedef ap_uint<2> opcode_high_t;
 typedef ap_uint<3> func3_t;
 typedef ap_uint<7> func7_t;
 typedef ap_uint<5> reg_t;
@@ -21,6 +25,58 @@ namespace Opcode32Suffix {
 	const opcode_suffix_t alu    = 0b01100;
 	const opcode_suffix_t fence  = 0b00011;
 	const opcode_suffix_t system = 0b11100;
+}
+
+namespace OpcodeHigh {
+	const opcode_high_t load_fence_auipc    = 0b00;
+	const opcode_high_t store_alu_lui       = 0b01;
+	const opcode_high_t branch_jal_r_system = 0b11;
+	#define OPCODE_HIGH_00_LOAD_FENCE_ALUI_AUIPC  0b00
+	#define OPCODE_HIGH_01_STORE_ALU_LUI          0b01
+	#define OPCODE_HIGH_10                        0b10
+	#define OPCODE_HIGH_11_BRANCH_JAL_R_SYSTEM    0b11
+}
+
+namespace OpcodeLow {
+	// High is 0b00
+	const opcode_low_t load  = 0b000;
+	const opcode_low_t fence = 0b011;
+	const opcode_low_t auipc = 0b101;
+	#define OPCODE_LOW_00_LOAD  0b000
+	#define OPCODE_LOW_00_001   0b001
+	#define OPCODE_LOW_00_010   0b010
+	#define OPCODE_LOW_00_FENCE 0b011
+	#define OPCODE_LOW_00_ALUI  0b100
+	#define OPCODE_LOW_00_AUIPC 0b101
+	#define OPCODE_LOW_00_110   0b110
+	#define OPCODE_LOW_00_111   0b111
+
+	// High is 0b01
+	const opcode_low_t store = 0b000;
+	const opcode_low_t alu   = 0b100;
+	const opcode_low_t lui   = 0b101;
+	#define OPCODE_LOW_01_STORE 0b000
+	#define OPCODE_LOW_01_001   0b001
+	#define OPCODE_LOW_01_010   0b010
+	#define OPCODE_LOW_01_011   0b011
+	#define OPCODE_LOW_01_ALU   0b100
+	#define OPCODE_LOW_01_LUI   0b101
+	#define OPCODE_LOW_01_110   0b110
+	#define OPCODE_LOW_01_111   0b111
+
+	// High is 0b11
+	const opcode_low_t branch = 0b000;
+	const opcode_low_t jalr   = 0b001;
+	const opcode_low_t jal    = 0b011;
+	const opcode_low_t system = 0b100;
+	#define OPCODE_LOW_11_BRANCH 0b000
+	#define OPCODE_LOW_11_JALR   0b001
+	#define OPCODE_LOW_11_010    0b010
+	#define OPCODE_LOW_11_JAL    0b011
+	#define OPCODE_LOW_11_SYSTEM 0b100
+	#define OPCODE_LOW_11_101    0b101
+	#define OPCODE_LOW_11_110    0b110
+	#define OPCODE_LOW_11_111    0b111
 }
 
 namespace Func3 {
@@ -139,4 +195,6 @@ namespace Register {
 	const reg_t x29 = 0b11101,   t4 = 0b11101;
 	const reg_t x30 = 0b11110,   t5 = 0b11110;
 	const reg_t x31 = 0b11111,   t6 = 0b11111;
+
+	std::string getRegister(reg_t reg);
 }

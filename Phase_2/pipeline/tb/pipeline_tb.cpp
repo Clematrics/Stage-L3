@@ -53,7 +53,7 @@ int main() {
 
 	word_t cycles = 0;
 	// pipeline(memory, memory, memory, memory, &cycles);
-	pipeline(memory, memory, memory, memory, &cycles);
+	pipeline(memory, memory, &cycles);
 
 	std::cout << "Cycles count : " << cycles << '\n';
 

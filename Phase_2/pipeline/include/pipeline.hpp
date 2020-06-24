@@ -13,7 +13,7 @@ class Pipeline {
 	word_t next_program_counter;
 public:
 	Pipeline(word_t initial_program_counter = 0);
-	void pipeline(memory_t memory_1, memory_t memory_2, memory_t memory_3, memory_t memory_4, bit_t* stop);
+	void pipeline(memory_t memory_1, memory_t memory_2, bit_t* stop);
 };
 
-void pipeline(memory_t memory_1, memory_t memory_2, memory_t memory_3, memory_t memory_4, word_t* cycles);
+void pipeline(memory_t memory_1, memory_t memory_2, word_t* cycles);
