@@ -1,25 +1,36 @@
 #include "../include/fetch.hpp"
 
+#include <string>
+
+#include "../include/debugger.hpp"
+#include "../include/disasm.hpp"
+
 Fetch::Fetch(word_t program_counter)
 	: program_counter(program_counter),
 	  active(true)
 {
 }
 
-void Fetch::fetch(const memory_t memory_0, const memory_t memory_1, word_t next_program_counter, word_t* instruction, word_t* current_program_counter) {
+void Fetch::fetch(const memory_t memory, word_t next_program_counter, word_t* instruction, word_t* current_program_counter) {
 	#pragma HLS INLINE
 
 	if (active) {
-		// *instruction = (memory[program_counter + 3] << 24)
-		//              | (memory[program_counter + 2] << 16)
-		//              | (memory[program_counter + 1] <<  8)
-		//              |  memory[program_counter];
-		(*instruction)(31, 24) = memory_0[program_counter + 3];
-		(*instruction)(23, 16) = memory_0[program_counter + 2];
-		(*instruction)(15,  8) = memory_1[program_counter + 1];
-		(*instruction)( 7,  0) = memory_1[program_counter    ];
+		*instruction = memory[program_counter];
 		*current_program_counter = program_counter;
 		program_counter = next_program_counter;
+		#ifndef __SYNTHESIS__
+		std::string asm_line = instruction_to_string(disassemble(*instruction));
+		Debugger::add_asm_line(asm_line);
+		Debugger::add_event({
+			{"Fetch stage",
+				{
+					{"Program counter", program_counter.to_uint()},
+					{"Raw", string_hex(instruction->to_uint())},
+					{"Instruction", asm_line}
+				}
+			}
+		});
+		#endif // __SYNTHESIS__
 	}
 	active = !active;
 }

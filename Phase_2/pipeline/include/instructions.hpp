@@ -13,6 +13,30 @@ typedef ap_uint<3> func3_t;
 typedef ap_uint<7> func7_t;
 typedef ap_uint<5> reg_t;
 
+namespace Instruction {
+	enum Type {
+		R, I, S, B, U, J, UnknownType
+	};
+
+	enum Name {
+		LUI, AUIPC,
+		JAL, JALR,
+		BEQ, BNE, BLT, BGE, BLTU, BGEU,
+		LB, LH, LW, LBU, LHU,
+		SB, SH, SW,
+		ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,
+		ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND,
+		FENCE,
+		ECALL, EBREAK,
+		MUL, MULH, MULHSU, MULHU, DIV, DIVU, REM, REMU,
+		UnknownName
+	};
+
+}
+
+std::string to_string(Instruction::Type type);
+std::string to_string(Instruction::Name name);
+
 namespace Opcode32Suffix {
 	const opcode_suffix_t lui    = 0b01101;
 	const opcode_suffix_t auipc  = 0b00101;
@@ -25,6 +49,18 @@ namespace Opcode32Suffix {
 	const opcode_suffix_t alu    = 0b01100;
 	const opcode_suffix_t fence  = 0b00011;
 	const opcode_suffix_t system = 0b11100;
+
+	#define OPCODE_SUFFIX_LUI    0b01101
+	#define OPCODE_SUFFIX_AUIPC  0b00101
+	#define OPCODE_SUFFIX_JAL    0b11011
+	#define OPCODE_SUFFIX_JALR   0b11001
+	#define OPCODE_SUFFIX_BRANCH 0b11000
+	#define OPCODE_SUFFIX_LOAD   0b00000
+	#define OPCODE_SUFFIX_STORE  0b01000
+	#define OPCODE_SUFFIX_ALUI   0b00100
+	#define OPCODE_SUFFIX_ALU    0b01100
+	#define OPCODE_SUFFIX_FENCE  0b00011
+	#define OPCODE_SUFFIX_SYSTEM 0b11100
 }
 
 namespace OpcodeHigh {
@@ -118,6 +154,8 @@ namespace Func3 {
 
 	const func3_t jalr = 0b000;
 
+	#define FUNC3_JALR 0b000
+
 	const func3_t lb  = 0b000;
 	const func3_t lh  = 0b001;
 	const func3_t lw  = 0b010;
@@ -135,9 +173,15 @@ namespace Func3 {
 
 	const func3_t fence = 0b000;
 
+	#define FUNC3_FENCE 0b000
+
 	const func3_t sb  = 0b000;
 	const func3_t sh  = 0b001;
 	const func3_t sw  = 0b010;
+
+	#define FUNC3_SB 0b000
+	#define FUNC3_SH 0b001
+	#define FUNC3_SW 0b010
 
 	const func3_t beq  = 0b000;
 	const func3_t bne  = 0b001;
@@ -160,6 +204,10 @@ namespace Func7 {
 	const func7_t null  = 0b0000000;
 	const func7_t first = 0b0000001;
 	const func7_t sixth = 0b0100000;
+
+	#define FUNC7_NULL  0b0000000
+	#define FUNC7_FIRST 0b0000001
+	#define FUNC7_SIXTH 0b0100000
 }
 
 namespace Register {
@@ -196,5 +244,71 @@ namespace Register {
 	const reg_t x30 = 0b11110,   t5 = 0b11110;
 	const reg_t x31 = 0b11111,   t6 = 0b11111;
 
-	std::string getRegister(reg_t reg);
+	#define REG_X0   0b00000
+	#define REG_ZERO 0b00000
+	#define REG_X1   0b00001
+	#define REG_RA   0b00001
+	#define REG_X2   0b00010
+	#define REG_SP   0b00010
+	#define REG_X3   0b00011
+	#define REG_GP   0b00011
+	#define REG_X4   0b00100
+	#define REG_TP   0b00100
+	#define REG_X5   0b00101
+	#define REG_T0   0b00101
+	#define REG_X6   0b00110
+	#define REG_T1   0b00110
+	#define REG_X7   0b00111
+	#define REG_T2   0b00111
+	#define REG_X8   0b01000
+	#define REG_S0   0b01000
+	#define REG_X9   0b01001
+	#define REG_S1   0b01001
+	#define REG_X10  0b01010
+	#define REG_A0   0b01010
+	#define REG_X11  0b01011
+	#define REG_A1   0b01011
+	#define REG_X12  0b01100
+	#define REG_A2   0b01100
+	#define REG_X13  0b01101
+	#define REG_A3   0b01101
+	#define REG_X14  0b01110
+	#define REG_A4   0b01110
+	#define REG_X15  0b01111
+	#define REG_A5   0b01111
+	#define REG_X16  0b10000
+	#define REG_A6   0b10000
+	#define REG_X17  0b10001
+	#define REG_A7   0b10001
+	#define REG_X18  0b10010
+	#define REG_S2   0b10010
+	#define REG_X19  0b10011
+	#define REG_S3   0b10011
+	#define REG_X20  0b10100
+	#define REG_S4   0b10100
+	#define REG_X21  0b10101
+	#define REG_S5   0b10101
+	#define REG_X22  0b10110
+	#define REG_S6   0b10110
+	#define REG_X23  0b10111
+	#define REG_S7   0b10111
+	#define REG_X24  0b11000
+	#define REG_S8   0b11000
+	#define REG_X25  0b11001
+	#define REG_S9   0b11001
+	#define REG_X26  0b11010
+	#define REG_S10  0b11010
+	#define REG_X27  0b11011
+	#define REG_S11  0b11011
+	#define REG_X28  0b11100
+	#define REG_T3   0b11100
+	#define REG_X29  0b11101
+	#define REG_T4   0b11101
+	#define REG_X30  0b11110
+	#define REG_T5   0b11110
+	#define REG_X31  0b11111
+	#define REG_T6   0b11111
+
 }
+
+std::string to_string(reg_t reg);

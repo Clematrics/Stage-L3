@@ -21,4 +21,4 @@ typedef ap_uint<word_bits> word_t;
 const uint32_t memory_words = 16;
 const uint32_t memory_size  = memory_words * word_size;
 
-typedef byte_t memory_t[memory_size];
+typedef word_t memory_t[memory_words];
