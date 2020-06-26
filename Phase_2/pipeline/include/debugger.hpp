@@ -1,21 +1,20 @@
 #pragma once
 
-#include <cstdint>
+#ifndef __SYNTHESIS__
+
 #include <string>
-#include <vector>
 
-#include "../include/nlohmann/json.hpp"
-
-using json = nlohmann::json;
+#include "../include/common.hpp"
+#include "../include/json.hpp"
 
 class Debugger {
 	static uint64_t cycles;
 	static json report;
-	static std::vector<std::string> assembly;
 public:
 	static void new_cycle();
-	static void add_asm_line(std::string& line);
-	static void add_event(json object);
+	static void add_asm_line(std::string line);
+	static void add_cycle_event(json object);
 	static json get_report();
-	static std::vector<std::string>& get_assembly();
 };
+
+#endif // __SYNTHESIS__

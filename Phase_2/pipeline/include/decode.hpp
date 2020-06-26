@@ -3,8 +3,6 @@
 #include "../include/common.hpp"
 #include "../include/instructions.hpp"
 
-#define ITERATION5
-
 struct DecodedInstruction {
 	Instruction::Name name;
 	reg_t dest;
@@ -13,12 +11,15 @@ struct DecodedInstruction {
 	word_t immediate;
 };
 
+word_t decodeIImmediate(const word_t& instruction);
+word_t decodeSImmediate(const word_t& instruction);
+word_t decodeBImmediate(const word_t& instruction);
+word_t decodeUImmediate(const word_t& instruction);
+word_t decodeJImmediate(const word_t& instruction);
+
 class Decode {
-	#ifdef OTHER
-	InstructionType instructionType(const word_t instruction);
-	#endif
 	bool active;
 public:
 	Decode();
-	void decode(const word_t instruction, word_t program_counter, word_t* out_program_counter, bit_t* stop_signal, DecodedInstruction* decoded);
+	void decode(const word_t& instruction, const word_t& program_counter, word_t* out_program_counter, bit_t* stop_signal, DecodedInstruction* decoded);
 };

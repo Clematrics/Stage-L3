@@ -1,28 +1,31 @@
 #include "../include/debugger.hpp"
 
+#ifndef __SYNTHESIS__
+
 #include <string>
 
 uint64_t Debugger::cycles = 0;
-json Debugger::report = json::array();
-std::vector<std::string> Debugger::assembly;
+json Debugger::report = {
+	{"Assembly", json::array()},
+	{"Cycles", json::object()}
+};
 
 void Debugger::new_cycle() {
 	cycles++;
-	report.push_back({{"Cycle " + std::to_string(cycles), json::array()}});
+	report["Cycles"].push_back({std::to_string(cycles), json::array()});
 }
 
-void Debugger::add_asm_line(std::string& line) {
-	assembly.push_back(line);
+void Debugger::add_asm_line(std::string line) {
+	report["Assembly"].push_back(line);
 }
 
-void Debugger::add_event(json object) {
-	report.back().back().push_back(object);
+void Debugger::add_cycle_event(const json object) {
+	json& current_cycle = report["Cycles"][std::to_string(cycles)];
+	current_cycle.push_back(object);
 }
 
 json Debugger::get_report() {
 	return report;
 }
 
-std::vector<std::string>& Debugger::get_assembly() {
-	return assembly;
-}
+#endif // __SYNTHESIS__

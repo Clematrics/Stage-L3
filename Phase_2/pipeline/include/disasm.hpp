@@ -1,11 +1,14 @@
 #pragma once
+
+
+#ifndef __SYNTHESIS__
+
 #include <ostream>
 #include <string>
 
 #include "../include/helpers.hpp"
 #include "../include/instructions.hpp"
-#include "../include/nlohmann/json.hpp"
-using json = nlohmann::json;
+#include "../include/json.hpp"
 
 struct AsmInstruction {
 	word_t raw;
@@ -23,6 +26,8 @@ struct AsmInstruction {
 	word_t immediate;
 };
 
-const AsmInstruction disassemble(const word_t raw);
+const AsmInstruction disassemble(const word_t& raw);
 std::string instruction_to_string(const AsmInstruction& instr);
 json instruction_to_json(const AsmInstruction& instr);
+
+#endif // __SYNTHESIS__

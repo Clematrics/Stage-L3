@@ -20,7 +20,6 @@ void Pipeline::pipeline(memory_t memory, bit_t* stop) {
 // top function
 void pipeline(memory_t memory) {
 	#pragma HLS INTERFACE s_axilite port=memory
-	#pragma HLS INTERFACE s_axilite port=cycle
 	#pragma HLS INTERFACE ap_ctrl_none port=return
 	Pipeline pipeline;
 	bit_t stop;

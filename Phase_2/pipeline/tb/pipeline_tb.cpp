@@ -28,9 +28,6 @@ int main() {
 	std::ofstream out;
 	out.open("output.json");
 	out << std::setw(4) << Debugger::get_report();
-	std::vector<std::string>& assembly = Debugger::get_assembly();
-	for (std::size_t i = 0; i < assembly.size(); i += 2)
-		out << '\n' << assembly.at(i);
 	out.close();
 
 	return 0;

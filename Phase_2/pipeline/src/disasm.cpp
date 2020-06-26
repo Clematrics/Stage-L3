@@ -1,5 +1,7 @@
 #include "../include/disasm.hpp"
 
+#ifndef __SYNTHESIS__
+
 #include <algorithm>
 #include <array>
 #include <iterator>
@@ -7,7 +9,7 @@
 
 #include "../include/helpers.hpp"
 #include "../include/instructions.hpp"
-#include "../include/nlohmann/json.hpp"
+#include "../include/json.hpp"
 
 
 template<typename T, typename U>
@@ -177,7 +179,7 @@ void dispatchDecode(AsmInstruction& instr){
 	}
 }
 
-const AsmInstruction disassemble(const word_t raw) {
+const AsmInstruction disassemble(const word_t& raw) {
 	AsmInstruction instr;
 	instr.raw           = raw;
 	instr.opcode        = raw(6, 0);
@@ -241,65 +243,67 @@ json instruction_to_json(const AsmInstruction& instr) {
 			||	instr.name == Instruction::Name::SRAI)
 		{
 			return {
-				{"Type", to_string(instr.type)},
-				{"Name", to_string(instr.name)},
-				{"Destination register", to_string(instr.destination)},
-				{"Source 1 register", to_string(instr.source1)},
-				{"Shift amount", instr.immediate(4, 0).to_uint()},
+				{ "Type", to_string(instr.type) },
+				{ "Name", to_string(instr.name) },
+				{ "Destination register", to_string(instr.destination) },
+				{ "Source 1 register", to_string(instr.source1) },
+				{ "Shift amount", instr.immediate(4, 0).to_uint() },
 			};
 		}
 		else {
 			return {
-				{"Type", to_string(instr.type)},
-				{"Name", to_string(instr.name)},
-				{"Destination register", to_string(instr.destination)},
-				{"Source 1 register", to_string(instr.source1)},
-				{"Source 2 register", to_string(instr.source2)},
+				{ "Type", to_string(instr.type) },
+				{ "Name", to_string(instr.name) },
+				{ "Destination register", to_string(instr.destination) },
+				{ "Source 1 register", to_string(instr.source1) },
+				{ "Source 2 register", to_string(instr.source2) },
 			};
 		}
 	case Instruction::Type::I:
 		return {
-			{"Type", to_string(instr.type)},
-			{"Name", to_string(instr.name)},
-			{"Destination register", to_string(instr.destination)},
-			{"Source 1 register", to_string(instr.source1)},
-			{"Immediate", instr.immediate.to_int()},
+			{ "Type", to_string(instr.type) },
+			{ "Name", to_string(instr.name) },
+			{ "Destination register", to_string(instr.destination) },
+			{ "Source 1 register", to_string(instr.source1) },
+			{ "Immediate", instr.immediate.to_int() },
 		};
 	case Instruction::Type::S:
 		return {
-			{"Type", to_string(instr.type)},
-			{"Name", to_string(instr.name)},
-			{"Source 1 register", to_string(instr.source1)},
-			{"Source 2 register", to_string(instr.source2)},
-			{"Immediate", instr.immediate.to_int()},
+			{ "Type", to_string(instr.type) },
+			{ "Name", to_string(instr.name) },
+			{ "Source 1 register", to_string(instr.source1) },
+			{ "Source 2 register", to_string(instr.source2) },
+			{ "Immediate", instr.immediate.to_int() },
 		};
 	case Instruction::Type::B:
 		return {
-			{"Type", to_string(instr.type)},
-			{"Name", to_string(instr.name)},
-			{"Source 1 register", to_string(instr.source1)},
-			{"Source 2 register", to_string(instr.source2)},
-			{"Immediate", instr.immediate.to_int()},
+			{ "Type", to_string(instr.type) },
+			{ "Name", to_string(instr.name) },
+			{ "Source 1 register", to_string(instr.source1) },
+			{ "Source 2 register", to_string(instr.source2) },
+			{ "Immediate", instr.immediate.to_int() },
 		};
 	case Instruction::Type::U:
 		return {
-			{"Type", to_string(instr.type)},
-			{"Name", to_string(instr.name)},
-			{"Destination register", to_string(instr.destination)},
-			{"Immediate", instr.immediate.to_int()},
+			{ "Type", to_string(instr.type) },
+			{ "Name", to_string(instr.name) },
+			{ "Destination register", to_string(instr.destination) },
+			{ "Immediate", instr.immediate.to_int() },
 		};
 	case Instruction::Type::J:
 		return {
-			{"Type", to_string(instr.type)},
-			{"Name", to_string(instr.name)},
-			{"Destination register", to_string(instr.destination)},
-			{"Immediate", instr.immediate.to_int()},
+			{ "Type", to_string(instr.type) },
+			{ "Name", to_string(instr.name) },
+			{ "Destination register", to_string(instr.destination) },
+			{ "Immediate", instr.immediate.to_int() },
 		};
 	default:
 		return {
-			{"Type", to_string(instr.type)},
-			{"Opcode", string_bin(instr.opcode.to_uint())},
-			{"Raw", string_hex(instr.raw.to_uint())},
+			{ "Type", to_string(instr.type) },
+			{ "Opcode", string_bin(instr.opcode.to_uint()) },
+			{ "Raw", string_hex(instr.raw.to_uint()) },
 		};
 	}
 }
+
+#endif // __SYNTHESIS__

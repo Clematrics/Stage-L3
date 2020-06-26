@@ -18,6 +18,7 @@ add_files pipeline/src/helpers.cpp
 add_files pipeline/include/helpers.hpp
 add_files pipeline/src/instructions.cpp
 add_files pipeline/include/instructions.hpp
+add_files pipeline/include/json.hpp
 add_files pipeline/src/pipeline.cpp
 add_files pipeline/include/pipeline.hpp
 add_files -tb pipeline/tb/pipeline_tb.cpp -cflags "-Wno-unknown-pragmas" -csimflags "-Wno-unknown-pragmas"

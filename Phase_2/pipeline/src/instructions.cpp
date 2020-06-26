@@ -2,71 +2,71 @@
 
 std::string to_string(Instruction::Type type) {
 	switch (type) {
-	case Instruction::Type::R: return "R";
-	case Instruction::Type::I: return "I";
-	case Instruction::Type::S: return "S";
-	case Instruction::Type::B: return "B";
-	case Instruction::Type::U: return "U";
-	case Instruction::Type::J: return "J";
-	case Instruction::Type::UnknownType: return "Unknown";
+	case Instruction::R: return "R";
+	case Instruction::I: return "I";
+	case Instruction::S: return "S";
+	case Instruction::B: return "B";
+	case Instruction::U: return "U";
+	case Instruction::J: return "J";
+	case Instruction::UnknownType: return "Unknown";
 	}
 }
 
 std::string to_string(Instruction::Name name) {
 	switch (name) {
-	case Instruction::Name::LUI:         return "lui";
-	case Instruction::Name::AUIPC:       return "auipc";
-	case Instruction::Name::JAL:         return "jal";
-	case Instruction::Name::JALR:        return "jalr";
-	case Instruction::Name::BEQ:         return "beq";
-	case Instruction::Name::BNE:         return "bne";
-	case Instruction::Name::BLT:         return "blt";
-	case Instruction::Name::BGE:         return "bge";
-	case Instruction::Name::BLTU:        return "bltu";
-	case Instruction::Name::BGEU:        return "bgeu";
-	case Instruction::Name::LB:          return "lb";
-	case Instruction::Name::LH:          return "lh";
-	case Instruction::Name::LW:          return "lw";
-	case Instruction::Name::LBU:         return "lbu";
-	case Instruction::Name::LHU:         return "lhu";
-	case Instruction::Name::SB:          return "sb";
-	case Instruction::Name::SH:          return "sh";
-	case Instruction::Name::SW:          return "sw";
-	case Instruction::Name::ADDI:        return "addi";
-	case Instruction::Name::SLTI:        return "slti";
-	case Instruction::Name::SLTIU:       return "sltiu";
-	case Instruction::Name::XORI:        return "xori";
-	case Instruction::Name::ORI:         return "ori";
-	case Instruction::Name::ANDI:        return "andi";
-	case Instruction::Name::SLLI:        return "slli";
-	case Instruction::Name::SRLI:        return "srli";
-	case Instruction::Name::SRAI:        return "srai";
-	case Instruction::Name::ADD:         return "add";
-	case Instruction::Name::SUB:         return "sub";
-	case Instruction::Name::SLL:         return "sll";
-	case Instruction::Name::SLT:         return "slt";
-	case Instruction::Name::SLTU:        return "sltu";
-	case Instruction::Name::XOR:         return "xor";
-	case Instruction::Name::SRL:         return "srl";
-	case Instruction::Name::SRA:         return "sra";
-	case Instruction::Name::OR:          return "or";
-	case Instruction::Name::AND:         return "and";
-	case Instruction::Name::FENCE:       return "fence";
-	case Instruction::Name::ECALL:       return "ecall";
-	case Instruction::Name::EBREAK:      return "ebreak";
-	case Instruction::Name::MUL:         return "mul";
-	case Instruction::Name::MULH:        return "mulh";
-	case Instruction::Name::MULHSU:      return "mulhsu";
-	case Instruction::Name::MULHU:       return "mulhu";
-	case Instruction::Name::DIV:         return "div";
-	case Instruction::Name::DIVU:        return "divu";
-	case Instruction::Name::REM:         return "rem";
-	case Instruction::Name::REMU:        return "remu";
-	case Instruction::Name::UnknownName: return "unknown";
+	case Instruction::LUI:         return "lui";
+	case Instruction::AUIPC:       return "auipc";
+	case Instruction::JAL:         return "jal";
+	case Instruction::JALR:        return "jalr";
+	case Instruction::BEQ:         return "beq";
+	case Instruction::BNE:         return "bne";
+	case Instruction::BLT:         return "blt";
+	case Instruction::BGE:         return "bge";
+	case Instruction::BLTU:        return "bltu";
+	case Instruction::BGEU:        return "bgeu";
+	case Instruction::LB:          return "lb";
+	case Instruction::LH:          return "lh";
+	case Instruction::LW:          return "lw";
+	case Instruction::LBU:         return "lbu";
+	case Instruction::LHU:         return "lhu";
+	case Instruction::SB:          return "sb";
+	case Instruction::SH:          return "sh";
+	case Instruction::SW:          return "sw";
+	case Instruction::ADDI:        return "addi";
+	case Instruction::SLTI:        return "slti";
+	case Instruction::SLTIU:       return "sltiu";
+	case Instruction::XORI:        return "xori";
+	case Instruction::ORI:         return "ori";
+	case Instruction::ANDI:        return "andi";
+	case Instruction::SLLI:        return "slli";
+	case Instruction::SRLI:        return "srli";
+	case Instruction::SRAI:        return "srai";
+	case Instruction::ADD:         return "add";
+	case Instruction::SUB:         return "sub";
+	case Instruction::SLL:         return "sll";
+	case Instruction::SLT:         return "slt";
+	case Instruction::SLTU:        return "sltu";
+	case Instruction::XOR:         return "xor";
+	case Instruction::SRL:         return "srl";
+	case Instruction::SRA:         return "sra";
+	case Instruction::OR:          return "or";
+	case Instruction::AND:         return "and";
+	case Instruction::FENCE:       return "fence";
+	case Instruction::ECALL:       return "ecall";
+	case Instruction::EBREAK:      return "ebreak";
+	case Instruction::MUL:         return "mul";
+	case Instruction::MULH:        return "mulh";
+	case Instruction::MULHSU:      return "mulhsu";
+	case Instruction::MULHU:       return "mulhu";
+	case Instruction::DIV:         return "div";
+	case Instruction::DIVU:        return "divu";
+	case Instruction::REM:         return "rem";
+	case Instruction::REMU:        return "remu";
+	case Instruction::UnknownName: return "unknown";
 	}
 }
 
-std::string to_string(reg_t reg) {
+std::string to_string(const reg_t& reg) {
 	switch (reg) {
 	case  0: return  "x0";
 	case  1: return  "x1";

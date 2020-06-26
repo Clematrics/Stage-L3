@@ -1,27 +1,28 @@
 <project xmlns="com.autoesl.autopilot.project" name="pipeline" top="pipeline">
-    <files>
-        <file name="../tb/pipeline_tb.cpp" sc="0" tb="1" cflags=" -Wno-unknown-pragmas" blackbox="false" csimflags=" -Wno-unknown-pragmas"/>
-        <file name="pipeline/include/common.hpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/src/debugger.cpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/include/debugger.hpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/src/decode.cpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/include/decode.hpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/src/disasm.cpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/include/disasm.hpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/src/fetch.cpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/include/fetch.hpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/src/helpers.cpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/include/helpers.hpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/src/instructions.cpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/include/instructions.hpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/src/pipeline.cpp" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="pipeline/include/pipeline.hpp" sc="0" tb="false" cflags="" blackbox="false"/>
-    </files>
     <includePaths/>
     <libraryPaths/>
     <Simulation argv="">
         <SimFlow name="csim" csimMode="0" lastCsimMode="0"/>
     </Simulation>
+    <files xmlns="">
+        <file name="../tb/pipeline_tb.cpp" sc="0" tb="1" cflags=" -Wno-unknown-pragmas" csimflags=" -Wno-unknown-pragmas" blackbox="false"/>
+        <file name="pipeline/include/pipeline.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/src/pipeline.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/include/json.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/include/instructions.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/src/instructions.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/include/helpers.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/src/helpers.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/include/fetch.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/src/fetch.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/include/disasm.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/src/disasm.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/include/decode.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/src/decode.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/include/debugger.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/src/debugger.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/include/common.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+    </files>
     <solutions xmlns="">
         <solution name="solution1" status="active"/>
     </solutions>

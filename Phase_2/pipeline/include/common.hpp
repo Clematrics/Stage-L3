@@ -3,8 +3,10 @@
 #include "ap_int.h"
 
 // Types for constants
-typedef unsigned char uint8_t;
-typedef unsigned int  uint32_t;
+typedef unsigned char       uint8_t;
+typedef unsigned short      uint16_t;
+typedef unsigned int        uint32_t;
+typedef unsigned long long  uint64_t;
 
 // ..._bits denotes the number of bits of something
 // ..._size denotes the number of bytes of something
