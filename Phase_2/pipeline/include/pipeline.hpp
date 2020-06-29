@@ -3,10 +3,12 @@
 #include "../include/common.hpp"
 #include "../include/fetch.hpp"
 #include "../include/decode.hpp"
+#include "../include/register_file.hpp"
 
 class Pipeline {
 	Fetch fetch_stage;
 	Decode decode_stage;
+	RegisterFile register_file;
 	DecodedInstruction decoded;
 	word_t instruction;
 	word_t program_counter;

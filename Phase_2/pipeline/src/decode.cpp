@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "../include/instructions.hpp"
+#include "../include/register_file.hpp"
 
 #ifndef __SYNTHESIS__
 #include "../include/debugger.hpp"
@@ -10,8 +11,9 @@
 #include "../include/json.hpp"
 #endif // __SYNTHESIS__
 
-Decode::Decode()
-	: active(false)
+Decode::Decode(RegisterFile& register_file)
+	: active(false),
+	  register_file(register_file)
 {
 }
 
@@ -70,10 +72,6 @@ void Decode::decode(const word_t& instruction, const word_t& program_counter, wo
 		const reg_t dest = instruction(Slicing::Dest::high, Slicing::Dest::low);
 		const reg_t reg1 = instruction(Slicing::Reg1::high, Slicing::Reg1::low);
 		const reg_t reg2 = instruction(Slicing::Reg2::high, Slicing::Reg2::low);
-
-		decoded->dest = dest;
-		decoded->reg1 = reg1;
-		decoded->reg2 = reg2;
 
 		const func3_t func3 = instruction(Slicing::Func3::high, Slicing::Func3::low);
 		const func7_t func7 = instruction(Slicing::Func7::high, Slicing::Func7::low);
@@ -307,14 +305,39 @@ void Decode::decode(const word_t& instruction, const word_t& program_counter, wo
 			decoded->name = Instruction::UnknownName;
 		}
 
+		bool blocking = false;
 		switch (type) {
-		case Instruction::R: break;
-		case Instruction::I: decoded->immediate = decodeIImmediate(instruction); break;
-		case Instruction::S: decoded->immediate = decodeSImmediate(instruction); break;
-		case Instruction::B: decoded->immediate = decodeBImmediate(instruction); break;
-		case Instruction::U: decoded->immediate = decodeUImmediate(instruction); break;
-		case Instruction::J: decoded->immediate = decodeJImmediate(instruction); break;
-		case Instruction::UnknownType: break;
+		case Instruction::R:
+			register_file.get_alias(dest, &decoded->reg1);
+			register_file.get_alias(dest, &decoded->reg2);
+			register_file.create_alias(dest, &decoded->dest, &blocking);
+			break;
+		case Instruction::I:
+			decoded->immediate = decodeIImmediate(instruction);
+			register_file.get_alias(dest, &decoded->reg1);
+			register_file.create_alias(dest, &decoded->dest, &blocking);
+			break;
+		case Instruction::S:
+			decoded->immediate = decodeSImmediate(instruction);
+			register_file.get_alias(dest, &decoded->reg1);
+			register_file.get_alias(dest, &decoded->reg2);
+			break;
+		case Instruction::B:
+			decoded->immediate = decodeBImmediate(instruction);
+			register_file.get_alias(dest, &decoded->reg1);
+			register_file.get_alias(dest, &decoded->reg2);
+			register_file.create_alias(dest, &decoded->dest, &blocking);
+			break;
+		case Instruction::U:
+			decoded->immediate = decodeUImmediate(instruction);
+			register_file.create_alias(dest, &decoded->dest, &blocking);
+			break;
+		case Instruction::J:
+			decoded->immediate = decodeJImmediate(instruction);
+			register_file.create_alias(dest, &decoded->dest, &blocking);
+			break;
+		case Instruction::UnknownType:
+			break;
 		}
 
 		if (is_jump_instruction) {

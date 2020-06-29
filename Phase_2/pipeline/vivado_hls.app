@@ -2,10 +2,12 @@
     <includePaths/>
     <libraryPaths/>
     <Simulation argv="">
-        <SimFlow name="csim" csimMode="0" lastCsimMode="0"/>
+        <SimFlow name="csim" setup="true" csimMode="0" lastCsimMode="0"/>
     </Simulation>
     <files xmlns="">
         <file name="../tb/pipeline_tb.cpp" sc="0" tb="1" cflags=" -Wno-unknown-pragmas" csimflags=" -Wno-unknown-pragmas" blackbox="false"/>
+        <file name="pipeline/include/register_file.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
+        <file name="pipeline/src/register_file.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
         <file name="pipeline/include/pipeline.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
         <file name="pipeline/src/pipeline.cpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>
         <file name="pipeline/include/json.hpp" sc="0" tb="false" cflags="" csimflags="" blackbox="false"/>

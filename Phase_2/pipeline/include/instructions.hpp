@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "common.hpp"
+#include "../include/common.hpp"
 
 typedef ap_uint<7> opcode_t;
 typedef ap_uint<2> opcode_prefix_t;
@@ -11,7 +11,6 @@ typedef ap_uint<3> opcode_suffix_low_t;
 typedef ap_uint<2> opcode_suffix_high_t;
 typedef ap_uint<3> func3_t;
 typedef ap_uint<7> func7_t;
-typedef ap_uint<5> reg_t;
 
 namespace Slicing {
 	namespace Opcode {
