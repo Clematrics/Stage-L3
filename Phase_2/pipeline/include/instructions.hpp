@@ -11,6 +11,7 @@ typedef ap_uint<3> opcode_suffix_low_t;
 typedef ap_uint<2> opcode_suffix_high_t;
 typedef ap_uint<3> func3_t;
 typedef ap_uint<7> func7_t;
+typedef ap_uint<20> packed_immediate_t;
 
 namespace Slicing {
 	namespace Opcode {

@@ -2,17 +2,19 @@
 
 #ifndef __SYNTHESIS__
 
+#include <iostream>
+#include <iomanip>
 #include <string>
 
 uint64_t Debugger::cycles = 0;
 json Debugger::report = {
-	{"Assembly", json::array()},
-	{"Cycles", json::object()}
+	{ "Assembly", json::array() },
+	{ "Cycles", json::object() }
 };
 
 void Debugger::new_cycle() {
 	cycles++;
-	report["Cycles"].push_back({std::to_string(cycles), json::array()});
+	report["Cycles"].push_back({ std::to_string(cycles), json::array() });
 }
 
 void Debugger::add_asm_line(std::string line) {
@@ -22,6 +24,8 @@ void Debugger::add_asm_line(std::string line) {
 void Debugger::add_cycle_event(const json object) {
 	json& current_cycle = report["Cycles"][std::to_string(cycles)];
 	current_cycle.push_back(object);
+
+	std::cout << "Cycle " << cycles << " : " << std::setw(4) << object << '\n' << std::flush;
 }
 
 json Debugger::get_report() {

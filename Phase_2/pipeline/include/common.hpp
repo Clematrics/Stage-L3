@@ -44,8 +44,12 @@ typedef word_t memory_t[memory_words];
 const uint16_t physical_register_count      = 64;
 const uint16_t architectural_register_count = 32;
 
-static const uint32_t physical_register_id_width      = Width<physical_register_count>::Value;
-static const uint32_t architectural_register_id_width = Width<architectural_register_count>::Value;
+const uint32_t physical_register_id_width      = Width<physical_register_count>::Value;
+const uint32_t architectural_register_id_width = Width<architectural_register_count>::Value;
 typedef ap_uint<physical_register_id_width>      physical_id_t;
 typedef ap_uint<architectural_register_id_width> reg_t;
+
+const uint16_t reorder_buffer_count = 16;
+const uint32_t reorder_buffer_count_width      = Width<reorder_buffer_count>::Value;
+typedef ap_uint<reorder_buffer_count_width>      reorder_buffer_ptr_t;
 

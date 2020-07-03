@@ -5,19 +5,17 @@
 #include "../include/debugger.hpp"
 #include "../include/disasm.hpp"
 
-Fetch::Fetch(word_t program_counter)
-	: program_counter(program_counter),
-	  active(true)
+Fetch::Fetch()
+	: active(true)
 {
 }
 
-void Fetch::fetch(const memory_t memory, const word_t& next_program_counter, word_t* instruction, word_t* current_program_counter) {
+void Fetch::fetch(const memory_t memory, const word_t& program_counter, word_t* instruction, word_t* current_program_counter) {
 	#pragma HLS INLINE
 
 	if (active) {
 		*instruction = memory[program_counter];
 		*current_program_counter = program_counter;
-		program_counter = next_program_counter;
 		#ifndef __SYNTHESIS__
 		std::string asm_line = instruction_to_string(disassemble(*instruction));
 		Debugger::add_asm_line(asm_line);

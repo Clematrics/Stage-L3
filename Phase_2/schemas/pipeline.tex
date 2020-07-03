@@ -1,18 +1,44 @@
 \documentclass[a4paper]{article}
 
 \usepackage{tikz}
-\usetikzlibrary{arrows, calc, positioning}
+\usetikzlibrary{arrows, calc, fit, positioning}
 
 \begin{document}
 \begin{center}
 	\begin{tikzpicture}[>=latex]
-		\node[draw] (fetch) {Fetch};
-		\node[draw] [below=of fetch] (decode) {Decode};
+		\node[draw] (fetch) {
+			\begin{tikzpicture}
+				\node {Fetch};
+			\end{tikzpicture}
+		};
+		\node[draw] [below=of fetch] (decode) {
+			\begin{tikzpicture}
+				\node {Decode};
+			\end{tikzpicture}
+		};
+		\node[draw] [left=2cm of decode] (register_file) {Register file};
+		\node[draw] [below=of decode] (reorder_buffer) {
+			\begin{tikzpicture}
+				\node {Reorder buffer};
+			\end{tikzpicture}
+		};
+		\node[draw] [below=of reorder_buffer] (issue) {
+			\begin{tikzpicture}
+				\node {Issue};
+			\end{tikzpicture}
+		};
 
-		\draw[->] (fetch.north) ++(0,1) -- node[right] {memory} (fetch.north);
-		\draw[->] (fetch.240)   -- node[left]  {instruction} (fetch.240|-decode.north);
-		\draw[->] (fetch.300)   -- node[right] {pc}          (fetch.300|-decode.north);
-		\draw[->] (decode.east) -- ++(.5,0) |- node[right, pos=0.25] {next pc} (fetch.east);
+		\draw[->]  (fetch.north)    ++(0,1) -- node[right] {memory} (fetch.north);
+		\draw[->]  (fetch.240)      -- node[left]  {instruction} (fetch.240|-decode.north);
+		\draw[->]  (fetch.300)      -- node[right] {pc}          (fetch.300|-decode.north);
+		\draw[->]  (decode.345)     -- ++(1,0) |- node[right, pos=0.25] {next pc} (fetch.15);
+		\draw[->]  (decode.240)     -- node[left, align=center] {decoded\\instruction} (decode.240|-reorder_buffer.north);
+		\draw[<->] (decode)         -- node[above] {rename} (register_file);
+		\draw[->]  (reorder_buffer) -- node[left, align=center] {take\\instruction} (issue);
+		\draw[<->] (reorder_buffer) -| node[left, align=center] {update\\available} (register_file);
+
+		\draw[->, dashed] (decode.15) -- ++(.5,0) |- node[pos=0.25,rotate=180,above,sloped] {block} (fetch.345);
+		\draw[->, dashed] (reorder_buffer.60) -- node[right] {block} (reorder_buffer.60|-decode.south);
 
 		\draw[thick] (current bounding box.south west) ++(-1,-1) rectangle ($(current bounding box.north east)+(1,1)$);
 	\end{tikzpicture}

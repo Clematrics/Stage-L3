@@ -7,6 +7,7 @@
 #include <iterator>
 #include <sstream>
 
+#include "../include/decode.hpp"
 #include "../include/helpers.hpp"
 #include "../include/instructions.hpp"
 #include "../include/json.hpp"
@@ -17,7 +18,7 @@ bool contains(const T& container, const U& elem) {
 	return std::find(std::begin(container), std::end(container), elem) != std::end(container);
 }
 
-void decodeType(AsmInstruction& instr) {
+void decode_type(AsmInstruction& instr) {
 	const static std::array<func3_t, 6> func3IType {0b000, 0b010, 0b011, 0b100, 0b110, 0b111};
 
 	if (instr.opcode_prefix != 0b11) {
@@ -61,7 +62,7 @@ void decodeType(AsmInstruction& instr) {
 }
 
 
-void decodeRType(AsmInstruction& instr){
+void decode_R_type(AsmInstruction& instr){
 	if (instr.opcode_suffix == OPCODE_SUFFIX_ALUI && instr.func3 == FUNC3_SLLI         && instr.func7 == FUNC7_NULL ) { instr.name = Instruction::Name::SLLI; return; }
 	if (instr.opcode_suffix == OPCODE_SUFFIX_ALUI && instr.func3 == FUNC3_SRLI_SRAI    && instr.func7 == FUNC7_NULL ) { instr.name = Instruction::Name::SRLI; return; }
 	if (instr.opcode_suffix == OPCODE_SUFFIX_ALUI && instr.func3 == FUNC3_SRLI_SRAI    && instr.func7 == FUNC7_SIXTH) { instr.name = Instruction::Name::SRAI; return; }
@@ -86,7 +87,7 @@ void decodeRType(AsmInstruction& instr){
 	/*else*/ instr.name = Instruction::Name::UnknownName;
 }
 
-void decodeIType(AsmInstruction& instr){
+void decode_I_type(AsmInstruction& instr){
 	instr.immediate(11,  0) = instr.raw(31, 20);
 	instr.immediate(31, 12) = instr.raw.test(31) ? -1 : 0;
 
@@ -118,7 +119,7 @@ void decodeIType(AsmInstruction& instr){
 	/*else*/ instr.name = Instruction::Name::UnknownName;
 }
 
-void decodeSType(AsmInstruction& instr){
+void decode_S_type(AsmInstruction& instr){
 	instr.immediate( 4,  0) = instr.raw(11,  7);
 	instr.immediate(11,  5) = instr.raw(31, 25);
 	instr.immediate(31, 12) = instr.raw.test(31) ? -1 : 0;
@@ -129,7 +130,7 @@ void decodeSType(AsmInstruction& instr){
 	/*else*/ instr.name = Instruction::Name::UnknownName;
 }
 
-void decodeBType(AsmInstruction& instr){
+void decode_B_type(AsmInstruction& instr){
 	instr.immediate.set_bit(0, false);
 	instr.immediate( 4,  1)   = instr.raw(11, 8);
 	instr.immediate(10,  5)   = instr.raw(30, 25);
@@ -147,7 +148,7 @@ void decodeBType(AsmInstruction& instr){
 	/*else*/ instr.name = Instruction::Name::UnknownName;
 }
 
-void decodeUType(AsmInstruction& instr){
+void decode_U_type(AsmInstruction& instr){
 	instr.immediate(11,  0) = 0;
 	instr.immediate(31, 12) = instr.raw(31, 12);
 
@@ -156,7 +157,7 @@ void decodeUType(AsmInstruction& instr){
 	/*else*/ instr.name = Instruction::Name::UnknownName;
 }
 
-void decodeJType(AsmInstruction& instr){
+void decode_J_type(AsmInstruction& instr){
 	instr.immediate.set_bit( 0, false);
 	instr.immediate(10,  1)   = instr.raw(30, 21);
 	instr.immediate.set_bit(11, instr.raw.get_bit(20));
@@ -167,14 +168,14 @@ void decodeJType(AsmInstruction& instr){
 	instr.name = Instruction::Name::JAL;
 }
 
-void dispatchDecode(AsmInstruction& instr){
+void dispatch_decode(AsmInstruction& instr){
 	switch (instr.type) {
-	case Instruction::Type::R: decodeRType(instr); break;
-	case Instruction::Type::I: decodeIType(instr); break;
-	case Instruction::Type::S: decodeSType(instr); break;
-	case Instruction::Type::B: decodeBType(instr); break;
-	case Instruction::Type::U: decodeUType(instr); break;
-	case Instruction::Type::J: decodeJType(instr); break;
+	case Instruction::Type::R: decode_R_type(instr); break;
+	case Instruction::Type::I: decode_I_type(instr); break;
+	case Instruction::Type::S: decode_S_type(instr); break;
+	case Instruction::Type::B: decode_B_type(instr); break;
+	case Instruction::Type::U: decode_U_type(instr); break;
+	case Instruction::Type::J: decode_J_type(instr); break;
 	default: break;
 	}
 }
@@ -191,8 +192,8 @@ const AsmInstruction disassemble(const word_t& raw) {
 	instr.source1       = raw(19, 15);
 	instr.source2       = raw(24, 20);
 
-	decodeType(instr);
-	dispatchDecode(instr);
+	decode_type(instr);
+	dispatch_decode(instr);
 	return instr;
 }
 

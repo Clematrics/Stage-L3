@@ -17,25 +17,25 @@ Decode::Decode(RegisterFile& register_file)
 {
 }
 
-word_t decodeIImmediate(const word_t& instruction) {
+word_t decode_I_immediate(const word_t& instruction) {
 	word_t immediate;
 	immediate(11,  0) = instruction(Slicing::I::imm_11_0_high, Slicing::I::imm_11_0_low);
 	immediate(31, 12) = instruction.get_bit(Slicing::I::imm_sign) ? -1 : 0;
 	return immediate;
 }
 
-word_t decodeSImmediate(const word_t& instruction) {
+word_t decode_S_immediate(const word_t& instruction) {
 	word_t immediate;
-	immediate(4, 0)   = instruction(Slicing::S::imm_4_0_high , Slicing::S::imm_4_0_low);
+	immediate( 4,  0) = instruction(Slicing::S::imm_4_0_high , Slicing::S::imm_4_0_low);
 	immediate(11,  5) = instruction(Slicing::S::imm_11_5_high, Slicing::S::imm_11_5_low);
 	immediate(31, 12) = instruction.get_bit(Slicing::S::imm_sign) ? -1 : 0;
 	return immediate;
 }
 
-word_t decodeBImmediate(const word_t& instruction) {
+word_t decode_B_immediate(const word_t& instruction) {
 	word_t immediate;
 	immediate.set_bit(0, false);
-	immediate(4, 1)     = instruction(Slicing::B::imm_4_1_high , Slicing::B::imm_4_1_low);
+	immediate( 4,  1)   = instruction(Slicing::B::imm_4_1_high , Slicing::B::imm_4_1_low);
 	immediate(10,  5)   = instruction(Slicing::B::imm_10_5_high, Slicing::B::imm_10_5_low);
 	immediate.set_bit(11, instruction.get_bit(Slicing::B::imm_11));
 	immediate.set_bit(12, instruction.get_bit(Slicing::B::imm_12));
@@ -43,14 +43,14 @@ word_t decodeBImmediate(const word_t& instruction) {
 	return immediate;
 }
 
-word_t decodeUImmediate(const word_t& instruction) {
+word_t decode_U_immediate(const word_t& instruction) {
 	word_t immediate;
 	immediate(11,  0) = 0x000;
 	immediate(31, 12) = instruction(Slicing::U::imm_31_12_high, Slicing::U::imm_31_12_low);
 	return immediate;
 }
 
-word_t decodeJImmediate(const word_t& instruction) {
+word_t decode_J_immediate(const word_t& instruction) {
 	word_t immediate;
 	immediate.set_bit(0, false);
 	immediate(10,  1)   = instruction(Slicing::J::imm_10_1_high, Slicing::J::imm_10_1_low);
@@ -59,6 +59,95 @@ word_t decodeJImmediate(const word_t& instruction) {
 	immediate.set_bit(20, instruction.get_bit(Slicing::J::imm_20));
 	immediate(31, 21)   = instruction.get_bit(Slicing::J::imm_sign) ? -1 : 0;
 	return immediate;
+}
+
+
+packed_immediate_t pack_I_immediate(const word_t& instruction) {
+	packed_immediate_t immediate;
+	immediate(11,  0) = instruction(Slicing::I::imm_11_0_high, Slicing::I::imm_11_0_low);
+	return immediate;
+}
+
+packed_immediate_t pack_S_immediate(const word_t& instruction) {
+	packed_immediate_t immediate;
+	immediate( 4,  0) = instruction(Slicing::S::imm_4_0_high , Slicing::S::imm_4_0_low);
+	immediate(11,  5) = instruction(Slicing::S::imm_11_5_high, Slicing::S::imm_11_5_low);
+	return immediate;
+}
+
+packed_immediate_t pack_B_immediate(const word_t& instruction) {
+	packed_immediate_t immediate;
+	immediate( 3,  0)   = instruction(Slicing::B::imm_4_1_high , Slicing::B::imm_4_1_low);
+	immediate( 9,  4)   = instruction(Slicing::B::imm_10_5_high, Slicing::B::imm_10_5_low);
+	immediate.set_bit(10, instruction.get_bit(Slicing::B::imm_11));
+	immediate.set_bit(11, instruction.get_bit(Slicing::B::imm_12));
+	return immediate;
+}
+
+packed_immediate_t pack_U_immediate(const word_t& instruction) {
+	packed_immediate_t immediate;
+	immediate(19,  0)   = instruction(Slicing::U::imm_31_12_high, Slicing::U::imm_31_12_low);
+	return immediate;
+}
+
+packed_immediate_t pack_J_immediate(const word_t& instruction) {
+	packed_immediate_t immediate;
+	immediate( 9,  0)   = instruction(Slicing::J::imm_10_1_high, Slicing::J::imm_10_1_low);
+	immediate.set_bit(10, instruction.get_bit(Slicing::J::imm_11));
+	immediate(18, 11)   = instruction(Slicing::J::imm_19_12_high, Slicing::J::imm_19_12_low);
+	immediate.set_bit(19, instruction.get_bit(Slicing::J::imm_20));
+	return immediate;
+}
+
+word_t unpack_I_immediate(const packed_immediate_t& packed_immediate) {
+	word_t immediate;
+	immediate(11,  0) = packed_immediate(11, 0);
+	immediate(31, 12) = packed_immediate.test(11) ? -1 : 0;
+	return immediate;
+}
+
+word_t unpack_S_immediate(const packed_immediate_t& packed_immediate) {
+	word_t immediate;
+	immediate(11,  0) = packed_immediate(11, 0);
+	immediate(31, 12) = packed_immediate.test(11) ? -1 : 0;
+	return immediate;
+}
+
+word_t unpack_B_immediate(const packed_immediate_t& packed_immediate) {
+	word_t immediate;
+	immediate.set_bit(0, false);
+	immediate(12,  1)   = packed_immediate(11, 0);
+	immediate(31, 13)   = packed_immediate.test(11) ? -1 : 0;
+	return immediate;
+}
+
+word_t unpack_U_immediate(const packed_immediate_t& packed_immediate) {
+	word_t immediate;
+	immediate(11,  0) = 0x000;
+	immediate(31, 12) = packed_immediate;
+	return immediate;
+}
+
+word_t unpack_J_immediate(const packed_immediate_t& packed_immediate) {
+	word_t immediate;
+	immediate.set_bit(0, false);
+	immediate(20,  1) = packed_immediate;
+	immediate(31, 21) = packed_immediate.get_bit(19) ? -1 : 0;
+	return immediate;
+}
+
+
+word_t unpack_immediate(Instruction::Type type, const packed_immediate_t& packed_immediate) {
+	switch (type) {
+	case Instruction::R: break;
+	case Instruction::I: return unpack_I_immediate(packed_immediate);
+	case Instruction::S: return unpack_S_immediate(packed_immediate);
+	case Instruction::B: return unpack_B_immediate(packed_immediate);
+	case Instruction::U: return unpack_U_immediate(packed_immediate);
+	case Instruction::J: return unpack_J_immediate(packed_immediate);
+	case Instruction::UnknownType: break;
+	}
+	return 0;
 }
 
 void Decode::decode(const word_t& instruction, const word_t& program_counter, word_t* out_program_counter, bit_t* stop_signal, DecodedInstruction* decoded) {
@@ -305,46 +394,55 @@ void Decode::decode(const word_t& instruction, const word_t& program_counter, wo
 			decoded->name = Instruction::UnknownName;
 		}
 
-		bool blocking = false;
+		bool rename_reg1 = false;
+		bool rename_reg2 = false;
+		bool rename_dest = false;
 		switch (type) {
 		case Instruction::R:
-			register_file.get_alias(dest, &decoded->reg1);
-			register_file.get_alias(dest, &decoded->reg2);
-			register_file.create_alias(dest, &decoded->dest, &blocking);
+			rename_reg1 = true;
+			rename_reg2 = true;
+			rename_dest = true;
 			break;
 		case Instruction::I:
-			decoded->immediate = decodeIImmediate(instruction);
-			register_file.get_alias(dest, &decoded->reg1);
-			register_file.create_alias(dest, &decoded->dest, &blocking);
+			decoded->packed_immediate = pack_I_immediate(instruction);
+			rename_reg1 = true;
+			rename_dest = true;
 			break;
 		case Instruction::S:
-			decoded->immediate = decodeSImmediate(instruction);
-			register_file.get_alias(dest, &decoded->reg1);
-			register_file.get_alias(dest, &decoded->reg2);
+			decoded->packed_immediate = pack_S_immediate(instruction);
+			rename_reg1 = true;
+			rename_reg2 = true;
 			break;
 		case Instruction::B:
-			decoded->immediate = decodeBImmediate(instruction);
-			register_file.get_alias(dest, &decoded->reg1);
-			register_file.get_alias(dest, &decoded->reg2);
-			register_file.create_alias(dest, &decoded->dest, &blocking);
+			decoded->packed_immediate = pack_B_immediate(instruction);
+			rename_reg1 = true;
+			rename_reg2 = true;
+			rename_dest = true;
 			break;
 		case Instruction::U:
-			decoded->immediate = decodeUImmediate(instruction);
-			register_file.create_alias(dest, &decoded->dest, &blocking);
+			decoded->packed_immediate = pack_U_immediate(instruction);
+			rename_dest = true;
 			break;
 		case Instruction::J:
-			decoded->immediate = decodeJImmediate(instruction);
-			register_file.create_alias(dest, &decoded->dest, &blocking);
+			decoded->packed_immediate = pack_J_immediate(instruction);
+			rename_dest = true;
 			break;
 		case Instruction::UnknownType:
 			break;
 		}
 
+		bool blocking = false;
+		if (rename_reg1)
+			register_file.get_alias(dest, &decoded->reg1);
+		if (rename_reg2)
+			register_file.get_alias(dest, &decoded->reg2);
+		if (rename_dest)
+			register_file.create_alias(dest, &decoded->dest, &blocking);
+
 		if (is_jump_instruction) {
 			word_t offset;
-			offset(29, 0) = decoded->immediate(31, 2);
-			offset.set_bit(30, decoded->immediate.get_bit(31));
-			offset.set_bit(31, decoded->immediate.get_bit(31));
+			offset(18,  0) = decoded->packed_immediate(19, 1);
+			offset(31, 19) = decoded->packed_immediate.test(19) ? -1 : 0;
 			*out_program_counter = program_counter + offset;
 		}
 		else {
@@ -364,10 +462,10 @@ void Decode::decode(const word_t& instruction, const word_t& program_counter, wo
 			func7,
 			decoded->name,
 			type,
-			decoded->dest,
-			decoded->reg1,
-			decoded->reg2,
-			decoded->immediate
+			dest,
+			reg1,
+			reg2,
+			unpack_immediate(type, decoded->packed_immediate)
 		};
 		Debugger::add_cycle_event({
 			{ "Decode stage",
