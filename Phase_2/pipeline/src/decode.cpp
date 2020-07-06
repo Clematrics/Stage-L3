@@ -5,11 +5,9 @@
 #include "../include/instructions.hpp"
 #include "../include/register_file.hpp"
 
-#ifndef __SYNTHESIS__
 #include "../include/debugger.hpp"
 #include "../include/disasm.hpp"
 #include "../include/json.hpp"
-#endif // __SYNTHESIS__
 
 Decode::Decode(RegisterFile& register_file)
 	: active(false),

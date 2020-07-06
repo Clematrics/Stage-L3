@@ -1,3 +1,5 @@
+#ifndef __SYNTHESIS__
+
 #include "../include/nlohmann/json.hpp"
 #include "../include/tsl/ordered_map.h"
 
@@ -13,3 +15,5 @@ template<class Key, class T, class Ignore, class Allocator,
 using ordered_map = tsl::ordered_map<Key, T, Hash, KeyEqual, AllocatorPair, ValueTypeContainer>;
 
 using json = nlohmann::basic_json<ordered_map>;
+
+#endif // __SYNTHESIS__

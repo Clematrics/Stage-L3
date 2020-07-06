@@ -10,9 +10,9 @@
 class Pipeline {
 	Fetch fetch_stage;
 	Decode decode_stage;
-	Issue issue_stage;
-	RegisterFile register_file;
-	ReorderBuffer reorder_buffer;
+	// Issue issue_stage;
+	// RegisterFile register_file;
+	// ReorderBuffer reorder_buffer;
 	DecodedInstruction decoded;
 	word_t instruction;
 	word_t program_counter;
