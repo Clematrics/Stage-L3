@@ -10,7 +10,19 @@ struct DecodedInstruction {
 	physical_id_t reg1;
 	physical_id_t reg2;
 	word_t immediate;
+
+	// New decoded layout
 	packed_immediate_t packed_immediate;
+	bool use_reg1;
+	bool use_reg2;
+	bool use_dest;
+	reg_t reg1;
+	reg_t reg2;
+	reg_t dest;
+	// type of instruction ?
+	// aliases for registers ?
+	// which register is used / necessary ? or this fall into the type ?
+	// unit in charge of the processing of the instruction ?
 };
 
 word_t decode_I_immediate(const word_t& instruction);
@@ -35,8 +47,7 @@ word_t unpack_immediate(Instruction::Type type, const packed_immediate_t& packed
 
 class Decode {
 	bool active;
-	RegisterFile& register_file;
 public:
-	Decode(RegisterFile& register_file);
+	Decode();
 	void decode(const word_t& instruction, const word_t& program_counter, word_t* out_program_counter, bit_t* stop_signal, DecodedInstruction* decoded);
 };

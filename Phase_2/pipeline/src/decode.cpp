@@ -9,9 +9,8 @@
 #include "../include/disasm.hpp"
 #include "../include/json.hpp"
 
-Decode::Decode(RegisterFile& register_file)
-	: active(false),
-	  register_file(register_file)
+Decode::Decode()
+	: active(false)
 {
 }
 
@@ -429,13 +428,13 @@ void Decode::decode(const word_t& instruction, const word_t& program_counter, wo
 			break;
 		}
 
-		bool blocking = false;
-		if (rename_reg1)
-			register_file.get_alias(dest, &decoded->reg1);
-		if (rename_reg2)
-			register_file.get_alias(dest, &decoded->reg2);
-		if (rename_dest)
-			register_file.create_alias(dest, &decoded->dest, &blocking);
+		// bool blocking = false;
+		// if (rename_reg1)
+		// 	register_file.get_alias(dest, &decoded->reg1);
+		// if (rename_reg2)
+		// 	register_file.get_alias(dest, &decoded->reg2);
+		// if (rename_dest)
+		// 	register_file.create_alias(dest, &decoded->dest, &blocking);
 
 		if (is_jump_instruction) {
 			word_t offset;

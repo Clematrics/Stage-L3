@@ -5,14 +5,41 @@
 #include "../include/decode.hpp"
 #include "../include/issue.hpp"
 #include "../include/register_file.hpp"
-#include "../include/reorder_buffer.hpp"
+
+struct FetchToDecode {
+	bool fetched;
+	word_t instruction;
+	word_t program_counter;
+};
+
+struct DecodeToFetch {
+	word_t next_program_counter;
+	bool block_fetch;
+};
+
+// to enqueue the instruction into the ROB
+struct DecodeToCommit {
+	bool enqueue;
+	DecodedInstruction decoded_instruction;
+};
+
+struct DecodeToIssue {
+	bool decoded;
+	DecodedInstruction decoded_instruction;
+	// add something for the renaming ?
+};
+
+//
+struct WritebackToIssue {
+	bool write_result;
+	physical_id_t destination;
+	word_t value;
+};
 
 class Pipeline {
 	Fetch fetch_stage;
 	Decode decode_stage;
-	// Issue issue_stage;
-	// RegisterFile register_file;
-	// ReorderBuffer reorder_buffer;
+	Issue issue_stage;
 	DecodedInstruction decoded;
 	word_t instruction;
 	word_t program_counter;

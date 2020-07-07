@@ -17,7 +17,6 @@
 				\node {Decode};
 			\end{tikzpicture}
 		};
-		\node[draw] [left=2cm of decode] (register_file) {Register file};
 		\node[draw] [below=of decode] (issue) {
 			\begin{tikzpicture}[node distance=.8cm, remember picture]
 				\node (issue_base) {};
@@ -41,10 +40,11 @@
 				\node[draw] [minimum width=2cm, right=of bu] (mu) {Memory unit};
 			\end{tikzpicture}
 		};
+		\node[draw] [left=2cm of issue] (register_file) {Register file};
 		\node[draw] [below=of units] (write_back) {Write back};
 		\node[draw] [below=of write_back] (commit) {Commit};
 
-		\node[draw] [right=of issue] (reorder_buffer) {
+		\node[draw] [right=3cm of commit] (reorder_buffer) {
 			\begin{tikzpicture}
 				\node {Reorder buffer};
 			\end{tikzpicture}
@@ -53,24 +53,25 @@
 		\draw[->]  (fetch.north)        ++(0,1) -- node[right] {memory} (fetch.north);
 		\draw[->]  (fetch.240)          -- node[left]  {instruction} (fetch.240|-decode.north);
 		\draw[->]  (fetch.300)          -- node[right] {pc}          (fetch.300|-decode.north);
-		\draw[->]  (decode.0)           -- ++(1,0) |- node[right, pos=0.25] {next pc} (fetch.15);
+		\draw[->]  (decode.5)           -- ++(1,0) |- node[right, pos=0.25] {next pc} (fetch.15);
 		\draw[->]  (decode.240)         -- node[left, align=center] {decoded\\instruction} (decode.240|-issue.north);
-		\draw[->]  (decode.345)         -| node[right, align=center] {enqueue\\instruction} node[above right,pos=1] {\scriptsize +} (reorder_buffer);
-		\draw[<->] (decode)             -- node[above] {rename} (register_file);
-		\draw[<->] (issue)              -| node[left, align=center] {update\\available\\sources} (register_file);
-		\draw[->]  (reorder_buffer)     |- node[right, align=center] {dequeue\\instruction} node[below right,pos=0] {-} (commit);
+		\draw[->]  (decode.355)         -| node[right, align=center] {enqueue\\instruction} node[above right,pos=1] {\scriptsize +} (reorder_buffer);
+		\draw[<->] (decode)             -| node[above] {rename} (register_file);
+		\draw[<->] (issue)              -- node[below, align=center] {update\\available\\sources} (register_file);
+		\draw[->]  (reorder_buffer)     -- node[below, align=center] {dequeue\\instruction} node[below left,pos=0] {-} (commit);
 		\draw[->]  (issue_table.south)  |- ($(bu) +(0,0.5)$) node [left, pos=0.25, align=center] {take ready\\instruction} -- (bu.north) ;
 		\draw[->]  (issue_table.south)  |- ($(alu)+(0,0.5)$) -- (alu.north);
 		\draw[->]  (issue_table.south)  |- ($(mu) +(0,0.5)$) -- (mu.north) ;
 		\draw[->]  (bu)                 -- ++(0,-0.5) -| node [right, pos=0.75] {result} (write_back);
 		\draw[->]  (alu)                -- ++(0,-0.5) -| (write_back);
 		\draw[->]  (mu)                 -- ++(0,-0.5) -| (write_back);
-		\draw[->]  (write_back.175)     -| node[right, align=center, pos=0.65] {write\\result} ($(register_file.west)-(1,0)$) -- (register_file);
-		\draw[->]  (write_back.185)     -| node[below, align=center, pos=0.25] {next pc} ($(fetch.west)-(6,0)$) -- (fetch);
+		\draw[->]  (write_back.175)     -| node[left, align=center, pos=0.65] {write\\result} (register_file);
+		\draw[->]  (write_back.185)     -| node[below, align=center, pos=0.25] {next pc} ($(fetch.west)-(7,0)$) -- (fetch);
 		\draw[->]  (write_back)         -- node[left, align=center] {mark\\instruction done} (commit);
 
 		\draw[->, dashed] (decode.15) -- ++(.5,0) |- node[pos=0.25,rotate=180,above,sloped] {block} (fetch.345);
-		\draw[->, dashed] (issue.75) -- node[right] {block} (issue.75|-decode.south);
+		\draw[->, dashed] (reorder_buffer.115) |- node[pos=0.25,left] {block} (decode.345);
+		\draw[->, dashed] (decode.300|-issue.north) -- node[right] {block} (decode.300);
 		\node (bu_anchor)  at ($(bu.east)+(.2,0)$) {};
 		\node (alu_anchor) at ($(alu.east)+(.2,0)$) {};
 		\node (mu_anchor)  at ($(mu.west)-(.2,0)$) {};

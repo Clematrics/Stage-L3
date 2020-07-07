@@ -62,14 +62,14 @@ void RegisterFile::free_alias(const physical_id_t& id) {
 	#endif // __SYNTHESIS__
 }
 
-
-void RegisterFile::read(bool read, const reg_t& id, word_t* read_value) {
-	if (read)
-		*read_value = registers[map[id]];
+bool RegisterFile::is_alias_ready(const physical_id_t& id) {
+	return registers[id].is_ready;
 }
 
+void RegisterFile::read(const physical_id_t& id, word_t* read_value) {
+	*read_value = registers[id].value;
+}
 
-void RegisterFile::write(bool write, const reg_t& id, word_t write_value) {
-	if (write)
-		registers[map[id]] = write_value;
+void RegisterFile::write(const physical_id_t& id, word_t write_value) {
+	registers[id] = { write_value, true };
 }
