@@ -1,0 +1,20 @@
+#include "pipeline.hpp"
+
+Pipeline::Pipeline()
+	: fetch_stage     (5, 0),
+	  decode_stage    (5, 1),
+	  issue_stage     (5, 2),
+	  write_back_stage(5, 3),
+	  commit_stage    (5, 4)
+{
+}
+
+void Pipeline::interface(memory_t memory, bool* stop) {
+	#pragma HLS PIPELINE
+
+	fetch_stage     .interface(memory, decode_to_fetch, write_back_to_fetch, &fetch_to_decode);
+	decode_stage    .interface();
+	issue_stage     .interface();
+	write_back_stage.interface();
+	commit_stage    .interface();
+}
