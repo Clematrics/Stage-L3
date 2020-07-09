@@ -18,16 +18,6 @@ enum struct Type {
 	R, I, S, B, U, J, unknown
 };
 
-// TODO : not sure yet : let it here ? take it in decoding ? add jumps ?
-enum struct Kind {
-	alu,
-	alu_immediate,
-	load,
-	store,
-	branch,
-	other
-};
-
 enum struct Name {
 	LUI, AUIPC,
 	JAL, JALR,

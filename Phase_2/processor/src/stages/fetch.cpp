@@ -19,6 +19,8 @@ void FetchStage::interface(const memory_t memory, DecodeToFetch from_decode, Wri
 			to_decode->has_fetched_instruction = false;
 		}
 		else {
+			program_counter = from_decode.next_program_counter;
+
 			to_decode->has_fetched_instruction = true;
 			to_decode->instruction             = memory[program_counter];
 			to_decode->program_counter         = program_counter;
@@ -36,8 +38,6 @@ void FetchStage::interface(const memory_t memory, DecodeToFetch from_decode, Wri
 				}
 			});
 			#endif // __SYNTHESIS__
-
-			program_counter = from_decode.next_program_counter;
 		}
 	}
 	tick();

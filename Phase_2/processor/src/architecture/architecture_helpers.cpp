@@ -1,5 +1,7 @@
 #include "architecture/architecture_helpers.hpp"
 
+#include "architecture/decoding.hpp"
+
 std::string to_string(Type type) {
 	switch (type) {
 	case Type::R: return "R";
@@ -13,6 +15,7 @@ std::string to_string(Type type) {
 	}
 }
 
+using namespace Decoding;
 std::string to_string(Kind kind) {
 	switch (kind) {
 	case Kind::alu:           return "alu";

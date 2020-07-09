@@ -1,6 +1,5 @@
 <project xmlns="com.autoesl.autopilot.project" name="processor" top="processor">
     <files>
-        <file name="../tb/processor_tb.cpp" sc="0" tb="1" cflags="-I../include"/>
         <file name="processor/src/architecture/architecture_helpers.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
         <file name="processor/src/stages/commit.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
         <file name="processor/src/debug/debug_helpers.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
@@ -11,8 +10,10 @@
         <file name="processor/src/stages/issue.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
         <file name="processor/src/pipeline.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
         <file name="processor/src/processor.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
+        <file name="processor/src/components/register_map.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
         <file name="processor/src/stages/stage.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
         <file name="processor/src/stages/write_back.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>
+        <file name="../tb/processor_tb.cpp" sc="0" tb="1" cflags="-I../include"/>
     </files>
     <includePaths/>
     <libraryPaths/>

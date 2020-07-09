@@ -9,9 +9,8 @@ void processor(memory_t memory) {
 	#pragma HLS INTERFACE ap_ctrl_none port=return
 
 	Pipeline pipeline;
-	uint16_t i = 100;
 	bool stop;
-	while (i--) {
+	while (!stop) {
 		#ifndef __SYNTHESIS__
 		Debugger::new_cycle();
 		#endif // __SYNTHESIS__

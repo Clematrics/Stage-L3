@@ -37,6 +37,8 @@ typedef ap_uint<1>         bit_t;
 typedef ap_uint<byte_bits> byte_t;
 typedef ap_uint<word_bits> word_t;
 
+typedef ap_uint<word_bits - 2> program_counter_t;     // The program counter is aligned on 32 bits : the two lower bits of a word_t are ignored
+
 const uint32_t memory_words = 16;
 const uint32_t memory_size  = memory_words * word_size;
 

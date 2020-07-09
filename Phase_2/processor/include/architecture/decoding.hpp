@@ -16,6 +16,17 @@ typedef ap_uint<20> packed_immediate_t;
 
 /* Symbolic constants for the decoding phase */
 namespace Decoding {
+	// TODO : add categories ? jumps ?
+	enum struct Kind {
+		alu,
+		alu_immediate,
+		load,
+		store,
+		branch,
+		other,
+		unknown
+	};
+
 	/* The following is always extracted, regardless of the instruction type
 	*
 	*  31   25 24  20 19  15 14   12 11   7 6    5 4   2 1        0
@@ -94,7 +105,17 @@ namespace Decoding {
 	)
 
 	namespace Opcode {
+		enum {
+			high = 6,
+			low  = 0,
+		};
+
 		namespace Suffix {
+			enum {
+				high = 6,
+				low  = 2,
+			};
+
 			// Only for the disassembler
 			enum {
 				lui    = 0b01101,
@@ -116,6 +137,7 @@ namespace Decoding {
 
 				load_fence_auipc    = 0b00,
 				store_alu_lui       = 0b01,
+				h10_unused          = 0b10,
 				branch_jal_r_system = 0b11
 			)
 
@@ -125,17 +147,31 @@ namespace Decoding {
 
 				// hXX represents the two bits of the high suffix associated with the low opcode
 				h00_load  = 0b000,
+				h00_001   = 0b001,
+				h00_010   = 0b010,
 				h00_fence = 0b011,
+				h00_alui  = 0b100,
 				h00_auipc = 0b101,
+				h00_110   = 0b110,
+				h00_111   = 0b111,
 
 				h01_store = 0b000,
+				h01_001   = 0b001,
+				h01_010   = 0b010,
+				h01_011   = 0b011,
 				h01_alu   = 0b100,
 				h01_lui   = 0b101,
+				h01_110   = 0b110,
+				h01_111   = 0b111,
 
 				h11_branch = 0b000,
 				h11_jalr   = 0b001,
+				h11_010    = 0b010,
 				h11_jal    = 0b011,
 				h11_system = 0b100,
+				h11_101    = 0b101,
+				h11_110    = 0b110,
+				h11_111    = 0b111
 			)
 		}
 
@@ -216,6 +252,10 @@ namespace Decoding {
 				high = 4,
 				low  = 0
 			)
+			SCOPED_ENUM(Imm_11_0,
+				high = 11,
+				low  = 0
+			)
 		}
 		namespace InUnpackedImmediate {
 			SCOPED_ENUM(SignExtension,
@@ -228,6 +268,10 @@ namespace Decoding {
 			)
 			SCOPED_ENUM(Imm_4_0,
 				high = 4,
+				low  = 0,
+			)
+			SCOPED_ENUM(Imm_11_0,
+				high = 11,
 				low  = 0,
 			)
 		}
@@ -277,6 +321,10 @@ namespace Decoding {
 				high = 3,
 				low  = 0
 			)
+			SCOPED_ENUM(Imm_12_1,
+				high = 11,
+				low  = 0
+			)
 		}
 		namespace InUnpackedImmediate {
 			SCOPED_ENUM(SignExtension,
@@ -300,6 +348,10 @@ namespace Decoding {
 			SCOPED_ENUM(Imm_0,
 				pos   = 0,
 				value = 0
+			)
+			SCOPED_ENUM(Imm_12_1,
+				high  = 12,
+				low   = 1
 			)
 		}
 	}
@@ -331,12 +383,12 @@ namespace Decoding {
 			SCOPED_ENUM(Imm_11_0,
 				high  = 11,
 				low   = 0,
-				value = 0
+				value = 0x000
 			)
 		}
 	}
 
-	/*       instruction immediate ─────────────────────────────────┐    packed immediate ────────────────────────────┐        unpacked immediate ─────────────────────────────────────────────────┐
+	/*       instruction immediate ─────────────────────────────┐        packed immediate ────────────────────────────┐        unpacked immediate ─────────────────────────────────────────────────┐
 	*             31    30       21     20    19        12 11  0              19    18        11     10    9         0          31              21     20    19        12    11     10        1  0
 	*        ┌─────────┬───────────┬─────────┬────────────┬─────┐        ┌─────────┬────────────┬─────────┬───────────┐        ┌──────────────────┬─────────┬────────────┬─────────┬───────────┬───┐
 	* J-type │ imm[20] │ imm[10:1] │ imm[11] │ imm[19:12] │ *** │ -----> │ imm[20] │ imm[19:12] │ imm[11] │ imm[10:1] │ -----> │ imm[20] ? -1 : 0 │ imm[20] │ imm[19:12] │ imm[11] │ imm[10:1] │ 0 │
@@ -380,6 +432,14 @@ namespace Decoding {
 				high = 9,
 				low  = 0
 			)
+			SCOPED_ENUM(Imm_20_1,
+				high = 19,
+				low  = 0
+			)
+			SCOPED_ENUM(JumpOffset,
+				high = 19,
+				low  = 1
+			)
 		}
 		namespace InUnpackedImmediate {
 			SCOPED_ENUM(SignExtension,
@@ -403,6 +463,18 @@ namespace Decoding {
 			SCOPED_ENUM(Imm_0,
 				pos   = 0,
 				value = 0
+			)
+			SCOPED_ENUM(Imm_20_1,
+				high = 20,
+				low  = 1
+			)
+			SCOPED_ENUM(Offset,
+				high = 18,
+				low  = 0
+			)
+			SCOPED_ENUM(OffsetSignExtension,
+				high = 29, // the offset has a width of 30 (and not 32) since the program_counter has a 30 bits width
+				low  = 19
 			)
 		}
 	}

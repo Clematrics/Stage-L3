@@ -21,6 +21,7 @@ class Pipeline {
 	DecodeToIssue     decode_to_issue;
 	DecodeToFetch     decode_to_fetch;
 	DecodeToCommit    decode_to_commit;
+	IssueToDecode     issue_to_decode;
 	IssueToWriteBack  issue_to_write_back;
 	WriteBackToCommit write_back_to_commit;
 	WriteBackToFetch  write_back_to_fetch;
