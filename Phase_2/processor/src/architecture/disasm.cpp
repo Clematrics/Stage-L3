@@ -12,6 +12,8 @@
 #include "architecture/decoding.hpp"
 #include "debug/debug.hpp"
 
+using namespace Decoding;
+
 template<typename T, typename U>
 bool contains(const T& container, const U& elem) {
 	return std::find(std::begin(container), std::end(container), elem) != std::end(container);

@@ -5,7 +5,15 @@ Pipeline::Pipeline()
 	  decode_stage    (5, 1),
 	  issue_stage     (5, 2),
 	  write_back_stage(5, 3),
-	  commit_stage    (5, 4)
+	  commit_stage    (5, 4),
+	  fetch_to_decode      { false, 0, 0 },
+	  decode_to_issue      { false },
+	  decode_to_fetch      { false, 1 },
+	  decode_to_commit     { false },
+	  issue_to_write_back  {  },
+	  write_back_to_commit {  },
+	  write_back_to_fetch  {  },
+	  write_back_to_issue  {  }
 {
 }
 

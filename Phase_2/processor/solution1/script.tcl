@@ -19,7 +19,7 @@ add_files processor/src/stages/stage.cpp -cflags "-Iprocessor/include"
 add_files processor/src/stages/write_back.cpp -cflags "-Iprocessor/include"
 add_files -tb processor/tb/processor_tb.cpp -cflags "-Iprocessor/include"
 open_solution "solution1"
-set_part {xc7z020clg400-1}
+set_part {xc7z020-clg400-1}
 create_clock -period 10 -name default
 #source "./processor/solution1/directives.tcl"
 csim_design

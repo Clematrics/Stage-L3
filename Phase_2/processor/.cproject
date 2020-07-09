@@ -309,9 +309,9 @@
                         						
                         <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1720777972.1330493034" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1720777972">
                             							
-                            <option id="gnu.cpp.compiler.option.preprocessor.def.462000743" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.462000743" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
                             							
-                            <option id="gnu.cpp.compiler.option.include.paths.958802740" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                            <option id="gnu.cpp.compiler.option.include.paths.958802740" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
                                 								
                                 <listOptionValue builtIn="false" value="processor/include"/>
                                 								
@@ -331,7 +331,9 @@
                                 							
                             </option>
                             							
-                            <option id="gnu.cpp.compiler.option.other.other.2140397579" superClass="gnu.cpp.compiler.option.other.other"/>
+                            <option id="gnu.cpp.compiler.option.other.other.2140397579" name="Other flags" superClass="gnu.cpp.compiler.option.other.other"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.989977865" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
                             						
                         </tool>
                         					
@@ -409,9 +411,9 @@
                         						
                         <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1720777972.2138303369" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1720777972">
                             							
-                            <option id="gnu.cpp.compiler.option.preprocessor.def.1450090631" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1450090631" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
                             							
-                            <option id="gnu.cpp.compiler.option.include.paths.264414575" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                            <option id="gnu.cpp.compiler.option.include.paths.264414575" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
                                 								
                                 <listOptionValue builtIn="false" value="processor/include"/>
                                 								
@@ -431,7 +433,9 @@
                                 							
                             </option>
                             							
-                            <option id="gnu.cpp.compiler.option.other.other.1471254575" superClass="gnu.cpp.compiler.option.other.other"/>
+                            <option id="gnu.cpp.compiler.option.other.other.1471254575" name="Other flags" superClass="gnu.cpp.compiler.option.other.other"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.815163307" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
                             						
                         </tool>
                         					
@@ -907,9 +911,9 @@
                         						
                         <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.348310511.1593919146" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.348310511">
                             							
-                            <option id="gnu.cpp.compiler.option.preprocessor.def.1431059927" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1431059927" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
                             							
-                            <option id="gnu.cpp.compiler.option.include.paths.218329029" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                            <option id="gnu.cpp.compiler.option.include.paths.218329029" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
                                 								
                                 <listOptionValue builtIn="false" value="processor/include"/>
                                 								
@@ -929,7 +933,9 @@
                                 							
                             </option>
                             							
-                            <option id="gnu.cpp.compiler.option.other.other.561314319" superClass="gnu.cpp.compiler.option.other.other"/>
+                            <option id="gnu.cpp.compiler.option.other.other.561314319" name="Other flags" superClass="gnu.cpp.compiler.option.other.other"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2076112142" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
                             						
                         </tool>
                         					
@@ -1007,9 +1013,9 @@
                         						
                         <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.348310511.201301091" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.348310511">
                             							
-                            <option id="gnu.cpp.compiler.option.preprocessor.def.158809603" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.158809603" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
                             							
-                            <option id="gnu.cpp.compiler.option.include.paths.1263830051" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                            <option id="gnu.cpp.compiler.option.include.paths.1263830051" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
                                 								
                                 <listOptionValue builtIn="false" value="processor/include"/>
                                 								
@@ -1029,7 +1035,9 @@
                                 							
                             </option>
                             							
-                            <option id="gnu.cpp.compiler.option.other.other.557856853" superClass="gnu.cpp.compiler.option.other.other"/>
+                            <option id="gnu.cpp.compiler.option.other.other.557856853" name="Other flags" superClass="gnu.cpp.compiler.option.other.other"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1122813037" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
                             						
                         </tool>
                         					

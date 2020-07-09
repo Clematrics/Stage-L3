@@ -1,4 +1,4 @@
-<project xmlns="com.autoesl.autopilot.project" top="processor" name="processor">
+<project xmlns="com.autoesl.autopilot.project" name="processor" top="processor">
     <files>
         <file name="../tb/processor_tb.cpp" sc="0" tb="1" cflags="-I../include"/>
         <file name="processor/src/architecture/architecture_helpers.cpp" sc="0" tb="false" cflags="-Iprocessor/include" blackbox="false"/>

@@ -6,7 +6,8 @@
 #include "debug/debug.hpp"
 
 FetchStage::FetchStage(uint16_t cycles_activity_period, uint16_t cycles_before_active)
-	: Stage(cycles_activity_period, cycles_before_active)
+	: Stage(cycles_activity_period, cycles_before_active),
+	  program_counter(0)
 {
 }
 
@@ -19,8 +20,8 @@ void FetchStage::interface(const memory_t memory, DecodeToFetch from_decode, Wri
 		}
 		else {
 			to_decode->has_fetched_instruction = true;
-			to_decode->instruction = memory[program_counter];
-			to_decode->program_counter = program_counter;
+			to_decode->instruction             = memory[program_counter];
+			to_decode->program_counter         = program_counter;
 
 			#ifndef __SYNTHESIS__
 			std::string asm_line = instruction_to_string(disassemble(to_decode->instruction));
