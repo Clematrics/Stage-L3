@@ -27,6 +27,7 @@ struct DisassembledInstruction {
 };
 
 const DisassembledInstruction disassemble(const word_t& raw);
+Name get_instruction_name(const word_t& instruction, const opcode_prefix_t& opcode_prefix, const opcode_suffix_high_t& opcode_high, const opcode_suffix_low_t& opcode_low, const func3_t& func3, const func7_t& func7);
 std::string instruction_to_string(const DisassembledInstruction& instr);
 json instruction_to_json(const DisassembledInstruction& instr);
 

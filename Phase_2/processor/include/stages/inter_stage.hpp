@@ -4,6 +4,10 @@
 #include "architecture/architecture.hpp"
 #include "architecture/decoding.hpp"
 
+using namespace Decoding::Kind;
+using namespace Architecture::Type;
+
+
 struct FetchToDecode {
 	bool has_fetched_instruction;
 	word_t instruction;
@@ -14,13 +18,13 @@ struct DecodeToIssue {
 	bool has_decoded_instruction;
 	// decoded instruction and all informations
 	Type type;
-	Decoding::Kind kind;
+	Kind kind;
 	func3_t func3;
-	physical_reg_t reg1;
-	physical_reg_t reg2;
+	physical_reg_t src1;
+	physical_reg_t src2;
 	physical_reg_t dest;
-	bool use_reg1;
-	bool use_reg2;
+	bool use_src1;
+	bool use_src2;
 	bool use_dest;
 	bool is_func7_0b0000000;
 	bool is_func7_0b0000001;
@@ -58,5 +62,6 @@ struct WriteBackToFetch {
 };
 
 struct WriteBackToIssue {
-
+	bool has_a_src_ready;
+	physical_reg_t src_ready;
 };

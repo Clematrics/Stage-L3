@@ -5,7 +5,7 @@
 
 class RegisterMap {
 	physical_reg_t map[architectural_register_count];
-	CircularBuffer<physical_reg_t, physical_register_count, physical_reg_ptr_t> free_list;
+	CircularBuffer<physical_reg_t, physical_register_count, physical_reg_ptr_t> free_aliases;
 public:
 	RegisterMap();
 	void get_alias(const reg_t& id, physical_reg_t* alias);

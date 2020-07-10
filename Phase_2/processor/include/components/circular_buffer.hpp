@@ -26,7 +26,7 @@ public:
 	}
 	entry_t pop() {
 		entry_t value = list[bot];
-		bot--;
+		bot++;
 		full = false;
 		if (bot == top)
 			empty = true;

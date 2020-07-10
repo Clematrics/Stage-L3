@@ -6,6 +6,8 @@ CommitStage::CommitStage(uint16_t cycles_activity_period, uint16_t cycles_before
 }
 
 void CommitStage::interface() {
+	#pragma HLS INLINE
+
 	if (is_active()) {
 
 	}

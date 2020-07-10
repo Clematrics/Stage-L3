@@ -17,22 +17,22 @@ typedef ap_uint<20> packed_immediate_t;
 /* Symbolic constants for the decoding phase */
 namespace Decoding {
 	// TODO : add categories ? jumps ?
-	enum struct Kind {
+	SCOPED_ENUM(Kind,
 		alu,
 		alu_immediate,
 		load,
 		store,
 		branch,
 		other,
-		unknown
-	};
+		unknown_kind
+	)
 
 	/* The following is always extracted, regardless of the instruction type
 	*
 	*  31   25 24  20 19  15 14   12 11   7 6    5 4   2 1        0
 	* ┌───────┬──────┬──────┬───────┬──────┬────────────┬──────────┐
 	* │       │      │      │       │      │   suffix   │          │
-	* │ func7 │ reg2 │ reg1 │ func3 │ dest │──────┬─────┤  prefix  │
+	* │ func7 │ src2 │ src1 │ func3 │ dest │──────┬─────┤  prefix  │
 	* │       │      │      │       │      │ high │ low │          │
 	* └───────┴──────┴──────┴───────┴──────┴──────┴─────┴──────────┘
 	*/
@@ -45,12 +45,12 @@ namespace Decoding {
 		sixth = 0b0100000,
 	)
 
-	SCOPED_ENUM(Reg2,
+	SCOPED_ENUM(Src2,
 		high = 24,
 		low  = 20
 	)
 
-	SCOPED_ENUM(Reg1,
+	SCOPED_ENUM(Src1,
 		high = 19,
 		low  = 15
 	)

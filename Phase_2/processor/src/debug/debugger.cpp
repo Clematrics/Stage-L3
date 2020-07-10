@@ -26,8 +26,6 @@ void Debugger::add_asm_line(std::string line) {
 void Debugger::add_cycle_event(const json object) {
 	json& current_cycle = report["Cycles"][std::to_string(cycles)];
 	current_cycle.push_back(object);
-
-	std::cout << "Cycle " << cycles << " : " << std::setw(4) << object << '\n' << std::flush;
 }
 
 json Debugger::get_report() {

@@ -8,6 +8,11 @@ typedef unsigned short      uint16_t;
 typedef unsigned int        uint32_t;
 typedef unsigned long long  uint64_t;
 
+typedef signed char       int8_t;
+typedef signed short      int16_t;
+typedef signed int        int32_t;
+typedef signed long long  int64_t;
+
 // Compute the width (number of bits) necessary to represent [0, N - 1]
 template<int X>
 struct WidthInternal {
@@ -46,7 +51,9 @@ typedef word_t memory_t[memory_words];
 
 const uint16_t physical_register_count      = 64;
 const uint16_t architectural_register_count = 32;
+#ifndef __SYNTHESIS__
 static_assert(architectural_register_count <= physical_register_count);
+#endif // __SYNTHESIS__
 
 const uint32_t physical_register_count_width      = Width<physical_register_count>::Value;
 const uint32_t architectural_register_count_width = Width<architectural_register_count>::Value;

@@ -6,6 +6,8 @@ WriteBackStage::WriteBackStage(uint16_t cycles_activity_period, uint16_t cycles_
 }
 
 void WriteBackStage::interface() {
+	#pragma HLS INLINE
+
 	if (is_active()) {
 
 	}

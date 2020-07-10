@@ -14,7 +14,7 @@ RegisterMap::RegisterMap() {
 	}
 	for (uint16_t id = architectural_register_count; id < physical_register_count; id++) {
 		#pragma HLS UNROLL
-		free_list.push_back(id);
+		free_aliases.push_back(id);
 	}
 }
 
@@ -23,11 +23,11 @@ void RegisterMap::get_alias(const reg_t& id, physical_reg_t* alias) {
 }
 
 void RegisterMap::create_alias(const reg_t& id, physical_reg_t* alias, bool* blocking) {
-	if (free_list.is_empty()) {
+	if (free_aliases.is_empty()) {
 		*blocking = true;
 	}
 	else {
-		physical_reg_t new_alias = free_list.pop();
+		physical_reg_t new_alias = free_aliases.pop();
 		*alias = map[id] = new_alias;
 	}
 
@@ -41,7 +41,7 @@ void RegisterMap::create_alias(const reg_t& id, physical_reg_t* alias, bool* blo
 				{ "Architectural register", to_string(id) },
 				{ "Physical register created", alias->to_uint() },
 				{ "Current mapping", json_map },
-				{ "Free registers", free_list }
+				{ "Free registers", free_aliases }
 			}
 		}
 	});
@@ -49,14 +49,14 @@ void RegisterMap::create_alias(const reg_t& id, physical_reg_t* alias, bool* blo
 }
 
 void RegisterMap::free_alias(const physical_reg_t& id) {
-	free_list.push_back(id);
+	free_aliases.push_back(id);
 
 	#ifndef __SYNTHESIS__
 	Debugger::add_cycle_event({
 		{ "Freeing alias",
 			{
 				{ "Architectural register", to_string(id) },
-				{ "Free registers", free_list }
+				{ "Free registers", free_aliases }
 			}
 		}
 	});

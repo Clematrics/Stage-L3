@@ -23,7 +23,7 @@ void decode_type(DisassembledInstruction& instr) {
 	const static std::array<func3_t, 6> func3IType {0b000, 0b010, 0b011, 0b100, 0b110, 0b111};
 
 	if (instr.opcode_prefix != 0b11) {
-		instr.type = Type::unknown;
+		instr.type = Type::unknown_type;
 		return;
 	}
 
@@ -57,7 +57,7 @@ void decode_type(DisassembledInstruction& instr) {
 		instr.type = Type::J;
 		break;
 	default:
-		instr.type = Type::unknown;
+		instr.type = Type::unknown_type;
 		break;
 	}
 }
@@ -85,7 +85,7 @@ void decode_R_type(DisassembledInstruction& instr){
 	if (instr.opcode_suffix == Opcode::Suffix::alu  && instr.func3 == Func3::srl_sra_divu && instr.func7 == Func7::first) { instr.name = Name::DIVU; return; }
 	if (instr.opcode_suffix == Opcode::Suffix::alu  && instr.func3 == Func3::or_rem       && instr.func7 == Func7::first) { instr.name = Name::REM;  return; }
 	if (instr.opcode_suffix == Opcode::Suffix::alu  && instr.func3 == Func3::and_remu     && instr.func7 == Func7::first) { instr.name = Name::REMU; return; }
-	/*else*/ instr.name = Name::unknown;
+	/*else*/ instr.name = Name::unknown_name;
 }
 
 void decode_I_type(DisassembledInstruction& instr){
@@ -117,7 +117,7 @@ void decode_I_type(DisassembledInstruction& instr){
 	if (instr.opcode_suffix == Opcode::Suffix::alui && instr.func3 == Func3::xori ) { instr.name = Name::XORI; return; }
 	if (instr.opcode_suffix == Opcode::Suffix::alui && instr.func3 == Func3::ori  ) { instr.name = Name::ORI;  return; }
 	if (instr.opcode_suffix == Opcode::Suffix::alui && instr.func3 == Func3::andi ) { instr.name = Name::ANDI; return; }
-	/*else*/ instr.name = Name::unknown;
+	/*else*/ instr.name = Name::unknown_name;
 }
 
 void decode_S_type(DisassembledInstruction& instr){
@@ -128,7 +128,7 @@ void decode_S_type(DisassembledInstruction& instr){
 	if (instr.opcode_suffix == Opcode::Suffix::store && instr.func3 == Func3::sb) { instr.name = Name::SB; return; }
 	if (instr.opcode_suffix == Opcode::Suffix::store && instr.func3 == Func3::sh) { instr.name = Name::SH; return; }
 	if (instr.opcode_suffix == Opcode::Suffix::store && instr.func3 == Func3::sw) { instr.name = Name::SW; return; }
-	/*else*/ instr.name = Name::unknown;
+	/*else*/ instr.name = Name::unknown_name;
 }
 
 void decode_B_type(DisassembledInstruction& instr){
@@ -146,7 +146,7 @@ void decode_B_type(DisassembledInstruction& instr){
 	if (instr.opcode_suffix == Opcode::Suffix::branch && instr.func3 == Func3::bge ) { instr.name = Name::BGE;  return; }
 	if (instr.opcode_suffix == Opcode::Suffix::branch && instr.func3 == Func3::bltu) { instr.name = Name::BLTU; return; }
 	if (instr.opcode_suffix == Opcode::Suffix::branch && instr.func3 == Func3::bgeu) { instr.name = Name::BGEU; return; }
-	/*else*/ instr.name = Name::unknown;
+	/*else*/ instr.name = Name::unknown_name;
 }
 
 void decode_U_type(DisassembledInstruction& instr){
@@ -155,7 +155,7 @@ void decode_U_type(DisassembledInstruction& instr){
 
 	if (instr.opcode_suffix == Opcode::Suffix::lui)   { instr.name = Name::LUI;   return;}
 	if (instr.opcode_suffix == Opcode::Suffix::auipc) { instr.name = Name::AUIPC; return;}
-	/*else*/ instr.name = Name::unknown;
+	/*else*/ instr.name = Name::unknown_name;
 }
 
 void decode_J_type(DisassembledInstruction& instr){
@@ -196,6 +196,162 @@ const DisassembledInstruction disassemble(const word_t& raw) {
 	decode_type(instr);
 	dispatch_decode(instr);
 	return instr;
+}
+
+Name get_instruction_name(const word_t& instruction, const opcode_prefix_t& opcode_prefix, const opcode_suffix_high_t& opcode_high, const opcode_suffix_low_t& opcode_low, const func3_t& func3, const func7_t& func7) {
+	const bool is_func7_0b0x0000x = !(func7 & 0b1011110);
+	const bool is_func7_0b0000000 = is_func7_0b0x0000x && !func7.test(5) && !func7.test(0);
+	const bool is_func7_0b0000001 = is_func7_0b0x0000x && !func7.test(5) &&  func7.test(0);
+	const bool is_func7_0b0100000 = is_func7_0b0x0000x &&  func7.test(5) && !func7.test(0);
+
+	if (opcode_prefix == 0b11) {
+		switch (opcode_high) {
+		case Opcode::Suffix::High::load_fence_auipc:
+			switch (opcode_low) {
+			case Opcode::Suffix::Low::h00_load:
+				switch (func3) {
+				case Func3::lb:  return Name::LB;
+				case Func3::lh:  return Name::LH;
+				case Func3::lw:  return Name::LW;
+				case Func3::lbu: return Name::LBU;
+				case Func3::lhu: return Name::LHU;
+				default:         return Name::unknown_name;
+				}
+			case Opcode::Suffix::Low::h00_001:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h00_010:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h00_fence:
+				if (func3 == Func3::fence) return Name::FENCE;
+				else                       return Name::unknown_name;
+			case Opcode::Suffix::Low::h00_alui:
+				switch (func3) {
+				case Func3::addi:                return Name::ADDI;
+				case Func3::slli:
+					if      (is_func7_0b0000000) return Name::SLLI;
+					else                         return Name::unknown_name;
+				case Func3::slti:                return Name::SLTI;
+				case Func3::sltiu:               return Name::SLTIU;
+				case Func3::xori:                return Name::XORI;
+				case Func3::srli_srai:
+					if      (is_func7_0b0000000) return Name::SRLI;
+					else if (is_func7_0b0100000) return Name::SRAI;
+					else                         return Name::unknown_name;
+				case Func3::ori:                 return Name::ORI;
+				case Func3::andi:                return Name::ANDI;
+				}
+			case Opcode::Suffix::Low::h00_auipc:
+				return Name::AUIPC;
+			case Opcode::Suffix::Low::h00_110:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h00_111:
+				return Name::unknown_name;
+			}
+		case Opcode::Suffix::High::store_alu_lui:
+			switch (opcode_low) {
+			case Opcode::Suffix::Low::h01_store:
+				if (func3.test(2)) {
+					return Name::unknown_name;
+				} else {
+					switch (func3(1, 0)) {
+					case 0b00: return Name::SB;
+					case 0b01: return Name::SH;
+					case 0b10: return Name::SW;
+					case 0b11: return Name::unknown_name;
+					}
+				}
+			case Opcode::Suffix::Low::h01_001:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h01_010:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h01_011:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h01_alu:
+				switch (func3) {
+				case Func3::add_sub_mul:
+					if      (is_func7_0b0000000) return Name::ADD;
+					else if (is_func7_0b0100000) return Name::SUB;
+					else if (is_func7_0b0000001) return Name::MUL;
+					else                         return Name::unknown_name;
+				case Func3::sll_mulh:
+					if      (is_func7_0b0000000) return Name::SLL;
+					else if (is_func7_0b0000001) return Name::MULH;
+					else                         return Name::unknown_name;
+				case Func3::slt_mulhsu:
+					if      (is_func7_0b0000000) return Name::SLT;
+					else if (is_func7_0b0000001) return Name::MULHSU;
+					else                         return Name::unknown_name;
+				case Func3::sltu_mulhu:
+					if      (is_func7_0b0000000) return Name::SLTU;
+					else if (is_func7_0b0000001) return Name::MULHU;
+					else                         return Name::unknown_name;
+				case Func3::xor_div:
+					if      (is_func7_0b0000000) return Name::XOR;
+					else if (is_func7_0b0000001) return Name::DIV;
+					else                         return Name::unknown_name;
+				case Func3::srl_sra_divu:
+					if      (is_func7_0b0000000) return Name::SRL;
+					else if (is_func7_0b0100000) return Name::SRA;
+					else if (is_func7_0b0000001) return Name::DIVU;
+					else                         return Name::unknown_name;
+				case Func3::or_rem:
+					if      (is_func7_0b0000000) return Name::OR;
+					else if (is_func7_0b0000001) return Name::REM;
+					else                         return Name::unknown_name;
+				case Func3::and_remu:
+					if      (is_func7_0b0000000) return Name::AND;
+					else if (is_func7_0b0000001) return Name::REMU;
+					else                         return Name::unknown_name;
+				}
+			case Opcode::Suffix::Low::h01_lui:
+				return Name::LUI;
+			case Opcode::Suffix::Low::h01_110:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h01_111:
+				return Name::unknown_name;
+			}
+		case Opcode::Suffix::High::h10_unused:
+			return Name::unknown_name;
+		case Opcode::Suffix::High::branch_jal_r_system:
+			switch (opcode_low) {
+			case Opcode::Suffix::Low::h11_branch:
+				switch (func3) {
+				case Func3::beq:  return Name::BEQ;
+				case Func3::bne:  return Name::BNE;
+				case Func3::blt:  return Name::BLT;
+				case Func3::bge:  return Name::BGE;
+				case Func3::bltu: return Name::BLTU;
+				case Func3::bgeu: return Name::BGEU;
+				default:          return Name::unknown_name;
+				}
+			case Opcode::Suffix::Low::h11_jalr:
+				if (func3 == Func3::jalr) {
+					return Name::JALR;
+				}
+				else {
+					return Name::unknown_name;
+				}
+			case Opcode::Suffix::Low::h11_010:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h11_jal:
+				return Name::JAL;
+			case Opcode::Suffix::Low::h11_system: {
+				const ap_uint<25> no_opcode = instruction(31, 7);
+				if      (no_opcode == 0b0000000000000000000000000) return Name::EBREAK;
+				else if (no_opcode == 0b0000000000010000000000000) return Name::ECALL;
+				else                                               return Name::unknown_name;
+				}
+			case Opcode::Suffix::Low::h11_101:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h11_110:
+				return Name::unknown_name;
+			case Opcode::Suffix::Low::h11_111:
+				return Name::unknown_name;
+			}
+		}
+	} else {
+		return Name::unknown_name;
+	}
 }
 
 std::string instruction_to_string(const DisassembledInstruction& instr) {
