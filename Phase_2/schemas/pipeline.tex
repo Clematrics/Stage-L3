@@ -41,6 +41,7 @@
 			\end{tikzpicture}
 		};
 		\node[draw] [left=2cm of issue] (register_file) {Register file};
+		\node[draw] at (decode-|register_file) (register_mapping) {Register mapping};
 		\node[draw] [below=of units] (write_back) {Write back};
 		\node[draw] [below=of write_back] (commit) {Commit};
 
@@ -55,8 +56,8 @@
 		\draw[->]  (fetch.300)          -- node[right] {pc}          (fetch.300|-decode.north);
 		\draw[->]  (decode.5)           -- ++(1,0) |- node[right, pos=0.25] {next pc} (fetch.15);
 		\draw[->]  (decode.240)         -- node[left, align=center] {decoded\\instruction} (decode.240|-issue.north);
-		\draw[->]  (decode.355)         -| node[right, align=center] {enqueue\\instruction} node[above right,pos=1] {\scriptsize +} (reorder_buffer);
-		\draw[<->] (decode)             -| node[above] {rename} (register_file);
+		\draw[<->] (decode.355)         -| node[right, align=center] {generate\\instruction id} node[right, align=center, pos=0.75] {enqueue\\instruction} node[above right,pos=1] {\scriptsize +} (reorder_buffer);
+		\draw[<->] (decode)             -- node[above] {rename} (register_mapping);
 		\draw[<->] (issue)              -- node[below, align=center] {update\\available\\sources} (register_file);
 		\draw[->]  (reorder_buffer)     -- node[below, align=center] {dequeue\\instruction} node[below left,pos=0] {-} (commit);
 		\draw[->]  (issue_table.south)  |- ($(bu) +(0,0.5)$) node [left, pos=0.25, align=center] {take ready\\instruction} -- (bu.north) ;
@@ -66,8 +67,10 @@
 		\draw[->]  (alu)                -- ++(0,-0.5) -| (write_back);
 		\draw[->]  (mu)                 -- ++(0,-0.5) -| (write_back);
 		\draw[->]  (write_back.175)     -| node[left, align=center, pos=0.65] {write\\result} (register_file);
-		\draw[->]  (write_back.185)     -| node[below, align=center, pos=0.25] {next pc} ($(fetch.west)-(7,0)$) -- (fetch);
+		\draw[->]  (write_back.185)     -| node[below, align=center, pos=0.25] {next pc} ($(register_mapping.west)-(0.5,0)$) |- (fetch);
 		\draw[->]  (write_back)         -- node[left, align=center] {mark\\instruction done} (commit);
+		\draw[->]  (commit.173)         -| node[above, pos=0.35] {write load result} ($(register_file)-(1.5,0)$) -- (register_file);
+		\draw[->]  (commit.187)         -| node[below, pos=0.25] {free register} ($(register_mapping.west)-(1,0)$) -- (register_mapping);
 
 		\draw[->, dashed] (decode.15) -- ++(.5,0) |- node[pos=0.25,rotate=180,above,sloped] {block} (fetch.345);
 		\draw[->, dashed] (reorder_buffer.115) |- node[pos=0.25,left] {block} (decode.345);
