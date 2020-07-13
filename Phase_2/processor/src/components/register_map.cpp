@@ -29,6 +29,7 @@ void RegisterMap::create_alias(const reg_t& id, physical_reg_t* alias, bool* blo
 	else {
 		physical_reg_t new_alias = free_aliases.pop();
 		*alias = map[id] = new_alias;
+		*blocking = free_aliases.is_empty();
 	}
 
 	#ifndef __SYNTHESIS__

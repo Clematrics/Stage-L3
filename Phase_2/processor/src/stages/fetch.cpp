@@ -11,7 +11,7 @@ FetchStage::FetchStage(uint16_t cycles_activity_period, uint16_t cycles_before_a
 {
 }
 
-void FetchStage::interface(const memory_t memory, DecodeToFetch from_decode, WriteBackToFetch from_write_back, FetchToDecode* to_decode) {
+void FetchStage::interface(const memory_t memory, const DecodeToFetch& from_decode, WriteBackToFetch from_write_back, FetchToDecode* to_decode) {
 	#pragma HLS INLINE
 
 	if (is_active()) {

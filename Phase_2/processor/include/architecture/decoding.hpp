@@ -23,7 +23,12 @@ namespace Decoding {
 		load,
 		store,
 		branch,
-		other,
+		fence,
+		lui,
+		auipc,
+		jal,
+		jalr,
+		system,
 		unknown_kind
 	)
 
@@ -79,20 +84,30 @@ namespace Decoding {
 
 		jalr = 0b000,
 
-		lb  = 0b000,
-		lh  = 0b001,
-		lw  = 0b010,
-		lbu = 0b100,
-		lhu = 0b101,
+		lb   = 0b000,
+		lh   = 0b001,
+		lw   = 0b010,
+		l011 = 0b011,
+		lbu  = 0b100,
+		lhu  = 0b101,
+		l110 = 0b110,
+		l111 = 0b111,
 
 		fence = 0b000,
 
-		sb  = 0b000,
-		sh  = 0b001,
-		sw  = 0b010,
+		sb   = 0b000,
+		sh   = 0b001,
+		sw   = 0b010,
+		s011 = 0b011,
+		s100 = 0b100,
+		s101 = 0b101,
+		s110 = 0b110,
+		s111 = 0b111,
 
 		beq  = 0b000,
 		bne  = 0b001,
+		b010 = 0b010,
+		b011 = 0b011,
 		blt  = 0b100,
 		bge  = 0b101,
 		bltu = 0b110,
@@ -438,7 +453,7 @@ namespace Decoding {
 			)
 			SCOPED_ENUM(JumpOffset,
 				high = 19,
-				low  = 1
+				low  = 1   // the least significant bit (imm[1]) is ignored because the jump offset is taken as a multiple of 4
 			)
 		}
 		namespace InUnpackedImmediate {

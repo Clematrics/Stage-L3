@@ -38,9 +38,11 @@ const uint8_t  byte_bits    = 8;                      // Number of bits in a byt
 const uint8_t  word_size    = 4;                      // Number of bytes in a word
 const uint8_t  word_bits    = word_size * byte_bits;  // Number of bits in a word
 
-typedef ap_uint<1>         bit_t;
-typedef ap_uint<byte_bits> byte_t;
-typedef ap_uint<word_bits> word_t;
+typedef ap_uint<1>             bit_t;
+typedef ap_uint<byte_bits>     byte_t;
+typedef ap_uint<word_bits>     word_t;
+typedef ap_int<word_bits>      signed_word_t;
+typedef ap_uint<2 * word_bits> double_word_t;
 
 typedef ap_uint<word_bits - 2> program_counter_t;     // The program counter is aligned on 32 bits : the two lower bits of a word_t are ignored
 

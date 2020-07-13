@@ -22,7 +22,6 @@ std::string to_string(Kind kind) {
 	case Decoding::Kind::load:          return "load";
 	case Decoding::Kind::store:         return "store";
 	case Decoding::Kind::branch:        return "branch";
-	case Decoding::Kind::other:         return "other";
 	default: return "Unknown";
 	}
 }

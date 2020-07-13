@@ -8,11 +8,12 @@
 using namespace Decoding;
 
 DecodeStage::DecodeStage(uint16_t cycles_activity_period, uint16_t cycles_before_active)
-	: Stage(cycles_activity_period, cycles_before_active)
+	: Stage(cycles_activity_period, cycles_before_active),
+	  token(0)
 {
 }
 
-void DecodeStage::interface(FetchToDecode from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, bool* stop) {
+void DecodeStage::interface(const FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit, bool* stop) {
 	#pragma HLS INLINE
 
 	if (is_active()) {
@@ -39,6 +40,8 @@ void DecodeStage::interface(FetchToDecode from_fetch, DecodeToFetch* to_fetch, D
 		to_issue-> is_func7_0b0000001 = is_func7_0b0x0000x && !func7.test(5) &&  func7.test(0);
 		to_issue-> is_func7_0b0100000 = is_func7_0b0x0000x &&  func7.test(5) && !func7.test(0);
 
+		to_issue->program_counter = from_fetch.program_counter;
+
 		to_issue->type = Architecture::Type::unknown_type;
 		to_issue->kind = Decoding::Kind::unknown_kind;
 
@@ -48,40 +51,40 @@ void DecodeStage::interface(FetchToDecode from_fetch, DecodeToFetch* to_fetch, D
 			switch (opcode_high) {
 			case Opcode::Suffix::High::load_fence_auipc:
 				switch (opcode_low) {
-				case Opcode::Suffix::Low::h00_load : to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::load;                               break;
-				case Opcode::Suffix::Low::h00_001  :                                                                                                              break;
-				case Opcode::Suffix::Low::h00_010  :                                                                                                              break;
-				case Opcode::Suffix::Low::h00_fence: to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::other;                              break;
-				case Opcode::Suffix::Low::h00_alui : to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::alu_immediate;                      break;
-				case Opcode::Suffix::Low::h00_auipc: to_issue->type = Architecture::Type::U; to_issue->kind = Decoding::Kind::other;                              break;
-				case Opcode::Suffix::Low::h00_110  :                                                                                                              break;
-				case Opcode::Suffix::Low::h00_111  :                                                                                                              break;
+				case Opcode::Suffix::Low::h00_load : to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::load;                             break;
+				case Opcode::Suffix::Low::h00_001  :                                                                                                            break;
+				case Opcode::Suffix::Low::h00_010  :                                                                                                            break;
+				case Opcode::Suffix::Low::h00_fence: to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::fence;                            break;
+				case Opcode::Suffix::Low::h00_alui : to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::alu_immediate;                    break;
+				case Opcode::Suffix::Low::h00_auipc: to_issue->type = Architecture::Type::U; to_issue->kind = Decoding::Kind::auipc;                            break;
+				case Opcode::Suffix::Low::h00_110  :                                                                                                            break;
+				case Opcode::Suffix::Low::h00_111  :                                                                                                            break;
 				}
 				break;
 			case Opcode::Suffix::High::store_alu_lui:
 				switch (opcode_low) {
-				case Opcode::Suffix::Low::h01_store: to_issue->type = Architecture::Type::S; to_issue->kind = Decoding::Kind::store;                              break;
-				case Opcode::Suffix::Low::h01_001  :                                                                                                              break;
-				case Opcode::Suffix::Low::h01_010  :                                                                                                              break;
-				case Opcode::Suffix::Low::h01_011  :                                                                                                              break;
-				case Opcode::Suffix::Low::h01_alu  : to_issue->type = Architecture::Type::R; to_issue->kind = Decoding::Kind::alu;                                break;
-				case Opcode::Suffix::Low::h01_lui  : to_issue->type = Architecture::Type::U; to_issue->kind = Decoding::Kind::other;                              break;
-				case Opcode::Suffix::Low::h01_110  :                                                                                                              break;
-				case Opcode::Suffix::Low::h01_111  :                                                                                                              break;
+				case Opcode::Suffix::Low::h01_store: to_issue->type = Architecture::Type::S; to_issue->kind = Decoding::Kind::store;                            break;
+				case Opcode::Suffix::Low::h01_001  :                                                                                                            break;
+				case Opcode::Suffix::Low::h01_010  :                                                                                                            break;
+				case Opcode::Suffix::Low::h01_011  :                                                                                                            break;
+				case Opcode::Suffix::Low::h01_alu  : to_issue->type = Architecture::Type::R; to_issue->kind = Decoding::Kind::alu;                              break;
+				case Opcode::Suffix::Low::h01_lui  : to_issue->type = Architecture::Type::U; to_issue->kind = Decoding::Kind::lui;                              break;
+				case Opcode::Suffix::Low::h01_110  :                                                                                                            break;
+				case Opcode::Suffix::Low::h01_111  :                                                                                                            break;
 				}
 				break;
 			case Opcode::Suffix::High::h10_unused:
 				break;
 			case Opcode::Suffix::High::branch_jal_r_system:
 				switch (opcode_low) {
-				case Opcode::Suffix::Low::h11_branch: to_issue->type = Architecture::Type::B; to_issue->kind = Decoding::Kind::branch;                            break;
-				case Opcode::Suffix::Low::h11_jalr  : to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::other;                             break;
-				case Opcode::Suffix::Low::h11_010   :                                                                                                             break;
-				case Opcode::Suffix::Low::h11_jal   : to_issue->type = Architecture::Type::J; to_issue->kind = Decoding::Kind::other; is_jump_instruction = true; break;
-				case Opcode::Suffix::Low::h11_system: to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::other;                             break;
-				case Opcode::Suffix::Low::h11_101   :                                                                                                             break;
-				case Opcode::Suffix::Low::h11_110   :                                                                                                             break;
-				case Opcode::Suffix::Low::h11_111   :                                                                                                             break;
+				case Opcode::Suffix::Low::h11_branch: to_issue->type = Architecture::Type::B; to_issue->kind = Decoding::Kind::branch;                          break;
+				case Opcode::Suffix::Low::h11_jalr  : to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::jalr;                            break;
+				case Opcode::Suffix::Low::h11_010   :                                                                                                           break;
+				case Opcode::Suffix::Low::h11_jal   : to_issue->type = Architecture::Type::J; to_issue->kind = Decoding::Kind::jal; is_jump_instruction = true; break;
+				case Opcode::Suffix::Low::h11_system: to_issue->type = Architecture::Type::I; to_issue->kind = Decoding::Kind::system;                          break;
+				case Opcode::Suffix::Low::h11_101   :                                                                                                           break;
+				case Opcode::Suffix::Low::h11_110   :                                                                                                           break;
+				case Opcode::Suffix::Low::h11_111   :                                                                                                           break;
 				}
 				break;
 			}
@@ -137,6 +140,10 @@ void DecodeStage::interface(FetchToDecode from_fetch, DecodeToFetch* to_fetch, D
 		// TODO : make something with blocking
 
 		// TODO : transfer informations to commit for the ROB
+		to_commit->has_decoded_instruction = true;
+		to_commit->token = token;
+		to_issue->token = token;
+		token++;
 
 		if (to_issue->type == Architecture::Type::unknown_type) {
 			*stop = true;
@@ -144,7 +151,7 @@ void DecodeStage::interface(FetchToDecode from_fetch, DecodeToFetch* to_fetch, D
 
 		if (is_jump_instruction) {
 			program_counter_t offset;
-			offset(J::InUnpackedImmediate::Offset::high,    J::InUnpackedImmediate::Offset::low)    = to_issue->packed_immediate(J::InPackedImmediate::JumpOffset::high, J::InPackedImmediate::JumpOffset::low);
+			offset(J::InUnpackedImmediate::Offset::high,              J::InUnpackedImmediate::Offset::low)              = to_issue->packed_immediate(J::InPackedImmediate::JumpOffset::high, J::InPackedImmediate::JumpOffset::low);
 			offset(J::InUnpackedImmediate::OffsetSignExtension::high, J::InUnpackedImmediate::OffsetSignExtension::low) = to_issue->packed_immediate.test(J::InPackedImmediate::Sign::pos) ? -1 : 0;
 			to_fetch->next_program_counter = from_fetch.program_counter + offset;
 		}

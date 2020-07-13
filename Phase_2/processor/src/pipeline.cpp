@@ -28,7 +28,7 @@ void Pipeline::interface(memory_t memory, bool* stop) {
 	#pragma HLS PIPELINE
 
 	fetch_stage     .interface(memory, decode_to_fetch, write_back_to_fetch, &fetch_to_decode);
-	decode_stage    .interface(fetch_to_decode, &decode_to_fetch, &decode_to_issue, stop);
+	decode_stage    .interface(fetch_to_decode, &decode_to_fetch, &decode_to_issue, &decode_to_commit, stop);
 	issue_stage     .interface(decode_to_issue, write_back_to_issue, &issue_to_decode, &issue_to_write_back);
 	write_back_stage.interface();
 	commit_stage    .interface();

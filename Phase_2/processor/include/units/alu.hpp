@@ -4,10 +4,10 @@
 #include "architecture/decoding.hpp"
 
 using namespace Architecture::Type;
+using namespace Decoding::Kind;
 
 struct AluInput {
-	bool has_request;
-	Type type;
+	Kind kind;
 	func3_t func3;
 	bool is_func7_0b0000000;
 	bool is_func7_0b0000001;
@@ -15,13 +15,14 @@ struct AluInput {
 	word_t src1_value;
 	word_t src2_value;
 	packed_immediate_t packed_immediate;
+	program_counter_t current_pc;
 };
 
 struct AluOutput {
-	bool is_busy;
-	bool has_result;
+	bool valid_instruction;
 	word_t result;
-	physical_reg_t destination;
+	bool has_next_pc;
+	program_counter_t next_pc;
 };
 
 class Alu {
