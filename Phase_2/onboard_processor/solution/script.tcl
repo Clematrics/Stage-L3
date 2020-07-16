@@ -1,0 +1,23 @@
+############################################################
+## This file is generated automatically by Vivado HLS.
+## Please DO NOT edit it.
+## Copyright (C) 1986-2019 Xilinx, Inc. All Rights Reserved.
+############################################################
+open_project onboard_processor
+set_top processor
+add_files onboard_processor/src/debug/debug_helpers.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/debug/debugger.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/stages/fetch.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/pipeline.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/processor.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/stages/stage.cpp -cflags "-Ionboard_processor/include"
+add_files -tb onboard_processor/tb/processor_tb.cpp -cflags "-Ionboard_processor/include"
+open_solution "solution"
+set_part {xc7z020clg400-1}
+create_clock -period 10 -name default
+config_export -format ip_catalog -rtl verilog
+#source "./onboard_processor/solution/directives.tcl"
+csim_design
+csynth_design
+cosim_design
+export_design -rtl verilog -format ip_catalog

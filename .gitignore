@@ -14,3 +14,16 @@
 **/*_data.json
 **/*.log
 **/*.funcunit
+
+**/onboard_processor_vivado/*
+!**/onboard_processor_vivado/*.xpr
+!**/onboard_processor_vivado/*.bit
+!**/onboard_processor_vivado/*.xsa
+
+**/onboard_processor_workspace_vitis/*.*
+**/onboard_processor_workspace_vitis/onboard_processor_app_system
+**/onboard_processor_workspace_vitis/onboard_processor_platform
+**/onboard_processor_workspace_vitis/RemoteSystemsTempFiles
+**/onboard_processor_workspace_vitis/onboard_processor_app/*
+!**/onboard_processor_workspace_vitis/onboard_processor_app/src
+

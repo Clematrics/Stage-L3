@@ -51,11 +51,11 @@
                                 								
                                 <option id="gnu.cpp.compiler.option.include.paths.528681562" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
+                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/."/>
+                                    									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/auto_cc/include"/>
                                     									
@@ -64,8 +64,6 @@
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include/ap_sysc"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/systemc/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/."/>
                                     								
                                 </option>
                                 								
@@ -91,11 +89,11 @@
                                 								
                                 <option id="gnu.c.compiler.option.include.paths.770608062" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
+                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/."/>
+                                    									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/auto_cc/include"/>
                                     									
@@ -104,8 +102,6 @@
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include/ap_sysc"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/systemc/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/."/>
                                     								
                                 </option>
                                 								
@@ -809,11 +805,11 @@
                                 								
                                 <option id="gnu.cpp.compiler.option.include.paths.1970178863" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
+                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/."/>
+                                    									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/auto_cc/include"/>
                                     									
@@ -822,8 +818,6 @@
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include/ap_sysc"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/systemc/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/."/>
                                     								
                                 </option>
                                 								
@@ -839,11 +833,11 @@
                                 								
                                 <option id="gnu.c.compiler.option.include.paths.592342792" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                                     									
+                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/."/>
+                                    									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/auto_cc/include"/>
                                     									
@@ -852,8 +846,6 @@
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include/ap_sysc"/>
                                     									
                                     <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/systemc/include"/>
-                                    									
-                                    <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/processor/."/>
                                     								
                                 </option>
                                 								
