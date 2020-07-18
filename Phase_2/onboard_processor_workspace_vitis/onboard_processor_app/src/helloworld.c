@@ -53,30 +53,67 @@
 
 #define MEMORY_SIZE 32
 
+void init_memory(unsigned int* ptr, unsigned int size) {
+	// for (int i = 0; i < size; i++)
+	//	ptr[i] = 0;
+}
+
+void print_memory(unsigned int* ptr, unsigned int size) {
+	xil_printf("{ ");
+	if (size != 0)
+		xil_printf("%lu", ptr[0]);
+	for (int i = 1; i < size; i++)
+		xil_printf(", %lu", ptr[i]);
+	xil_printf(" }");
+}
+
 int main()
 {
+    unsigned int* memory = (unsigned int *)(XPAR_PROCESSOR_0_S_AXI_AXILITES_BASEADDR + XPROCESSOR_AXILITES_ADDR_MEMORY_V_BASE);
+    unsigned int* stop_i = (unsigned int *)(XPAR_PROCESSOR_0_S_AXI_AXILITES_BASEADDR + XPROCESSOR_AXILITES_ADDR_STOP_I_DATA);
+    unsigned int* stop_o = (unsigned int *)(XPAR_PROCESSOR_0_S_AXI_AXILITES_BASEADDR + XPROCESSOR_AXILITES_ADDR_STOP_O_DATA);
+
+
+	*stop_i = 0;
+	init_memory(memory, MEMORY_SIZE);
+
     init_platform();
-    print("Hello World\n\r");
 
-    u32 ret;
+    while (!(*stop_o & 0x1)) {
+    }
 
-	XProcessor proc_instance;
-	XProcessor_Initialize(&proc_instance, 0);
-	if (proc_instance.IsReady != XIL_COMPONENT_IS_READY) {
-		print("Not ready yet?\n\r");
-	}
-
-	XProcessor_Set_stop_i(&proc_instance, 0);
-	int memory[MEMORY_SIZE] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	ret = XProcessor_Write_memory_V_Words(&proc_instance, 0, memory, MEMORY_SIZE);
-	xil_printf("Write memory length: %lu\n\r", ret);
-
-    while (!XProcessor_Get_stop_o(&proc_instance));
-
-    XProcessor_Read_memory_V_Words(&proc_instance, 0, memory, MEMORY_SIZE);
-	for (int i = 0; i < MEMORY_SIZE; i++)
-		xil_printf("%lu\n\r", memory[i]);
+	print_memory(memory, MEMORY_SIZE);
 
     cleanup_platform();
     return 0;
+
+    // u32 ret;
+
+	// XProcessor         proc_instance;
+	// XProcessor_Config* cfg_instance_ptr;
+	// cfg_instance_ptr = XProcessor_LookupConfig(0);
+	// XProcessor_CfgInitialize(&proc_instance, cfg_instance_ptr);
+	// if (proc_instance.IsReady != XIL_COMPONENT_IS_READY) {
+	// 	print("Not ready yet?\n\r");
+	// }
+
+	// XProcessor_Set_stop_i(&proc_instance, 0);
+	// int memory[MEMORY_SIZE] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	// ret = XProcessor_Write_memory_V_Words(&proc_instance, 0, memory, MEMORY_SIZE);
+	// xil_printf("Length written to memory : %lu\n\r", ret);
+
+    // init_platform();
+
+	// bool stop = false;
+    // while (!stop) {
+    // 	u32 s = XProcessor_Get_stop_o(&proc_instance);
+    // 	stop = s;
+    // }
+
+    // XProcessor_Read_memory_V_Words(&proc_instance, 0, memory, MEMORY_SIZE);
+	// for (int i = 0; i < MEMORY_SIZE; i++)
+	// 	xil_printf("%lu\n\r", memory[i]);
+
+    // cleanup_platform();
+    // return 0;
 }

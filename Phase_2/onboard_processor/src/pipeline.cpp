@@ -7,9 +7,17 @@ Pipeline::Pipeline()
 }
 
 void Pipeline::interface(memory_t memory, bool* stop) {
-	#pragma HLS PIPELINE
+	// #pragma HLS PIPELINE
 
-	fetch_stage     .interface(memory);
-	counter++;
-	if (counter == 10) *stop = true;
+	if (!(*stop)) {
+		if (counter == 10) {
+			memory[0] = 0xFFCC8822;
+			memory[1] = 0x00000001;
+			*stop = true;
+		}
+		else {
+			memory[counter] = 0x2266AAEE;
+			counter++;
+		}
+	}
 }

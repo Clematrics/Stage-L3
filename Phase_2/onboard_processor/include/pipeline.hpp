@@ -4,7 +4,7 @@
 
 class Pipeline {
 	FetchStage fetch_stage;
-	uint8_t counter;
+	int counter;
 public:
 	Pipeline();
 	void interface(memory_t memory, bool* stop);
