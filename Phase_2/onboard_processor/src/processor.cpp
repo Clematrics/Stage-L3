@@ -5,8 +5,6 @@
 #include "pipeline.hpp"
 
 void processor(memory_t memory, bool* stop) {
-	// #pragma HLS INTERFACE ap_memory port=memory
-	// #pragma HLS INTERFACE m_axi port=memory
 	#pragma HLS INTERFACE s_axilite port=memory
 	#pragma HLS INTERFACE s_axilite port=stop
 	#pragma HLS INTERFACE ap_ctrl_none port=return

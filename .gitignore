@@ -21,10 +21,7 @@
 !**/onboard_processor_vivado/*.xsa
 
 **/onboard_processor_workspace_vitis/*.*
-**/onboard_processor_workspace_vitis/webtalk
-**/onboard_processor_workspace_vitis/onboard_processor_app_system
 **/onboard_processor_workspace_vitis/onboard_processor_platform
+**/onboard_processor_workspace_vitis/onboard_processor_system
 **/onboard_processor_workspace_vitis/RemoteSystemsTempFiles
-**/onboard_processor_workspace_vitis/onboard_processor_app/*
-!**/onboard_processor_workspace_vitis/onboard_processor_app/src
-
+**/onboard_processor_workspace_vitis/webtalk
