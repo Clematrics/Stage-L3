@@ -12,10 +12,24 @@
 typedef uint32_t large_bool;
 DECL_TW_TYPE(large_bool);
 
-void processor(memory_t memory, TW(large_bool) hold, TW(large_bool) stop) {
+struct Test {
+	word_t test_info;
+};
+
+struct DebugInfo {
+	word_t info;
+	Test test;
+};
+
+#if defined(__SYNTHESIS__) && defined(DEBUG)
+void processor(memory_t memory, TW(large_bool) hold, TW(large_bool) stop, DebugInfo* dbg) {
+#else
+void processor(memory_t memory, TW(large_bool) stop) {
+#endif
 	#pragma HLS INTERFACE s_axilite port=memory
 	#pragma HLS INTERFACE s_axilite port=hold
 	#pragma HLS INTERFACE s_axilite port=stop
+	#pragma HLS INTERFACE s_axilite port=dbg
 	#pragma HLS INTERFACE ap_ctrl_none port=return
 
 	word_t counter = 0;
@@ -29,7 +43,9 @@ void processor(memory_t memory, TW(large_bool) hold, TW(large_bool) stop) {
 			#endif // __SYNTHESIS__
 
 			memory[counter] = counter;
+			dbg->info = counter;
 			counter++;
+			dbg->test.test_info = counter;
 
 		#if defined(__SYNTHESIS__) && defined(DEBUG)
 			// Cycle has ended, hold is set to trrue

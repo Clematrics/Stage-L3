@@ -74,6 +74,7 @@ int main() {
 
 		dump_memory();
 		print_memory();
+		std::cout << XProcessor_Get_dbg_info_V(&processor) << ' ' << XProcessor_Get_dbg_test_test_info_V(&processor) << '\n';
 
 		set_hold(false);
 	}
