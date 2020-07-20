@@ -1,8 +1,16 @@
 #pragma once
 
+/* ****************************************************************************
+*    This file regroups all common types and constants used throughout the
+*    implementation
+**************************************************************************** */
+
 #include "ap_int.h"
 
-// Types for constants
+/* ****************************************************************************
+*    Types with explicit size
+**************************************************************************** */
+
 typedef unsigned char       uint8_t;
 typedef unsigned short      uint16_t;
 typedef unsigned int        uint32_t;
@@ -13,7 +21,27 @@ typedef signed short      int16_t;
 typedef signed int        int32_t;
 typedef signed long long  int64_t;
 
-// Compute the width (number of bits) necessary to represent [0, N - 1]
+/* ****************************************************************************
+*    Special type declarations for the top function
+**************************************************************************** */
+
+// TW means two-way. A two-way type (an array of size 1 of a choosen type)
+// allows to communicate with the CPU through the same
+// address, and both can read and write at this address.
+#define TW(type) tw_##type
+#define DECL_TW_TYPE(type) typedef type TW(type)[1]
+
+// A special type to exchange boolean information is used. Any two-way type with a
+// size of 8 bits will make the synthesis fail, because of a bug to compute the width
+// of the address
+typedef uint32_t large_bool;
+DECL_TW_TYPE(large_bool);
+
+/* ****************************************************************************
+*    Computation of the width of an address for accessing N cells
+**************************************************************************** */
+
+// Compute the width (number of bits) necessary to represent addresses in [0, N - 1]
 template<int X>
 struct WidthInternal {
 	static const uint16_t N = WidthInternal<X / 2>::N + 1;
@@ -28,6 +56,10 @@ template<int X>
 struct Width {
 	static const uint16_t Value = WidthInternal<X - 1>::N;
 };
+
+/* ****************************************************************************
+*    Common types used by the implementation
+**************************************************************************** */
 
 // ..._bits  denotes the number of bits of something
 // ..._size  denotes the number of bytes of something
@@ -44,7 +76,11 @@ typedef ap_uint<word_bits>     word_t;
 typedef ap_int<word_bits>      signed_word_t;
 typedef ap_uint<2 * word_bits> double_word_t;
 
-typedef ap_uint<word_bits - 2> program_counter_t;     // The program counter is aligned on 32 bits : the two lower bits of a word_t are ignored
+typedef ap_uint<word_bits - 2> program_counter_t;     // The program counter is aligned on 32 bits: the two lower bits of the address are ignored
+
+/* ****************************************************************************
+*    RISC-V implementation constants and types
+**************************************************************************** */
 
 const uint32_t memory_words = 32;
 const uint32_t memory_size  = memory_words * word_size;
@@ -70,4 +106,3 @@ typedef ap_uint<reorder_buffer_count_width>         reorder_buffer_ptr_t;
 const uint16_t issue_table_entries_count = reorder_buffer_count;
 const uint32_t issue_table_ptr_width              = Width<issue_table_entries_count>::Value;
 typedef ap_uint<issue_table_ptr_width>              issue_table_ptr_t;
-

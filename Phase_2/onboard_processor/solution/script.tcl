@@ -5,12 +5,12 @@
 ############################################################
 open_project onboard_processor
 set_top processor
-add_files onboard_processor/src/stages/stage.cpp -cflags "-Ionboard_processor/include"
-add_files onboard_processor/src/processor.cpp -cflags "-Ionboard_processor/include"
-add_files onboard_processor/src/pipeline.cpp -cflags "-Ionboard_processor/include"
-add_files onboard_processor/src/stages/fetch.cpp -cflags "-Ionboard_processor/include"
-add_files onboard_processor/src/debug/debugger.cpp -cflags "-Ionboard_processor/include"
 add_files onboard_processor/src/debug/debug_helpers.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/debug/debugger.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/stages/decode.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/stages/fetch.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/pipeline.cpp -cflags "-Ionboard_processor/include"
+add_files onboard_processor/src/processor.cpp -cflags "-Ionboard_processor/include"
 add_files -tb onboard_processor/tb/processor_tb.cpp -cflags "-Ionboard_processor/include -Wno-unknown-pragmas" -csimflags "-Wno-unknown-pragmas"
 open_solution "solution"
 set_part {xc7z020-clg400-1}

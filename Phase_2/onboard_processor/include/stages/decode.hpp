@@ -1,15 +1,15 @@
 #pragma once
 
 /* ****************************************************************************
-*    Header file for the fetch stage
+*    Header file for the decode stage
 **************************************************************************** */
 
+#include "common.hpp"
 #include "inter_stage.hpp"
 
-class FetchStage {
+class DecodeStage {
 	bool locked;
-	program_counter_t program_counter;
 public:
-	FetchStage();
-	void interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode, bool* locked_dbg);
+	DecodeStage();
+	void interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, large_bool* stop, bool* locked_dbg);
 };

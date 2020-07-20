@@ -1,12 +1,11 @@
 #include "debug/debug_helpers.hpp"
 
 #include <bitset>
+#include <cstdint>
 #include <iomanip>
 #include <iostream>
 #include <string>
 #include <sstream>
-
-#include "common.hpp"
 
 std::string string_bin(uint32_t n) {
 	std::ostringstream ss;

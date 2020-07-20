@@ -199,6 +199,40 @@
                         					
                     </fileInfo>
                     					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.debug.1095131083.32552166" name="decode.cpp" rcbsApplicability="disable" resourcePath="source/decode.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1328429835.179425699">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1328429835.179425699" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1328429835">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.2058800993" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.1359023127" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="onboard_processor/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/onboard_processor/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/systemc/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.197010957" name="Other flags" superClass="gnu.cpp.compiler.option.other.other"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.630824370" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
+                    					
                     <fileInfo id="cdt.managedbuild.config.gnu.exe.debug.1095131083.1776446773" name="fetch.cpp" rcbsApplicability="disable" resourcePath="source/fetch.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1328429835.535495764">
                         						
                         <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1328429835.535495764" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1328429835">
@@ -274,8 +308,6 @@
                             <option id="gnu.cpp.compiler.option.preprocessor.def.2031239057" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
                             							
                             <option id="gnu.cpp.compiler.option.include.paths.1413261888" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-                                								
-                                <listOptionValue builtIn="false" value="onboard_processor/include"/>
                                 								
                                 <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include"/>
                                 								
@@ -593,6 +625,40 @@
                         					
                     </fileInfo>
                     					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.release.453983156.25858023" name="decode.cpp" rcbsApplicability="disable" resourcePath="source/decode.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1609120671.1702584033">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1609120671.1702584033" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1609120671">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1850453959" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.689036448" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="onboard_processor/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Stage-L3/Phase_2/onboard_processor/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/win64/tools/systemc/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.526178241" name="Other flags" superClass="gnu.cpp.compiler.option.other.other"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.840485129" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
+                    					
                     <fileInfo id="cdt.managedbuild.config.gnu.exe.release.453983156.2029129467" name="fetch.cpp" rcbsApplicability="disable" resourcePath="source/fetch.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1609120671.1267272613">
                         						
                         <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1609120671.1267272613" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1609120671">
@@ -668,8 +734,6 @@
                             <option id="gnu.cpp.compiler.option.preprocessor.def.1816971359" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
                             							
                             <option id="gnu.cpp.compiler.option.include.paths.204732149" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-                                								
-                                <listOptionValue builtIn="false" value="onboard_processor/include"/>
                                 								
                                 <listOptionValue builtIn="false" value="E:/Xilinx/Vivado/2019.2/include"/>
                                 								

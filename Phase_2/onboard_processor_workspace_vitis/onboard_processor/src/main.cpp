@@ -12,7 +12,10 @@
  */
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
+
+#include "debug/debug.hpp"
 #include "xprocessor.h"
 
 const uint32_t memory_size = 32;
@@ -67,17 +70,28 @@ void set_stop(bool value) {
 int main() {
 	XProcessor_Initialize(&processor, XPAR_XPROCESSOR_0_DEVICE_ID);
 
-	dump_memory();
-	print_memory();
-    while (!get_stop()) {
+	memory[0] = 0x01328233;
+	memory[1] = 0xfff4c013;
+	memory[2] = 0xfe242e23;
+	memory[3] = 0x00105063;
+	memory[4] = 0x00000fb7;
+	memory[5] = 0x0080006f;
+	memory[6] = 0x00000000;
+	memory[7] = 0x00008067;
+	memory[8] = 0x00008067;
+	memory[9] = 0x00008067;
+
+	set_memory();
+
+    do {
 		while (!get_hold()); // wait for the IP to finish a cycle
 
 		dump_memory();
 		print_memory();
-		std::cout << XProcessor_Get_dbg_info_V(&processor) << ' ' << XProcessor_Get_dbg_test_test_info_V(&processor) << '\n';
+		dumpDebugInfo(&processor);
 
 		set_hold(false);
-	}
+	} while (!get_stop());
 
     return 0;
 }

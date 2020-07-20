@@ -1,11 +1,16 @@
-#include "common.hpp"
-#include "debug/debug.hpp"
-#include "processor.hpp"
+/* ****************************************************************************
+*    Main testbench to check the implementation behavior in Vivado/Vitis HLS
+**************************************************************************** */
 
 #include <fstream>
 #include <iostream>
 #include <iomanip>
 
+#include "common.hpp"
+#include "debug/debug.hpp"
+#include "processor.hpp"
+
+#ifndef __SYNTHESIS__
 int main() {
 	memory_t memory;
 
@@ -24,13 +29,14 @@ int main() {
 	memory[8] = 0x00008067; // ret               = jalr x0, 0(x1)  : 0b 0000'0000'0000' 0000'1 000' 0000'0 110'0111    = 0x00 00 80 67
 	memory[9] = 0x00008067; // ret               = jalr x0, 0(x1)  : 0b 0000'0000'0000' 0000'1 000' 0000'0 110'0111    = 0x00 00 80 67
 
-	bool stop;
+	large_bool stop = false;
 	processor(memory, &stop);
 
 	std::ofstream out;
-	out.open("output.json");
+	out.open("../../../output.json");
 	out << std::setw(4) << Debugger::get_report();
 	out.close();
 
 	return 0;
 }
+#endif // __SYNTHESIS__

@@ -1,0 +1,485 @@
+{
+    "Assembly": [],
+    "Cycles": {
+        "1": [
+            {
+                "Fetch stage": {
+                    "Program counter": 0,
+                    "Raw instruction": "0x01328233"
+                }
+            }
+        ],
+        "2": [
+            {
+                "Decode stage": {
+                    "Next pc": 1
+                }
+            }
+        ],
+        "3": [
+            {
+                "Fetch stage": {
+                    "Program counter": 1,
+                    "Raw instruction": "0xfff4c013"
+                }
+            }
+        ],
+        "4": [
+            {
+                "Decode stage": {
+                    "Next pc": 2
+                }
+            }
+        ],
+        "5": [
+            {
+                "Fetch stage": {
+                    "Program counter": 2,
+                    "Raw instruction": "0xfe242e23"
+                }
+            }
+        ],
+        "6": [
+            {
+                "Decode stage": {
+                    "Next pc": 3
+                }
+            }
+        ],
+        "7": [
+            {
+                "Fetch stage": {
+                    "Program counter": 3,
+                    "Raw instruction": "0x00105063"
+                }
+            }
+        ],
+        "8": [
+            {
+                "Decode stage": {
+                    "Next pc": 4
+                }
+            }
+        ],
+        "9": [
+            {
+                "Fetch stage": {
+                    "Program counter": 4,
+                    "Raw instruction": "0x00000fb7"
+                }
+            }
+        ],
+        "10": [
+            {
+                "Decode stage": {
+                    "Next pc": 5
+                }
+            }
+        ],
+        "11": [
+            {
+                "Fetch stage": {
+                    "Program counter": 5,
+                    "Raw instruction": "0x0080006f"
+                }
+            }
+        ],
+        "12": [
+            {
+                "Decode stage": {
+                    "Next pc": 6
+                }
+            }
+        ],
+        "13": [
+            {
+                "Fetch stage": {
+                    "Program counter": 6,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "14": [
+            {
+                "Decode stage": {
+                    "Next pc": 7
+                }
+            }
+        ],
+        "15": [
+            {
+                "Fetch stage": {
+                    "Program counter": 7,
+                    "Raw instruction": "0x00008067"
+                }
+            }
+        ],
+        "16": [
+            {
+                "Decode stage": {
+                    "Next pc": 8
+                }
+            }
+        ],
+        "17": [
+            {
+                "Fetch stage": {
+                    "Program counter": 8,
+                    "Raw instruction": "0x00008067"
+                }
+            }
+        ],
+        "18": [
+            {
+                "Decode stage": {
+                    "Next pc": 9
+                }
+            }
+        ],
+        "19": [
+            {
+                "Fetch stage": {
+                    "Program counter": 9,
+                    "Raw instruction": "0x00008067"
+                }
+            }
+        ],
+        "20": [
+            {
+                "Decode stage": {
+                    "Next pc": 10
+                }
+            }
+        ],
+        "21": [
+            {
+                "Fetch stage": {
+                    "Program counter": 10,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "22": [
+            {
+                "Decode stage": {
+                    "Next pc": 11
+                }
+            }
+        ],
+        "23": [
+            {
+                "Fetch stage": {
+                    "Program counter": 11,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "24": [
+            {
+                "Decode stage": {
+                    "Next pc": 12
+                }
+            }
+        ],
+        "25": [
+            {
+                "Fetch stage": {
+                    "Program counter": 12,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "26": [
+            {
+                "Decode stage": {
+                    "Next pc": 13
+                }
+            }
+        ],
+        "27": [
+            {
+                "Fetch stage": {
+                    "Program counter": 13,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "28": [
+            {
+                "Decode stage": {
+                    "Next pc": 14
+                }
+            }
+        ],
+        "29": [
+            {
+                "Fetch stage": {
+                    "Program counter": 14,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "30": [
+            {
+                "Decode stage": {
+                    "Next pc": 15
+                }
+            }
+        ],
+        "31": [
+            {
+                "Fetch stage": {
+                    "Program counter": 15,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "32": [
+            {
+                "Decode stage": {
+                    "Next pc": 16
+                }
+            }
+        ],
+        "33": [
+            {
+                "Fetch stage": {
+                    "Program counter": 16,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "34": [
+            {
+                "Decode stage": {
+                    "Next pc": 17
+                }
+            }
+        ],
+        "35": [
+            {
+                "Fetch stage": {
+                    "Program counter": 17,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "36": [
+            {
+                "Decode stage": {
+                    "Next pc": 18
+                }
+            }
+        ],
+        "37": [
+            {
+                "Fetch stage": {
+                    "Program counter": 18,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "38": [
+            {
+                "Decode stage": {
+                    "Next pc": 19
+                }
+            }
+        ],
+        "39": [
+            {
+                "Fetch stage": {
+                    "Program counter": 19,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "40": [
+            {
+                "Decode stage": {
+                    "Next pc": 20
+                }
+            }
+        ],
+        "41": [
+            {
+                "Fetch stage": {
+                    "Program counter": 20,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "42": [
+            {
+                "Decode stage": {
+                    "Next pc": 21
+                }
+            }
+        ],
+        "43": [
+            {
+                "Fetch stage": {
+                    "Program counter": 21,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "44": [
+            {
+                "Decode stage": {
+                    "Next pc": 22
+                }
+            }
+        ],
+        "45": [
+            {
+                "Fetch stage": {
+                    "Program counter": 22,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "46": [
+            {
+                "Decode stage": {
+                    "Next pc": 23
+                }
+            }
+        ],
+        "47": [
+            {
+                "Fetch stage": {
+                    "Program counter": 23,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "48": [
+            {
+                "Decode stage": {
+                    "Next pc": 24
+                }
+            }
+        ],
+        "49": [
+            {
+                "Fetch stage": {
+                    "Program counter": 24,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "50": [
+            {
+                "Decode stage": {
+                    "Next pc": 25
+                }
+            }
+        ],
+        "51": [
+            {
+                "Fetch stage": {
+                    "Program counter": 25,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "52": [
+            {
+                "Decode stage": {
+                    "Next pc": 26
+                }
+            }
+        ],
+        "53": [
+            {
+                "Fetch stage": {
+                    "Program counter": 26,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "54": [
+            {
+                "Decode stage": {
+                    "Next pc": 27
+                }
+            }
+        ],
+        "55": [
+            {
+                "Fetch stage": {
+                    "Program counter": 27,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "56": [
+            {
+                "Decode stage": {
+                    "Next pc": 28
+                }
+            }
+        ],
+        "57": [
+            {
+                "Fetch stage": {
+                    "Program counter": 28,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "58": [
+            {
+                "Decode stage": {
+                    "Next pc": 29
+                }
+            }
+        ],
+        "59": [
+            {
+                "Fetch stage": {
+                    "Program counter": 29,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "60": [
+            {
+                "Decode stage": {
+                    "Next pc": 30
+                }
+            }
+        ],
+        "61": [
+            {
+                "Fetch stage": {
+                    "Program counter": 30,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "62": [
+            {
+                "Decode stage": {
+                    "Next pc": 31
+                }
+            }
+        ],
+        "63": [
+            {
+                "Fetch stage": {
+                    "Program counter": 31,
+                    "Raw instruction": "0x00000000"
+                }
+            }
+        ],
+        "64": [
+            {
+                "Decode stage": {
+                    "Next pc": 32
+                }
+            }
+        ]
+    }
+}
