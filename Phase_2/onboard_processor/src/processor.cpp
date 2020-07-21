@@ -9,8 +9,8 @@
 #include "pipeline.hpp"
 
 #ifdef DBG_SYNTH
-void processor(memory_t memory, TW(large_bool) hold, TW(large_bool) stop, DebugInfo* dbg) {
-	#pragma HLS INTERFACE s_axilite port=hold
+void processor(memory_t memory, TW(large_bool) run, TW(large_bool) stop, DebugInfo* dbg) {
+	#pragma HLS INTERFACE s_axilite port=run
 	#pragma HLS INTERFACE s_axilite port=dbg
 #else
 void processor(memory_t memory, TW(large_bool) stop) {
@@ -21,9 +21,13 @@ void processor(memory_t memory, TW(large_bool) stop) {
 
 	Pipeline pipeline;
 	word_t cycle = 0;
+
 	while (! *stop) {
+		#pragma HLS PIPELINE
+		#pragma HLS DEPENDENCE variable=stop intra false
+
 		#ifdef DBG_SYNTH
-		if (! *hold) { // Waiting for the 'hold' signal to be false to do a cycle
+		if (*run) { // Waiting for the 'run' signal to be true to do a cycle
 		#endif
 			#ifndef __SYNTHESIS__
 			Debugger::new_cycle();
@@ -38,7 +42,7 @@ void processor(memory_t memory, TW(large_bool) stop) {
 			#endif
 
 		#ifdef DBG_SYNTH
-			*hold = true; // Cycle has ended, hold is set to true
+			*run = false; // Cycle has ended, 'run' is set to false
 		}
 		#endif
 	}

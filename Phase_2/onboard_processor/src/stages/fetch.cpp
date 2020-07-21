@@ -6,30 +6,20 @@
 
 #include "debug/debug.hpp"
 
-FetchStage::FetchStage() :
-	locked(false) // The fetch stage is initially unlocked, while the decode stage is locke;
-{
-}
+FetchStage::FetchStage() {}
 
-void FetchStage::interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode, bool* locked_dbg) {
+void FetchStage::interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode, bit_t* fetch_ran) {
 	#pragma HLS INLINE
 
-	if (from_decode.has_next_pc) {
-		program_counter = from_decode.next_pc;
-		locked = false;
-	}
-	else {
-		locked = true;
-	}
+	bit_t do_smth = from_decode.has_next_pc;
 
-	if (!locked) {
+	if (do_smth) {
+		program_counter = from_decode.next_pc;
 		word_t instruction = memory[program_counter];
 
 		to_decode->has_fetched = true;
 		to_decode->instruction = instruction;
 		to_decode->pc          = program_counter;
-
-		locked = true; // lock the fetch stage to wait for the next pc
 
 		#ifndef __SYNTHESIS__
 		Debugger::add_cycle_event({
@@ -45,6 +35,5 @@ void FetchStage::interface(memory_t memory, DecodeToFetch& from_decode, FetchToD
 	else {
 		to_decode->has_fetched = false;
 	}
-
-	*locked_dbg = locked;
+	*fetch_ran = do_smth;
 }

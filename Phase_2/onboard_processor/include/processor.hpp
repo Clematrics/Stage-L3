@@ -7,7 +7,7 @@
 #include "common.hpp"
 
 #ifdef DBG_SYNTH
-void processor(memory_t memory, TW(large_bool) hold, TW(large_bool) stop, DebugInfo* dbg);
+void processor(memory_t memory, TW(large_bool) run, TW(large_bool) stop, DebugInfo* dbg);
 #else
 void processor(memory_t memory, TW(large_bool) stop);
 #endif

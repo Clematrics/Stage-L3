@@ -14,7 +14,7 @@ struct DebugInfo {
 	word_t cycle;
 	FetchToDecode fetch_to_decode;
 	DecodeToFetch decode_to_fetch;
-	bool fetch_locked;
-	bool decode_locked;
+	bit_t fetch_ran;
+	bit_t decode_ran;
 };
 #endif // DBG_SYNTH

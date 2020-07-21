@@ -8,8 +8,7 @@
 #include "inter_stage.hpp"
 
 class DecodeStage {
-	bool locked;
 public:
 	DecodeStage();
-	void interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, large_bool* stop, bool* locked_dbg);
+	void interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, large_bool* stop, bit_t* decode_ran);
 };

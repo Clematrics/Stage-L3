@@ -44,15 +44,15 @@ void set_memory() {
 	XProcessor_Write_memory_V_Words(&processor, 0, (int*)memory.data(), memory_size);
 }
 
-bool get_hold() {
+bool is_running() {
 	int d;
-	XProcessor_Read_hold_Words(&processor, 0, &d, 1);
+	XProcessor_Read_run_Words(&processor, 0, &d, 1);
 	return d != 0;
 }
 
-void set_hold(bool value) {
-	int d = value;
-	XProcessor_Write_hold_Words(&processor, 0, &d, 1);
+void run() {
+	int d = true;
+	XProcessor_Write_run_Words(&processor, 0, &d, 1);
 }
 
 bool get_stop() {
@@ -83,14 +83,15 @@ int main() {
 
 	set_memory();
 
+	run(); // Launch the IP
     do {
-		while (!get_hold()); // wait for the IP to finish a cycle
+		while (is_running()); // wait for the IP to finish a cycle
 
 		dump_memory();
 		print_memory();
 		dumpDebugInfo(&processor);
 
-		set_hold(false);
+		run();
 	} while (!get_stop());
 
     return 0;
