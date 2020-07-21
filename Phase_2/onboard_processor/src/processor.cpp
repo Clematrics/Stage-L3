@@ -9,20 +9,21 @@
 #include "pipeline.hpp"
 
 #ifdef DBG_SYNTH
-void processor(memory_t memory, TW(large_bool) run, TW(large_bool) stop, DebugInfo* dbg) {
+void processor(memory_t memory, TW(large_bool) run, bit_t* stopped, DebugInfo* dbg) {
 	#pragma HLS INTERFACE s_axilite port=run
 	#pragma HLS INTERFACE s_axilite port=dbg
 #else
-void processor(memory_t memory, TW(large_bool) stop) {
+void processor(memory_t memory, bit_t* stopped) {
 #endif
 	#pragma HLS INTERFACE s_axilite port=memory
-	#pragma HLS INTERFACE s_axilite port=stop
+	#pragma HLS INTERFACE s_axilite port=stopped
 	#pragma HLS INTERFACE ap_ctrl_none port=return
 
 	Pipeline pipeline;
 	word_t cycle = 0;
+	bit_t stop = false;
 
-	while (! *stop) {
+	while (!stop) {
 		#pragma HLS PIPELINE
 		#pragma HLS DEPENDENCE variable=stop intra false
 
@@ -34,11 +35,11 @@ void processor(memory_t memory, TW(large_bool) stop) {
 			#endif // __SYNTHESIS__
 
 			#ifdef DBG_SYNTH
-			pipeline.interface(memory, stop, dbg);
+			pipeline.interface(memory, &stop, dbg);
 			dbg->cycle = cycle;
 			cycle++;
 			#else
-			pipeline.interface(memory, stop);
+			pipeline.interface(memory, &stop);
 			#endif
 
 		#ifdef DBG_SYNTH
@@ -46,4 +47,5 @@ void processor(memory_t memory, TW(large_bool) stop) {
 		}
 		#endif
 	}
+	*stopped = true;
 }

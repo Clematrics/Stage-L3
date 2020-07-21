@@ -8,7 +8,7 @@
 
 DecodeStage::DecodeStage() {}
 
-void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, large_bool* stop, bit_t* decode_ran) {
+void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, bit_t* stop, bit_t* decode_ran) {
 	#pragma HLS INLINE
 
 	bit_t do_smth = from_fetch.has_fetched;

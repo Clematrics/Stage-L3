@@ -17,9 +17,9 @@ Pipeline::Pipeline() {
 }
 
 #ifdef DBG_SYNTH
-void Pipeline::interface(memory_t memory, large_bool* stop, DebugInfo* dbg) {
+void Pipeline::interface(memory_t memory, bit_t* stop, DebugInfo* dbg) {
 #else
-void Pipeline::interface(memory_t memory, large_bool* stop) {
+void Pipeline::interface(memory_t memory, bit_t* stop) {
 #endif // DBG_SYNTH
 	#pragma HLS INLINE
 

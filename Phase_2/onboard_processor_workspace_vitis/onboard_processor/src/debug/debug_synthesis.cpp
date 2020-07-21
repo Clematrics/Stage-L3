@@ -25,15 +25,15 @@ void dumpDebugInfo(XProcessor* instance) {
 	OBJECT(5, "",
 		PAIR("cycle", XProcessor_Get_dbg_cycle_V(instance)),
 		PAIR("fetch_to_decode", OBJECT(3, "  ",
-			PAIR("has_fetched", static_cast<bool>(XProcessor_Get_dbg_fetch_to_decode_has_fetched(instance))),
+			PAIR("has_fetched", static_cast<bool>(XProcessor_Get_dbg_fetch_to_decode_has_fetched_V(instance))),
 			PAIR("instruction", string_hex(XProcessor_Get_dbg_fetch_to_decode_instruction_V(instance))),
 			PAIR("pc", string_hex(XProcessor_Get_dbg_fetch_to_decode_pc_V(instance)))
 		)),
 		PAIR("decode_to_fetch", OBJECT(2, "  ",
-			PAIR("has_next_pc", static_cast<bool>(XProcessor_Get_dbg_decode_to_fetch_has_next_pc(instance))),
+			PAIR("has_next_pc", static_cast<bool>(XProcessor_Get_dbg_decode_to_fetch_has_next_pc_V(instance))),
 			PAIR("next_pc", string_hex(XProcessor_Get_dbg_decode_to_fetch_next_pc_V(instance)))
 		)),
-		PAIR("fetch_ran", static_cast<bool>(XProcessor_Get_dbg_fetch_ran(instance))),
-		PAIR("decode_ran", static_cast<bool>(XProcessor_Get_dbg_decode_ran(instance)))
+		PAIR("fetch_ran", static_cast<bool>(XProcessor_Get_dbg_fetch_ran_V(instance))),
+		PAIR("decode_ran", static_cast<bool>(XProcessor_Get_dbg_decode_ran_V(instance)))
 	) << '\n';
 }

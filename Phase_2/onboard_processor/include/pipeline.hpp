@@ -39,8 +39,8 @@ public:
 	Pipeline();
 
 	#ifdef DBG_SYNTH
-	void interface(memory_t memory, large_bool* stop, DebugInfo* dbg);
+	void interface(memory_t memory, bit_t* stop, DebugInfo* dbg);
 	#else
-	void interface(memory_t memory, large_bool* stop);
+	void interface(memory_t memory, bit_t* stop);
 	#endif
 };

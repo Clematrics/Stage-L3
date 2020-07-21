@@ -10,5 +10,5 @@
 class DecodeStage {
 public:
 	DecodeStage();
-	void interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, large_bool* stop, bit_t* decode_ran);
+	void interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, bit_t* stop, bit_t* decode_ran);
 };

@@ -55,17 +55,9 @@ void run() {
 	XProcessor_Write_run_Words(&processor, 0, &d, 1);
 }
 
-bool get_stop() {
-	int d;
-	XProcessor_Read_stop_Words(&processor, 0, &d, 1);
-	return d != 0;
+bool stopped() {
+	return static_cast<bool>(XProcessor_Get_stopped_V(&processor));
 }
-
-void set_stop(bool value) {
-	int d = value;
-	XProcessor_Write_stop_Words(&processor, 0, &d, 1);
-}
-
 
 int main() {
 	XProcessor_Initialize(&processor, XPAR_XPROCESSOR_0_DEVICE_ID);
@@ -92,7 +84,7 @@ int main() {
 		dumpDebugInfo(&processor);
 
 		run();
-	} while (!get_stop());
+	} while (!stopped());
 
     return 0;
 }
