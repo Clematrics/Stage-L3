@@ -35,6 +35,7 @@ class Pipeline {
 	// Inter stage structures
 	DECL_IS(FetchToDecode, fetch_to_decode);
 	DECL_IS(DecodeToFetch, decode_to_fetch);
+	DECL_IS(DecodeToIssue, decode_to_issue);
 public:
 	Pipeline();
 

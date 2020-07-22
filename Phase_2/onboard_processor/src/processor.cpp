@@ -22,10 +22,13 @@ void processor(memory_t memory, bit_t* stopped) {
 	Pipeline pipeline;
 	word_t cycle = 0;
 	bit_t stop = false;
+	bit_t stop_pipeline = false;
 
 	while (!stop) {
 		#pragma HLS PIPELINE
-		#pragma HLS DEPENDENCE variable=stop intra false
+		// #pragma HLS DEPENDENCE variable=stop inter false
+		// #pragma HLS DEPENDENCE variable=stop intra false
+		stop = stop_pipeline;
 
 		#ifdef DBG_SYNTH
 		if (*run) { // Waiting for the 'run' signal to be true to do a cycle
@@ -35,11 +38,11 @@ void processor(memory_t memory, bit_t* stopped) {
 			#endif // __SYNTHESIS__
 
 			#ifdef DBG_SYNTH
-			pipeline.interface(memory, &stop, dbg);
+			pipeline.interface(memory, &stop_pipeline, dbg);
 			dbg->cycle = cycle;
 			cycle++;
 			#else
-			pipeline.interface(memory, &stop);
+			pipeline.interface(memory, &stop_pipeline);
 			#endif
 
 		#ifdef DBG_SYNTH

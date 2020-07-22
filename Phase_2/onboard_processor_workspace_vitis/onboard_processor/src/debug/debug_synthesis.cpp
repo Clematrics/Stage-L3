@@ -16,13 +16,18 @@
 #define OBJECT7(indent, pair, pairs...) indent << pair << ",\n" << OBJECT6(indent, pairs)
 #define OBJECT8(indent, pair, pairs...) indent << pair << ",\n" << OBJECT7(indent, pairs)
 #define OBJECT9(indent, pair, pairs...) indent << pair << ",\n" << OBJECT8(indent, pairs)
+#define OBJECT10(indent, pair, pairs...) indent << pair << ",\n" << OBJECT9(indent, pairs)
+#define OBJECT11(indent, pair, pairs...) indent << pair << ",\n" << OBJECT10(indent, pairs)
+#define OBJECT12(indent, pair, pairs...) indent << pair << ",\n" << OBJECT11(indent, pairs)
+#define OBJECT13(indent, pair, pairs...) indent << pair << ",\n" << OBJECT12(indent, pairs)
+#define OBJECT14(indent, pair, pairs...) indent << pair << ",\n" << OBJECT13(indent, pairs)
 
 #define OBJECT(count, indent, content...) "{\n" << OBJECT##count(indent "  ", content) << "\n" << indent << "}"
 
 
 void dumpDebugInfo(XProcessor* instance) {
 	std::cout <<
-	OBJECT(5, "",
+	OBJECT(6, "",
 		PAIR("cycle", XProcessor_Get_dbg_cycle_V(instance)),
 		PAIR("fetch_to_decode", OBJECT(3, "  ",
 			PAIR("has_fetched", static_cast<bool>(XProcessor_Get_dbg_fetch_to_decode_has_fetched_V(instance))),
@@ -32,6 +37,22 @@ void dumpDebugInfo(XProcessor* instance) {
 		PAIR("decode_to_fetch", OBJECT(2, "  ",
 			PAIR("has_next_pc", static_cast<bool>(XProcessor_Get_dbg_decode_to_fetch_has_next_pc_V(instance))),
 			PAIR("next_pc", string_hex(XProcessor_Get_dbg_decode_to_fetch_next_pc_V(instance)))
+		)),
+		PAIR("decode_to_issue", OBJECT(14, "  ",
+			PAIR("has_decoded_instruction", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_has_decoded_instruction_V(instance))),
+			PAIR("pc", XProcessor_Get_dbg_decode_to_issue_pc_V(instance)),
+			PAIR("func3", XProcessor_Get_dbg_decode_to_issue_func3_V(instance)),
+			PAIR("is_func7_0b0000000", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_is_func7_0b0000000_V(instance))),
+			PAIR("is_func7_0b0000001", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_is_func7_0b0000001_V(instance))),
+			PAIR("is_func7_0b0100000", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_is_func7_0b0100000_V(instance))),
+			PAIR("packed_immediate", XProcessor_Get_dbg_decode_to_issue_packed_immediate_V(instance)),
+			PAIR("use_dest", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_use_dest_V(instance))),
+			PAIR("use_src1", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_use_src1_V(instance))),
+			PAIR("use_src2", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_use_src2_V(instance))),
+			PAIR("dest", XProcessor_Get_dbg_decode_to_issue_dest_V(instance)),
+			PAIR("src1", XProcessor_Get_dbg_decode_to_issue_src1_V(instance)),
+			PAIR("src2", XProcessor_Get_dbg_decode_to_issue_src2_V(instance)),
+			PAIR("invalid_instruction", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_invalid_instruction_V(instance)))
 		)),
 		PAIR("fetch_ran", static_cast<bool>(XProcessor_Get_dbg_fetch_ran_V(instance))),
 		PAIR("decode_ran", static_cast<bool>(XProcessor_Get_dbg_decode_ran_V(instance)))

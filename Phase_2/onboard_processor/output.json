@@ -11,8 +11,104 @@
         ],
         "2": [
             {
+                "Creating alias": {
+                    "Architectural register": "tp",
+                    "Physical register created": 32,
+                    "Current mapping": {
+                        "zero": 0,
+                        "ra": 1,
+                        "sp": 2,
+                        "gp": 3,
+                        "tp": 32,
+                        "t0": 5,
+                        "t1": 6,
+                        "t2": 7,
+                        "s0": 8,
+                        "s1": 9,
+                        "a0": 10,
+                        "a1": 11,
+                        "a2": 12,
+                        "a3": 13,
+                        "a4": 14,
+                        "a5": 15,
+                        "a6": 16,
+                        "a7": 17,
+                        "s2": 18,
+                        "s3": 19,
+                        "s4": 20,
+                        "s5": 21,
+                        "s6": 22,
+                        "s7": 23,
+                        "s8": 24,
+                        "s9": 25,
+                        "s10": 26,
+                        "s11": 27,
+                        "t3": 28,
+                        "t4": 29,
+                        "t5": 30,
+                        "t6": 31
+                    },
+                    "Free registers": {
+                        "Empty": false,
+                        "Full": false,
+                        "List": [
+                            33,
+                            34,
+                            35,
+                            36,
+                            37,
+                            38,
+                            39,
+                            40,
+                            41,
+                            42,
+                            43,
+                            44,
+                            45,
+                            46,
+                            47,
+                            48,
+                            49,
+                            50,
+                            51,
+                            52,
+                            53,
+                            54,
+                            55,
+                            56,
+                            57,
+                            58,
+                            59,
+                            60,
+                            61,
+                            62,
+                            63
+                        ]
+                    }
+                }
+            },
+            {
                 "Decode stage": {
-                    "Next pc": 1
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 1
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 0,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": true,
+                        "Use source 1": true,
+                        "Use source 2": true,
+                        "Physical destination": 32,
+                        "Physical source 1": 5,
+                        "Physical source 2": 19,
+                        "Invalid instruction": false
+                    }
                 }
             }
         ],
@@ -26,8 +122,103 @@
         ],
         "4": [
             {
+                "Creating alias": {
+                    "Architectural register": "zero",
+                    "Physical register created": 33,
+                    "Current mapping": {
+                        "zero": 33,
+                        "ra": 1,
+                        "sp": 2,
+                        "gp": 3,
+                        "tp": 32,
+                        "t0": 5,
+                        "t1": 6,
+                        "t2": 7,
+                        "s0": 8,
+                        "s1": 9,
+                        "a0": 10,
+                        "a1": 11,
+                        "a2": 12,
+                        "a3": 13,
+                        "a4": 14,
+                        "a5": 15,
+                        "a6": 16,
+                        "a7": 17,
+                        "s2": 18,
+                        "s3": 19,
+                        "s4": 20,
+                        "s5": 21,
+                        "s6": 22,
+                        "s7": 23,
+                        "s8": 24,
+                        "s9": 25,
+                        "s10": 26,
+                        "s11": 27,
+                        "t3": 28,
+                        "t4": 29,
+                        "t5": 30,
+                        "t6": 31
+                    },
+                    "Free registers": {
+                        "Empty": false,
+                        "Full": false,
+                        "List": [
+                            34,
+                            35,
+                            36,
+                            37,
+                            38,
+                            39,
+                            40,
+                            41,
+                            42,
+                            43,
+                            44,
+                            45,
+                            46,
+                            47,
+                            48,
+                            49,
+                            50,
+                            51,
+                            52,
+                            53,
+                            54,
+                            55,
+                            56,
+                            57,
+                            58,
+                            59,
+                            60,
+                            61,
+                            62,
+                            63
+                        ]
+                    }
+                }
+            },
+            {
                 "Decode stage": {
-                    "Next pc": 2
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 2
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 1,
+                        "Func 3": 4,
+                        "Is Func7 0b0000000": false,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 4294967295,
+                        "Use destination": true,
+                        "Use source 1": true,
+                        "Use source 2": false,
+                        "Physical destination": 33,
+                        "Physical source 1": 9,
+                        "Physical source 2": 19,
+                        "Invalid instruction": false
+                    }
                 }
             }
         ],
@@ -42,7 +233,26 @@
         "6": [
             {
                 "Decode stage": {
-                    "Next pc": 3
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 3
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 2,
+                        "Func 3": 2,
+                        "Is Func7 0b0000000": false,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 4294967292,
+                        "Use destination": false,
+                        "Use source 1": true,
+                        "Use source 2": true,
+                        "Physical destination": 33,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": false
+                    }
                 }
             }
         ],
@@ -50,14 +260,108 @@
             {
                 "Fetch stage": {
                     "Program counter": 3,
-                    "Raw instruction": "0x00105063"
+                    "Raw instruction": "0x00000fb7"
                 }
             }
         ],
         "8": [
             {
+                "Creating alias": {
+                    "Architectural register": "t6",
+                    "Physical register created": 34,
+                    "Current mapping": {
+                        "zero": 33,
+                        "ra": 1,
+                        "sp": 2,
+                        "gp": 3,
+                        "tp": 32,
+                        "t0": 5,
+                        "t1": 6,
+                        "t2": 7,
+                        "s0": 8,
+                        "s1": 9,
+                        "a0": 10,
+                        "a1": 11,
+                        "a2": 12,
+                        "a3": 13,
+                        "a4": 14,
+                        "a5": 15,
+                        "a6": 16,
+                        "a7": 17,
+                        "s2": 18,
+                        "s3": 19,
+                        "s4": 20,
+                        "s5": 21,
+                        "s6": 22,
+                        "s7": 23,
+                        "s8": 24,
+                        "s9": 25,
+                        "s10": 26,
+                        "s11": 27,
+                        "t3": 28,
+                        "t4": 29,
+                        "t5": 30,
+                        "t6": 34
+                    },
+                    "Free registers": {
+                        "Empty": false,
+                        "Full": false,
+                        "List": [
+                            35,
+                            36,
+                            37,
+                            38,
+                            39,
+                            40,
+                            41,
+                            42,
+                            43,
+                            44,
+                            45,
+                            46,
+                            47,
+                            48,
+                            49,
+                            50,
+                            51,
+                            52,
+                            53,
+                            54,
+                            55,
+                            56,
+                            57,
+                            58,
+                            59,
+                            60,
+                            61,
+                            62,
+                            63
+                        ]
+                    }
+                }
+            },
+            {
                 "Decode stage": {
-                    "Next pc": 4
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 4
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 3,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": true,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 34,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": false
+                    }
                 }
             }
         ],
@@ -65,14 +369,33 @@
             {
                 "Fetch stage": {
                     "Program counter": 4,
-                    "Raw instruction": "0x00000fb7"
+                    "Raw instruction": "0x00000000"
                 }
             }
         ],
         "10": [
             {
                 "Decode stage": {
-                    "Next pc": 5
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 5
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 4,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 34,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
@@ -80,78 +403,111 @@
             {
                 "Fetch stage": {
                     "Program counter": 5,
-                    "Raw instruction": "0x0080006f"
+                    "Raw instruction": "0x0140006f"
                 }
             }
         ],
         "12": [
             {
+                "Creating alias": {
+                    "Architectural register": "zero",
+                    "Physical register created": 35,
+                    "Current mapping": {
+                        "zero": 35,
+                        "ra": 1,
+                        "sp": 2,
+                        "gp": 3,
+                        "tp": 32,
+                        "t0": 5,
+                        "t1": 6,
+                        "t2": 7,
+                        "s0": 8,
+                        "s1": 9,
+                        "a0": 10,
+                        "a1": 11,
+                        "a2": 12,
+                        "a3": 13,
+                        "a4": 14,
+                        "a5": 15,
+                        "a6": 16,
+                        "a7": 17,
+                        "s2": 18,
+                        "s3": 19,
+                        "s4": 20,
+                        "s5": 21,
+                        "s6": 22,
+                        "s7": 23,
+                        "s8": 24,
+                        "s9": 25,
+                        "s10": 26,
+                        "s11": 27,
+                        "t3": 28,
+                        "t4": 29,
+                        "t5": 30,
+                        "t6": 34
+                    },
+                    "Free registers": {
+                        "Empty": false,
+                        "Full": false,
+                        "List": [
+                            36,
+                            37,
+                            38,
+                            39,
+                            40,
+                            41,
+                            42,
+                            43,
+                            44,
+                            45,
+                            46,
+                            47,
+                            48,
+                            49,
+                            50,
+                            51,
+                            52,
+                            53,
+                            54,
+                            55,
+                            56,
+                            57,
+                            58,
+                            59,
+                            60,
+                            61,
+                            62,
+                            63
+                        ]
+                    }
+                }
+            },
+            {
                 "Decode stage": {
-                    "Next pc": 6
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 10
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 5,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": true,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": false
+                    }
                 }
             }
         ],
         "13": [
-            {
-                "Fetch stage": {
-                    "Program counter": 6,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "14": [
-            {
-                "Decode stage": {
-                    "Next pc": 7
-                }
-            }
-        ],
-        "15": [
-            {
-                "Fetch stage": {
-                    "Program counter": 7,
-                    "Raw instruction": "0x00008067"
-                }
-            }
-        ],
-        "16": [
-            {
-                "Decode stage": {
-                    "Next pc": 8
-                }
-            }
-        ],
-        "17": [
-            {
-                "Fetch stage": {
-                    "Program counter": 8,
-                    "Raw instruction": "0x00008067"
-                }
-            }
-        ],
-        "18": [
-            {
-                "Decode stage": {
-                    "Next pc": 9
-                }
-            }
-        ],
-        "19": [
-            {
-                "Fetch stage": {
-                    "Program counter": 9,
-                    "Raw instruction": "0x00008067"
-                }
-            }
-        ],
-        "20": [
-            {
-                "Decode stage": {
-                    "Next pc": 10
-                }
-            }
-        ],
-        "21": [
             {
                 "Fetch stage": {
                     "Program counter": 10,
@@ -159,14 +515,33 @@
                 }
             }
         ],
-        "22": [
+        "14": [
             {
                 "Decode stage": {
-                    "Next pc": 11
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 11
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 10,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "23": [
+        "15": [
             {
                 "Fetch stage": {
                     "Program counter": 11,
@@ -174,14 +549,33 @@
                 }
             }
         ],
-        "24": [
+        "16": [
             {
                 "Decode stage": {
-                    "Next pc": 12
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 12
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 11,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "25": [
+        "17": [
             {
                 "Fetch stage": {
                     "Program counter": 12,
@@ -189,14 +583,33 @@
                 }
             }
         ],
-        "26": [
+        "18": [
             {
                 "Decode stage": {
-                    "Next pc": 13
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 13
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 12,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "27": [
+        "19": [
             {
                 "Fetch stage": {
                     "Program counter": 13,
@@ -204,14 +617,33 @@
                 }
             }
         ],
-        "28": [
+        "20": [
             {
                 "Decode stage": {
-                    "Next pc": 14
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 14
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 13,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "29": [
+        "21": [
             {
                 "Fetch stage": {
                     "Program counter": 14,
@@ -219,14 +651,33 @@
                 }
             }
         ],
-        "30": [
+        "22": [
             {
                 "Decode stage": {
-                    "Next pc": 15
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 15
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 14,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "31": [
+        "23": [
             {
                 "Fetch stage": {
                     "Program counter": 15,
@@ -234,14 +685,33 @@
                 }
             }
         ],
-        "32": [
+        "24": [
             {
                 "Decode stage": {
-                    "Next pc": 16
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 16
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 15,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "33": [
+        "25": [
             {
                 "Fetch stage": {
                     "Program counter": 16,
@@ -249,14 +719,33 @@
                 }
             }
         ],
-        "34": [
+        "26": [
             {
                 "Decode stage": {
-                    "Next pc": 17
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 17
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 16,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "35": [
+        "27": [
             {
                 "Fetch stage": {
                     "Program counter": 17,
@@ -264,14 +753,33 @@
                 }
             }
         ],
-        "36": [
+        "28": [
             {
                 "Decode stage": {
-                    "Next pc": 18
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 18
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 17,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "37": [
+        "29": [
             {
                 "Fetch stage": {
                     "Program counter": 18,
@@ -279,14 +787,33 @@
                 }
             }
         ],
-        "38": [
+        "30": [
             {
                 "Decode stage": {
-                    "Next pc": 19
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 19
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 18,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "39": [
+        "31": [
             {
                 "Fetch stage": {
                     "Program counter": 19,
@@ -294,14 +821,33 @@
                 }
             }
         ],
-        "40": [
+        "32": [
             {
                 "Decode stage": {
-                    "Next pc": 20
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 20
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 19,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "41": [
+        "33": [
             {
                 "Fetch stage": {
                     "Program counter": 20,
@@ -309,14 +855,33 @@
                 }
             }
         ],
-        "42": [
+        "34": [
             {
                 "Decode stage": {
-                    "Next pc": 21
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 21
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 20,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "43": [
+        "35": [
             {
                 "Fetch stage": {
                     "Program counter": 21,
@@ -324,14 +889,33 @@
                 }
             }
         ],
-        "44": [
+        "36": [
             {
                 "Decode stage": {
-                    "Next pc": 22
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 22
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 21,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "45": [
+        "37": [
             {
                 "Fetch stage": {
                     "Program counter": 22,
@@ -339,14 +923,33 @@
                 }
             }
         ],
-        "46": [
+        "38": [
             {
                 "Decode stage": {
-                    "Next pc": 23
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 23
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 22,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "47": [
+        "39": [
             {
                 "Fetch stage": {
                     "Program counter": 23,
@@ -354,14 +957,33 @@
                 }
             }
         ],
-        "48": [
+        "40": [
             {
                 "Decode stage": {
-                    "Next pc": 24
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 24
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 23,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "49": [
+        "41": [
             {
                 "Fetch stage": {
                     "Program counter": 24,
@@ -369,14 +991,33 @@
                 }
             }
         ],
-        "50": [
+        "42": [
             {
                 "Decode stage": {
-                    "Next pc": 25
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 25
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 24,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "51": [
+        "43": [
             {
                 "Fetch stage": {
                     "Program counter": 25,
@@ -384,14 +1025,33 @@
                 }
             }
         ],
-        "52": [
+        "44": [
             {
                 "Decode stage": {
-                    "Next pc": 26
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 26
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 25,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "53": [
+        "45": [
             {
                 "Fetch stage": {
                     "Program counter": 26,
@@ -399,14 +1059,33 @@
                 }
             }
         ],
-        "54": [
+        "46": [
             {
                 "Decode stage": {
-                    "Next pc": 27
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 27
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 26,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "55": [
+        "47": [
             {
                 "Fetch stage": {
                     "Program counter": 27,
@@ -414,14 +1093,33 @@
                 }
             }
         ],
-        "56": [
+        "48": [
             {
                 "Decode stage": {
-                    "Next pc": 28
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 28
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 27,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "57": [
+        "49": [
             {
                 "Fetch stage": {
                     "Program counter": 28,
@@ -429,14 +1127,33 @@
                 }
             }
         ],
-        "58": [
+        "50": [
             {
                 "Decode stage": {
-                    "Next pc": 29
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 29
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 28,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "59": [
+        "51": [
             {
                 "Fetch stage": {
                     "Program counter": 29,
@@ -444,14 +1161,33 @@
                 }
             }
         ],
-        "60": [
+        "52": [
             {
                 "Decode stage": {
-                    "Next pc": 30
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 30
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 29,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "61": [
+        "53": [
             {
                 "Fetch stage": {
                     "Program counter": 30,
@@ -459,14 +1195,33 @@
                 }
             }
         ],
-        "62": [
+        "54": [
             {
                 "Decode stage": {
-                    "Next pc": 31
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 31
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 30,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
                 }
             }
         ],
-        "63": [
+        "55": [
             {
                 "Fetch stage": {
                     "Program counter": 31,
@@ -474,10 +1229,37 @@
                 }
             }
         ],
-        "64": [
+        "56": [
             {
                 "Decode stage": {
-                    "Next pc": 32
+                    "To fetch": {
+                        "Has a next pc": true,
+                        "Next pc": 32
+                    },
+                    "To issue": {
+                        "Has decoded an instruction": true,
+                        "Program counter": 31,
+                        "Func 3": 0,
+                        "Is Func7 0b0000000": true,
+                        "Is Func7 0b0000001": false,
+                        "Is Func7 0b0100000": false,
+                        "Packed immediate": 0,
+                        "Use destination": false,
+                        "Use source 1": false,
+                        "Use source 2": false,
+                        "Physical destination": 35,
+                        "Physical source 1": 8,
+                        "Physical source 2": 2,
+                        "Invalid instruction": true
+                    }
+                }
+            }
+        ],
+        "57": [
+            {
+                "Fetch stage": {
+                    "Program counter": 32,
+                    "Raw instruction": "0x00000000"
                 }
             }
         ]

@@ -14,6 +14,7 @@ struct DebugInfo {
 	word_t cycle;
 	FetchToDecode fetch_to_decode;
 	DecodeToFetch decode_to_fetch;
+	DecodeToIssue decode_to_issue;
 	bit_t fetch_ran;
 	bit_t decode_ran;
 };
