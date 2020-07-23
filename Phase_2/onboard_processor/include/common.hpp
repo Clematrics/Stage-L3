@@ -103,6 +103,9 @@ const uint16_t reorder_buffer_count = 16;
 const uint32_t reorder_buffer_count_width         = Width<reorder_buffer_count>::Value;
 typedef ap_uint<reorder_buffer_count_width>         reorder_buffer_ptr_t;
 
+typedef ap_uint<reorder_buffer_count_width>         instruction_token_t;
+const instruction_token_t initial_token           = 0;
+
 const uint16_t issue_table_entries_count = reorder_buffer_count;
 const uint32_t issue_table_ptr_width              = Width<issue_table_entries_count>::Value;
 typedef ap_uint<issue_table_ptr_width>              issue_table_ptr_t;

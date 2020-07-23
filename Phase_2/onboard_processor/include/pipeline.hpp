@@ -9,6 +9,8 @@
 #include "debug/debug.hpp"
 #include "stages/fetch.hpp"
 #include "stages/decode.hpp"
+#include "stages/issue.hpp"
+#include "stages/commit.hpp"
 #include "stages/inter_stage.hpp"
 
 /* ****************************************************************************
@@ -21,21 +23,24 @@
 #define DECL_IS(type, name) type IS_IN(name); type IS_OUT(name)
 #define TRANSFER_IS(name) IS_IN(name) = IS_OUT(name)
 #else
-#define IS_IN(name)  name
-#define IS_OUT(name) name
-#define DECL_IS(type, name) type name
-#define TRANSFER_IS(name)
+#define IS_IN(name)  in_##name
+#define IS_OUT(name) out_##name
+#define DECL_IS(type, name) type IS_IN(name); type IS_OUT(name)
+#define TRANSFER_IS(name) IS_IN(name) = IS_OUT(name)
 #endif
 
 class Pipeline {
 	// Stages
-	FetchStage fetch_stage;
+	FetchStage  fetch_stage;
 	DecodeStage decode_stage;
+	IssueStage  issue_stage;
+	CommitStage commit_stage;
 
 	// Inter stage structures
-	DECL_IS(FetchToDecode, fetch_to_decode);
-	DECL_IS(DecodeToFetch, decode_to_fetch);
-	DECL_IS(DecodeToIssue, decode_to_issue);
+	DECL_IS(FetchToDecode,  fetch_to_decode);
+	DECL_IS(DecodeToFetch,  decode_to_fetch);
+	DECL_IS(DecodeToIssue,  decode_to_issue);
+	DECL_IS(DecodeToCommit, decode_to_commit);
 public:
 	Pipeline();
 

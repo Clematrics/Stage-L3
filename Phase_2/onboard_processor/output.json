@@ -7,6 +7,9 @@
                     "Program counter": 0,
                     "Raw instruction": "0x01328233"
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "2": [
@@ -108,8 +111,16 @@
                         "Physical source 1": 5,
                         "Physical source 2": 19,
                         "Invalid instruction": false
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 0,
+                        "Invalid instruction": false
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "3": [
@@ -117,6 +128,12 @@
                 "Fetch stage": {
                     "Program counter": 1,
                     "Raw instruction": "0xfff4c013"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 0,
+                    "Invalid instruction": false
                 }
             }
         ],
@@ -218,8 +235,16 @@
                         "Physical source 1": 9,
                         "Physical source 2": 19,
                         "Invalid instruction": false
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 1,
+                        "Invalid instruction": false
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "5": [
@@ -227,6 +252,12 @@
                 "Fetch stage": {
                     "Program counter": 2,
                     "Raw instruction": "0xfe242e23"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 1,
+                    "Invalid instruction": false
                 }
             }
         ],
@@ -252,8 +283,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": false
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 2,
+                        "Invalid instruction": false
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "7": [
@@ -261,6 +300,12 @@
                 "Fetch stage": {
                     "Program counter": 3,
                     "Raw instruction": "0x00000fb7"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 2,
+                    "Invalid instruction": false
                 }
             }
         ],
@@ -361,8 +406,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": false
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 3,
+                        "Invalid instruction": false
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "9": [
@@ -370,6 +423,12 @@
                 "Fetch stage": {
                     "Program counter": 4,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 3,
+                    "Invalid instruction": false
                 }
             }
         ],
@@ -395,8 +454,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 4,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "11": [
@@ -404,6 +471,12 @@
                 "Fetch stage": {
                     "Program counter": 5,
                     "Raw instruction": "0x0140006f"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 4,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -495,7 +568,7 @@
                         "Is Func7 0b0000000": true,
                         "Is Func7 0b0000001": false,
                         "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
+                        "Packed immediate": 1039200,
                         "Use destination": true,
                         "Use source 1": false,
                         "Use source 2": false,
@@ -503,8 +576,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": false
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 5,
+                        "Invalid instruction": false
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "13": [
@@ -512,6 +593,12 @@
                 "Fetch stage": {
                     "Program counter": 10,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 5,
+                    "Invalid instruction": false
                 }
             }
         ],
@@ -537,8 +624,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 6,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "15": [
@@ -546,6 +641,12 @@
                 "Fetch stage": {
                     "Program counter": 11,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 6,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -571,8 +672,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 7,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "17": [
@@ -580,6 +689,12 @@
                 "Fetch stage": {
                     "Program counter": 12,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 7,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -605,8 +720,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 8,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "19": [
@@ -614,6 +737,12 @@
                 "Fetch stage": {
                     "Program counter": 13,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 8,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -639,8 +768,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 9,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "21": [
@@ -648,6 +785,12 @@
                 "Fetch stage": {
                     "Program counter": 14,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 9,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -673,8 +816,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 10,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "23": [
@@ -682,6 +833,12 @@
                 "Fetch stage": {
                     "Program counter": 15,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 10,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -707,8 +864,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 11,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "25": [
@@ -716,6 +881,12 @@
                 "Fetch stage": {
                     "Program counter": 16,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 11,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -741,8 +912,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 12,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "27": [
@@ -750,6 +929,12 @@
                 "Fetch stage": {
                     "Program counter": 17,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 12,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -775,8 +960,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 13,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "29": [
@@ -784,6 +977,12 @@
                 "Fetch stage": {
                     "Program counter": 18,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 13,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -809,8 +1008,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 14,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "31": [
@@ -818,6 +1025,12 @@
                 "Fetch stage": {
                     "Program counter": 19,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 14,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -843,8 +1056,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 15,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "33": [
@@ -852,6 +1073,12 @@
                 "Fetch stage": {
                     "Program counter": 20,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 15,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -877,8 +1104,16 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
+                    },
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 0,
+                        "Invalid instruction": true
                     }
                 }
+            },
+            {
+                "Commit stage": {}
             }
         ],
         "35": [
@@ -886,6 +1121,12 @@
                 "Fetch stage": {
                     "Program counter": 21,
                     "Raw instruction": "0x00000000"
+                }
+            },
+            {
+                "Commit stage": {
+                    "Queued token": 0,
+                    "Invalid instruction": true
                 }
             }
         ],
@@ -911,355 +1152,18 @@
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "37": [
-            {
-                "Fetch stage": {
-                    "Program counter": 22,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "38": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 23
                     },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 22,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                    "To commit": {
+                        "Add instruction to ROB": true,
+                        "Token": 1,
                         "Invalid instruction": true
                     }
                 }
-            }
-        ],
-        "39": [
+            },
             {
-                "Fetch stage": {
-                    "Program counter": 23,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "40": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 24
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 23,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "41": [
-            {
-                "Fetch stage": {
-                    "Program counter": 24,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "42": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 25
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 24,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "43": [
-            {
-                "Fetch stage": {
-                    "Program counter": 25,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "44": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 26
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 25,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "45": [
-            {
-                "Fetch stage": {
-                    "Program counter": 26,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "46": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 27
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 26,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "47": [
-            {
-                "Fetch stage": {
-                    "Program counter": 27,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "48": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 28
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 27,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "49": [
-            {
-                "Fetch stage": {
-                    "Program counter": 28,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "50": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 29
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 28,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "51": [
-            {
-                "Fetch stage": {
-                    "Program counter": 29,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "52": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 30
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 29,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "53": [
-            {
-                "Fetch stage": {
-                    "Program counter": 30,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "54": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 31
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 30,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "55": [
-            {
-                "Fetch stage": {
-                    "Program counter": 31,
-                    "Raw instruction": "0x00000000"
-                }
-            }
-        ],
-        "56": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 32
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 31,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    }
-                }
-            }
-        ],
-        "57": [
-            {
-                "Fetch stage": {
-                    "Program counter": 32,
-                    "Raw instruction": "0x00000000"
+                "Commit stage": {
+                    "Dequeued token": 0,
+                    "Invalid instruction": true
                 }
             }
         ]

@@ -9,7 +9,7 @@
 FetchStage::FetchStage() {}
 
 void FetchStage::interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode, bit_t* fetch_ran) {
-	#pragma HLS INLINE
+	#pragma HLS inline
 
 	bit_t do_smth = from_decode.has_next_pc;
 

@@ -9,11 +9,11 @@
 
 RegisterMap::RegisterMap() {
 	for (uint16_t id = 0; id < architectural_register_count; id++) {
-		#pragma HLS UNROLL
+		#pragma HLS unroll
 		map[id] = id;
 	}
 	for (uint16_t id = architectural_register_count; id < physical_register_count; id++) {
-		#pragma HLS UNROLL
+		#pragma HLS unroll
 		free_aliases.push_back(id);
 	}
 }
@@ -27,7 +27,8 @@ void RegisterMap::create_alias(const reg_t& id, physical_reg_t* alias, bit_t* bl
 		*blocking = true;
 	}
 	else {
-		physical_reg_t new_alias = free_aliases.pop();
+		physical_reg_t new_alias = free_aliases.first();
+		free_aliases.pop();
 		*alias = map[id] = new_alias;
 		*blocking = free_aliases.is_empty();
 	}

@@ -10,25 +10,22 @@
 
 #ifdef DBG_SYNTH
 void processor(memory_t memory, TW(large_bool) run, bit_t* stopped, DebugInfo* dbg) {
-	#pragma HLS INTERFACE s_axilite port=run
-	#pragma HLS INTERFACE s_axilite port=dbg
+	#pragma HLS interface s_axilite port=run
+	#pragma HLS interface s_axilite port=dbg
 #else
 void processor(memory_t memory, bit_t* stopped) {
 #endif
-	#pragma HLS INTERFACE s_axilite port=memory
-	#pragma HLS INTERFACE s_axilite port=stopped
-	#pragma HLS INTERFACE ap_ctrl_none port=return
+	#pragma HLS interface s_axilite port=memory
+	#pragma HLS interface s_axilite port=stopped
+	#pragma HLS interface ap_ctrl_none port=return
 
 	Pipeline pipeline;
 	word_t cycle = 0;
 	bit_t stop = false;
-	bit_t stop_pipeline = false;
 
 	while (!stop) {
-		#pragma HLS PIPELINE
-		// #pragma HLS DEPENDENCE variable=stop inter false
-		// #pragma HLS DEPENDENCE variable=stop intra false
-		stop = stop_pipeline;
+		#pragma HLS pipeline
+		#pragma HLS dependence variable=stop inter false
 
 		#ifdef DBG_SYNTH
 		if (*run) { // Waiting for the 'run' signal to be true to do a cycle
@@ -38,11 +35,11 @@ void processor(memory_t memory, bit_t* stopped) {
 			#endif // __SYNTHESIS__
 
 			#ifdef DBG_SYNTH
-			pipeline.interface(memory, &stop_pipeline, dbg);
+			pipeline.interface(memory, &stop, dbg);
 			dbg->cycle = cycle;
 			cycle++;
 			#else
-			pipeline.interface(memory, &stop_pipeline);
+			pipeline.interface(memory, &stop);
 			#endif
 
 		#ifdef DBG_SYNTH

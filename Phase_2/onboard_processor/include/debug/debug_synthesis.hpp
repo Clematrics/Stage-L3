@@ -15,6 +15,7 @@ struct DebugInfo {
 	FetchToDecode fetch_to_decode;
 	DecodeToFetch decode_to_fetch;
 	DecodeToIssue decode_to_issue;
+	DecodeToCommit decode_to_commit;
 	bit_t fetch_ran;
 	bit_t decode_ran;
 };

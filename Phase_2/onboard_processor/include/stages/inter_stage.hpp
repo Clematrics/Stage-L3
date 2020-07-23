@@ -36,3 +36,21 @@ struct DecodeToIssue {
 
 	bit_t              invalid_instruction; // If unknown instruction
 };
+
+struct DecodeToCommit {
+	bit_t               add_to_rob;
+	instruction_token_t token;
+	bit_t               invalid_instruction;
+};
+
+struct IssueToWriteBack {
+
+};
+
+struct WriteBackToIssue {
+
+};
+
+struct CommitToIssue {
+
+};

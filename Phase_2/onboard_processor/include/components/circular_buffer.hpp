@@ -3,7 +3,7 @@
 #include "common.hpp"
 #include "debug/debug.hpp"
 
-template<typename entry_t, int size, typename ptr_t = entry_t>
+template<typename entry_t, uint16_t size, typename ptr_t = entry_t, uint16_t initial_pos = 0>
 class CircularBuffer {
 	entry_t list[size];
 	ptr_t   bot;
@@ -12,11 +12,12 @@ class CircularBuffer {
 	bit_t   full;
 public:
 	CircularBuffer() {
-		bot = 0;
-		top = 0;
+		bot = initial_pos;
+		top = initial_pos;
 		empty = true;
 		full = false;
 	}
+
 	void push_back(entry_t entry) {
 		list[top] = entry;
 		top++;
@@ -24,19 +25,34 @@ public:
 		if (bot == top)
 			full = true;
 	}
-	entry_t pop() {
-		entry_t value = list[bot];
+
+	void pop() {
 		bot++;
 		full = false;
 		if (bot == top)
 			empty = true;
-		return value;
 	}
+
+	void push_and_pop(entry_t new_entry) {
+		list[top] = new_entry;
+		bot++;
+		top++;
+	}
+
+	entry_t first() {
+		return list[bot];
+	}
+
 	bit_t is_empty() {
 		return empty;
 	}
+
 	bit_t is_full() {
 		return full;
+	}
+
+	entry_t& operator[](uint16_t index) {
+		return list[index];
 	}
 
 	#ifndef __SYNTHESIS__
@@ -46,8 +62,8 @@ public:
 			array.push_back(list[i].to_uint());
 		return json({
 			{ "Empty", empty.to_bool() },
-			{ "Full", full.to_bool() },
-			{ "List", array }
+			{ "Full",  full.to_bool()  },
+			{ "List",  array           }
 		});
 	}
 	#endif // __SYNTHESIS__

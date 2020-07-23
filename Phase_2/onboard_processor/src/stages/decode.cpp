@@ -11,10 +11,12 @@
 using namespace Architecture::Type;
 using namespace Decoding;
 
-DecodeStage::DecodeStage() {}
+DecodeStage::DecodeStage() {
+	token = initial_token;
+}
 
-void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, bit_t* stop, bit_t* decode_ran) {
-	#pragma HLS INLINE
+void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit, bit_t* decode_ran) {
+	#pragma HLS inline
 
 	bit_t do_smth = from_fetch.has_fetched;
 
@@ -141,8 +143,6 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 			if (is_jmp_address_known) {
 				to_fetch->has_next_pc = !invalid_instruction;
 				to_fetch->next_pc     = from_fetch.pc + pc_offset;
-				if (to_fetch->next_pc == memory_words)
-					*stop = true;
 			}
 			else {
 				to_fetch->has_next_pc = false;
@@ -151,8 +151,6 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		else {
 			to_fetch->has_next_pc = true;
 			to_fetch->next_pc     = from_fetch.pc + 1;
-			if (to_fetch->next_pc == memory_words)
-				*stop = true;
 		}
 
 		bit_t blocked_register_map = false;
@@ -171,7 +169,10 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		if (use_dest) register_map.create_alias(dest, &to_issue->dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
 		to_issue->invalid_instruction     = invalid_instruction;
 
-		// TODO : write token of the instruction to ROB, and transmit token to issue
+		to_commit->add_to_rob          = true;
+		to_commit->token               = token;
+		to_commit->invalid_instruction = invalid_instruction;
+		token++;
 
 		#ifndef __SYNTHESIS__
 		Debugger::add_cycle_event({
@@ -180,25 +181,32 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 					{ "To fetch",
 						{
 							{ "Has a next pc", to_fetch->has_next_pc.to_bool() },
-							{ "Next pc", to_fetch->next_pc.to_uint() }
+							{ "Next pc",       to_fetch->next_pc.to_uint()     }
 						}
 					},
 					{ "To issue",
 						{
-							{ "Has decoded an instruction", to_issue->has_decoded_instruction.to_bool() },
-							{ "Program counter", to_issue->pc.to_uint() },
-							{ "Func 3", to_issue->func3.to_uint() },
-							{ "Is Func7 0b0000000", to_issue->is_func7_0b0000000.to_bool() },
-							{ "Is Func7 0b0000001", to_issue->is_func7_0b0000001.to_bool() },
-							{ "Is Func7 0b0100000", to_issue->is_func7_0b0100000.to_bool() },
-							{ "Packed immediate", unpack_immediate(type, to_issue->packed_immediate).to_uint() },
-							{ "Use destination", to_issue->use_dest.to_bool() },
-							{ "Use source 1", to_issue->use_src1.to_bool() },
-							{ "Use source 2", to_issue->use_src2.to_bool() },
-							{ "Physical destination", to_issue->dest.to_uint() },
-							{ "Physical source 1", to_issue->src1.to_uint() },
-							{ "Physical source 2", to_issue->src2.to_uint() },
-							{ "Invalid instruction", to_issue->invalid_instruction.to_bool() }
+							{ "Has decoded an instruction", to_issue->has_decoded_instruction.to_bool()                  },
+							{ "Program counter",            to_issue->pc.to_uint()                                       },
+							{ "Func 3",                     to_issue->func3.to_uint()                                    },
+							{ "Is Func7 0b0000000",         to_issue->is_func7_0b0000000.to_bool()                       },
+							{ "Is Func7 0b0000001",         to_issue->is_func7_0b0000001.to_bool()                       },
+							{ "Is Func7 0b0100000",         to_issue->is_func7_0b0100000.to_bool()                       },
+							{ "Packed immediate",           unpack_immediate(type, to_issue->packed_immediate).to_uint() },
+							{ "Use destination",            to_issue->use_dest.to_bool()                                 },
+							{ "Use source 1",               to_issue->use_src1.to_bool()                                 },
+							{ "Use source 2",               to_issue->use_src2.to_bool()                                 },
+							{ "Physical destination",       to_issue->dest.to_uint()                                     },
+							{ "Physical source 1",          to_issue->src1.to_uint()                                     },
+							{ "Physical source 2",          to_issue->src2.to_uint()                                     },
+							{ "Invalid instruction",        to_issue->invalid_instruction.to_bool()                      }
+						}
+					},
+					{ "To commit",
+						{
+							{ "Add instruction to ROB", to_commit->add_to_rob.to_bool()          },
+							{ "Token",                  to_commit->token.to_uint()               },
+							{ "Invalid instruction",    to_commit->invalid_instruction.to_bool() }
 						}
 					}
 				}
@@ -207,9 +215,9 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		#endif // __SYNTHESIS__
 	}
 	else {
-		to_fetch->has_next_pc = false;
+		to_fetch->has_next_pc             = false;
 		to_issue->has_decoded_instruction = false;
-		// TODO : send nothing to ROB
+		to_commit->add_to_rob             = false;
 	}
 	*decode_ran = do_smth;
 }
