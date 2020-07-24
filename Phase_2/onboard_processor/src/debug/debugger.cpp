@@ -27,7 +27,7 @@ void Debugger::add_cycle_event(const json object) {
 	json& current_cycle = report["Cycles"][std::to_string(cycles)];
 	current_cycle.push_back(object);
 
-	// std::cout << std::to_string(cycles) << " : " << object << '\n' << std::flush;
+	// std::cout << std::to_string(cycles) << " : " << std::setw(4) << object << '\n' << std::flush;
 }
 
 json Debugger::get_report() {

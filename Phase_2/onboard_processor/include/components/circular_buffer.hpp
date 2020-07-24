@@ -58,7 +58,7 @@ public:
 	#ifndef __SYNTHESIS__
 	operator json() {
 		json array = json::array();
-		for (uint32_t i = bot ; i != top ; i = (i + 1) % size)
+		for (uint32_t i = bot, do_loop = !empty ; i != top || do_loop ; i = (i + 1) % size, do_loop = false)
 			array.push_back(list[i].to_uint());
 		return json({
 			{ "Empty", empty.to_bool() },

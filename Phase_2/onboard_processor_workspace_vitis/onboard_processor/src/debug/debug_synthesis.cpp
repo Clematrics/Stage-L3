@@ -27,7 +27,7 @@
 
 void dumpDebugInfo(XProcessor* instance) {
 	std::cout <<
-	OBJECT(6, "",
+	OBJECT(8, "",
 		PAIR("cycle", XProcessor_Get_dbg_cycle_V(instance)),
 		PAIR("fetch_to_decode", OBJECT(3, "  ",
 			PAIR("has_fetched", static_cast<bool>(XProcessor_Get_dbg_fetch_to_decode_has_fetched_V(instance))),
@@ -52,7 +52,18 @@ void dumpDebugInfo(XProcessor* instance) {
 			PAIR("dest", XProcessor_Get_dbg_decode_to_issue_dest_V(instance)),
 			PAIR("src1", XProcessor_Get_dbg_decode_to_issue_src1_V(instance)),
 			PAIR("src2", XProcessor_Get_dbg_decode_to_issue_src2_V(instance)),
-			PAIR("invalid_instruction", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_invalid_instruction_V(instance)))
+			PAIR("invalid_instruction", static_cast<bool>(XProcessor_Get_dbg_decode_to_issue_invalid_V(instance)))
+		)),
+		PAIR("decode_to_commit", OBJECT(3, "  ",
+			PAIR("add_to_rob", static_cast<bool>(XProcessor_Get_dbg_decode_to_commit_add_to_rob_V(instance))),
+			PAIR("token", string_hex(XProcessor_Get_dbg_decode_to_commit_token_V(instance))),
+			PAIR("invalid", static_cast<bool>(XProcessor_Get_dbg_decode_to_commit_invalid_V(instance)))
+		)),
+		PAIR("commit_to_commit", OBJECT(4, "  ",
+			PAIR("has_next_pc", static_cast<bool>(XProcessor_Get_dbg_commit_to_commit_rob_was_empty_V(instance))),
+			PAIR("first_entry_token", string_hex(XProcessor_Get_dbg_commit_to_commit_previous_first_entry_token_V(instance))),
+			PAIR("first_entry_done", static_cast<bool>(XProcessor_Get_dbg_commit_to_commit_previous_first_entry_done_V(instance))),
+			PAIR("first_entry_invalid", static_cast<bool>(XProcessor_Get_dbg_commit_to_commit_previous_first_entry_invalid_V(instance)))
 		)),
 		PAIR("fetch_ran", static_cast<bool>(XProcessor_Get_dbg_fetch_ran_V(instance))),
 		PAIR("decode_ran", static_cast<bool>(XProcessor_Get_dbg_decode_ran_V(instance)))

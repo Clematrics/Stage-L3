@@ -4,7 +4,7 @@
 *    Header file for the issue stage
 **************************************************************************** */
 
-#include "inter_stage.hpp"
+#include "stage_structs.hpp"
 
 class IssueStage {
 	program_counter_t program_counter;

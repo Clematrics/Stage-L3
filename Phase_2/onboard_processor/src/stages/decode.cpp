@@ -167,11 +167,11 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		if (use_src1) register_map.get_alias(src1, &to_issue->src1);
 		if (use_src2) register_map.get_alias(src2, &to_issue->src2);
 		if (use_dest) register_map.create_alias(dest, &to_issue->dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
-		to_issue->invalid_instruction     = invalid_instruction;
+		to_issue->invalid                 = invalid_instruction;
 
-		to_commit->add_to_rob          = true;
-		to_commit->token               = token;
-		to_commit->invalid_instruction = invalid_instruction;
+		to_commit->add_to_rob = true;
+		to_commit->token      = token;
+		to_commit->invalid    = invalid_instruction;
 		token++;
 
 		#ifndef __SYNTHESIS__
@@ -199,14 +199,14 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 							{ "Physical destination",       to_issue->dest.to_uint()                                     },
 							{ "Physical source 1",          to_issue->src1.to_uint()                                     },
 							{ "Physical source 2",          to_issue->src2.to_uint()                                     },
-							{ "Invalid instruction",        to_issue->invalid_instruction.to_bool()                      }
+							{ "Invalid instruction",        to_issue->invalid.to_bool()                                  }
 						}
 					},
 					{ "To commit",
 						{
-							{ "Add instruction to ROB", to_commit->add_to_rob.to_bool()          },
-							{ "Token",                  to_commit->token.to_uint()               },
-							{ "Invalid instruction",    to_commit->invalid_instruction.to_bool() }
+							{ "Add instruction to ROB", to_commit->add_to_rob.to_bool() },
+							{ "Token",                  to_commit->token.to_uint()      },
+							{ "Invalid instruction",    to_commit->invalid.to_bool()    }
 						}
 					}
 				}

@@ -4,7 +4,7 @@
 *    Header file for the fetch stage
 **************************************************************************** */
 
-#include "inter_stage.hpp"
+#include "stage_structs.hpp"
 
 class FetchStage {
 	program_counter_t program_counter;

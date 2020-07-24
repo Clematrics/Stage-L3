@@ -6,7 +6,7 @@
 
 #include "common.hpp"
 #include "components/register_map.hpp"
-#include "inter_stage.hpp"
+#include "stage_structs.hpp"
 
 class DecodeStage {
 	RegisterMap         register_map;

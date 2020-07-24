@@ -7,7 +7,7 @@
 
 #include "common.hpp"
 #include "config.hpp"
-#include "stages/inter_stage.hpp"
+#include "stages/stage_structs.hpp"
 
 #ifdef DBG_SYNTH
 struct DebugInfo {
@@ -16,6 +16,7 @@ struct DebugInfo {
 	DecodeToFetch decode_to_fetch;
 	DecodeToIssue decode_to_issue;
 	DecodeToCommit decode_to_commit;
+	CommitToCommit commit_to_commit;
 	bit_t fetch_ran;
 	bit_t decode_ran;
 };

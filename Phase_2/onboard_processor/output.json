@@ -9,7 +9,15 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [],
+                    "To commit": {
+                        "ROB was empty": true,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "2": [
@@ -120,7 +128,15 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [],
+                    "To commit": {
+                        "ROB was empty": true,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "3": [
@@ -132,8 +148,24 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
                     "Queued token": 0,
-                    "Invalid instruction": false
+                    "Invalid instruction": false,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -244,7 +276,24 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "5": [
@@ -256,8 +305,32 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
                     "Queued token": 1,
-                    "Invalid instruction": false
+                    "Invalid instruction": false,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -292,7 +365,32 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "7": [
@@ -304,8 +402,40 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
                     "Queued token": 2,
-                    "Invalid instruction": false
+                    "Invalid instruction": false,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -415,7 +545,40 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "9": [
@@ -427,8 +590,48 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
                     "Queued token": 3,
-                    "Invalid instruction": false
+                    "Invalid instruction": false,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -463,7 +666,48 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "11": [
@@ -475,8 +719,56 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 4,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -568,7 +860,7 @@
                         "Is Func7 0b0000000": true,
                         "Is Func7 0b0000001": false,
                         "Is Func7 0b0100000": false,
-                        "Packed immediate": 1039200,
+                        "Packed immediate": 4294660704,
                         "Use destination": true,
                         "Use source 1": false,
                         "Use source 2": false,
@@ -585,7 +877,56 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "13": [
@@ -597,8 +938,64 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
                     "Queued token": 5,
-                    "Invalid instruction": false
+                    "Invalid instruction": false,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -633,7 +1030,64 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "15": [
@@ -645,8 +1099,72 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 6,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -681,7 +1199,72 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "17": [
@@ -693,8 +1276,80 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 7,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -729,7 +1384,80 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "19": [
@@ -741,8 +1469,88 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 8,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -777,7 +1585,88 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "21": [
@@ -789,8 +1678,96 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 9,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -825,7 +1802,96 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "23": [
@@ -837,8 +1903,104 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 10,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -873,7 +2035,104 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "25": [
@@ -885,8 +2144,112 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 11,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -921,7 +2284,112 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "27": [
@@ -933,8 +2401,120 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "12",
+                            {
+                                "Token": 12,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 12,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -969,7 +2549,120 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "12",
+                            {
+                                "Token": 12,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "29": [
@@ -981,8 +2674,128 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "12",
+                            {
+                                "Token": 12,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "13",
+                            {
+                                "Token": 13,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 13,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -1017,7 +2830,128 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "12",
+                            {
+                                "Token": 12,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "13",
+                            {
+                                "Token": 13,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "31": [
@@ -1029,8 +2963,136 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "12",
+                            {
+                                "Token": 12,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "13",
+                            {
+                                "Token": 13,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "14",
+                            {
+                                "Token": 14,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 14,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -1065,7 +3127,136 @@
                 }
             },
             {
-                "Commit stage": {}
+                "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "12",
+                            {
+                                "Token": 12,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "13",
+                            {
+                                "Token": 13,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "14",
+                            {
+                                "Token": 14,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
+                }
             }
         ],
         "33": [
@@ -1077,8 +3268,144 @@
             },
             {
                 "Commit stage": {
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "12",
+                            {
+                                "Token": 12,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "13",
+                            {
+                                "Token": 13,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "14",
+                            {
+                                "Token": 14,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "15",
+                            {
+                                "Token": 15,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "Queued token": 15,
-                    "Invalid instruction": true
+                    "Invalid instruction": true,
+                    "To commit": {
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
+                    }
                 }
             }
         ],
@@ -1113,57 +3440,143 @@
                 }
             },
             {
-                "Commit stage": {}
-            }
-        ],
-        "35": [
-            {
-                "Fetch stage": {
-                    "Program counter": 21,
-                    "Raw instruction": "0x00000000"
-                }
-            },
-            {
                 "Commit stage": {
-                    "Queued token": 0,
-                    "Invalid instruction": true
-                }
-            }
-        ],
-        "36": [
-            {
-                "Decode stage": {
-                    "To fetch": {
-                        "Has a next pc": true,
-                        "Next pc": 22
-                    },
-                    "To issue": {
-                        "Has decoded an instruction": true,
-                        "Program counter": 21,
-                        "Func 3": 0,
-                        "Is Func7 0b0000000": true,
-                        "Is Func7 0b0000001": false,
-                        "Is Func7 0b0100000": false,
-                        "Packed immediate": 0,
-                        "Use destination": false,
-                        "Use source 1": false,
-                        "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
-                        "Invalid instruction": true
-                    },
+                    "ROB": [
+                        [
+                            "0",
+                            {
+                                "Token": 0,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "1",
+                            {
+                                "Token": 1,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "2",
+                            {
+                                "Token": 2,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "3",
+                            {
+                                "Token": 3,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "4",
+                            {
+                                "Token": 4,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "5",
+                            {
+                                "Token": 5,
+                                "Done": false,
+                                "Invalid": false
+                            }
+                        ],
+                        [
+                            "6",
+                            {
+                                "Token": 6,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "7",
+                            {
+                                "Token": 7,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "8",
+                            {
+                                "Token": 8,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "9",
+                            {
+                                "Token": 9,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "10",
+                            {
+                                "Token": 10,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "11",
+                            {
+                                "Token": 11,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "12",
+                            {
+                                "Token": 12,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "13",
+                            {
+                                "Token": 13,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "14",
+                            {
+                                "Token": 14,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ],
+                        [
+                            "15",
+                            {
+                                "Token": 15,
+                                "Done": true,
+                                "Invalid": true
+                            }
+                        ]
+                    ],
                     "To commit": {
-                        "Add instruction to ROB": true,
-                        "Token": 1,
-                        "Invalid instruction": true
+                        "ROB was empty": false,
+                        "First entry token": 0,
+                        "First entry is done": false,
+                        "First entry is invalid": false
                     }
-                }
-            },
-            {
-                "Commit stage": {
-                    "Dequeued token": 0,
-                    "Invalid instruction": true
                 }
             }
         ]

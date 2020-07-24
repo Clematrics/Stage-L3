@@ -2,10 +2,25 @@
 
 /* ****************************************************************************
 *    Header file which defines the structures used by stages to communicate
+*    and structures that are used by stages to store information
 **************************************************************************** */
 
 #include "common.hpp"
 #include "architecture/decoding.hpp"
+
+/* ****************************************************************************
+*    Intra-stage structures
+**************************************************************************** */
+
+struct ReorderBufferEntry {
+	instruction_token_t token; // is not useful, since the token is the same as the entry's index in the ROB
+	bit_t               done;
+	bit_t               invalid;
+};
+
+/* ****************************************************************************
+*    Inter-stage structures
+**************************************************************************** */
 
 struct FetchToDecode {
 	bit_t             has_fetched;
@@ -34,13 +49,13 @@ struct DecodeToIssue {
 	physical_reg_t     src1;
 	physical_reg_t     src2;
 
-	bit_t              invalid_instruction; // If unknown instruction
+	bit_t              invalid; // If unknown instruction
 };
 
 struct DecodeToCommit {
 	bit_t               add_to_rob;
 	instruction_token_t token;
-	bit_t               invalid_instruction;
+	bit_t               invalid;
 };
 
 struct IssueToWriteBack {
@@ -49,6 +64,11 @@ struct IssueToWriteBack {
 
 struct WriteBackToIssue {
 
+};
+
+struct CommitToCommit {
+	bit_t              rob_was_empty;
+	ReorderBufferEntry previous_first_entry;
 };
 
 struct CommitToIssue {
