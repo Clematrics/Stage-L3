@@ -14,8 +14,8 @@
                     "To commit": {
                         "ROB was empty": true,
                         "First entry token": 0,
-                        "First entry is done": false,
-                        "First entry is invalid": false
+                        "First entry is done": true,
+                        "First entry is invalid": true
                     }
                 }
             }
@@ -133,8 +133,8 @@
                     "To commit": {
                         "ROB was empty": true,
                         "First entry token": 0,
-                        "First entry is done": false,
-                        "First entry is invalid": false
+                        "First entry is done": true,
+                        "First entry is invalid": true
                     }
                 }
             }
@@ -860,7 +860,7 @@
                         "Is Func7 0b0000000": true,
                         "Is Func7 0b0000001": false,
                         "Is Func7 0b0100000": false,
-                        "Packed immediate": 4294660704,
+                        "Packed immediate": 131080,
                         "Use destination": true,
                         "Use source 1": false,
                         "Use source 2": false,

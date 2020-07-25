@@ -20,12 +20,6 @@ class CommitStage {
 	void reorder_buffer_pop();
 	void reorder_buffer_push_and_pop(ReorderBufferEntry new_entry);
 	ReorderBufferEntry reorder_buffer_first();
-	#ifndef __SYNTHESIS__
-	json reorder_buffer_as_json();
-	#endif // __SYNTHESIS__
-
-	// this stream contains at his head a copy of the first entry of the reorder buffer at the end of the cycle
-	// this avoids to access dynamically the ROB at the beginning of the cycle and to get a RAW dependency
 
 public:
 	CommitStage();

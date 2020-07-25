@@ -37,28 +37,9 @@ void CommitStage::reorder_buffer_push_and_pop(ReorderBufferEntry new_entry) {
 	reorder_buffer_top++;
 }
 
-#ifndef __SYNTHESIS__
-json CommitStage::reorder_buffer_as_json() {
-	json array = json::array();
-	for (uint32_t i = reorder_buffer_bot ; i != reorder_buffer_top ; i = (i + 1) % reorder_buffer_count)
-		array.push_back({
-			{ "Token",               reorder_buffer[i].token.to_uint()   },
-			{ "Instruction done",    reorder_buffer[i].done.to_bool()    },
-			{ "Invalid instruction", reorder_buffer[i].invalid.to_bool() }
-		});
-	return json({
-		{ "Empty", reorder_buffer_empty.to_bool() },
-		{ "Full",  reorder_buffer_empty.to_bool() },
-		{ "List",  array           }
-	});
-}
-#endif // __SYNTHESIS__
-
 void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_commit, CommitToCommit* to_commit, bit_t* stop, bit_t* commit_ran) {
 	#pragma HLS inline
-
-	// Anticipate the load of the second entry to replace the first entry if this one is pulled from the ROB
-	ReorderBufferEntry second_entry = reorder_buffer[reorder_buffer_bot + 1];
+	#pragma HLS array_partition variable=reorder_buffer complete
 
 	ReorderBufferEntry first_entry = from_commit.previous_first_entry; // Retrieve the copy of the first entry of the ROB.
 	ReorderBufferEntry new_entry; // Preparation of a potential new entry.
@@ -75,7 +56,7 @@ void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_co
 	bit_t can_dequeue = !from_commit.rob_was_empty && first_entry.done;
 	bit_t can_queue   = from_decode.add_to_rob;
 
-	if (reorder_buffer_full)
+	if (reorder_buffer_full) // TODO : remove
 		*stop = true;
 	if (can_dequeue) {
 		// if (first_entry.invalid)
@@ -98,7 +79,7 @@ void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_co
 	}
 
 	to_commit->rob_was_empty        = reorder_buffer_empty;
-	to_commit->previous_first_entry = can_dequeue ? second_entry : first_entry; // Create the copy of the first entry of the ROB.
+	to_commit->previous_first_entry = reorder_buffer[reorder_buffer_bot]; // Create the copy of the first entry of the ROB.
 
 	// TODO : block if the ROB is full
 

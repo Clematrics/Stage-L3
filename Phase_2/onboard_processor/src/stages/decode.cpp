@@ -6,6 +6,7 @@
 
 #include "architecture/decoding.hpp"
 #include "architecture/immediate_packing.hpp"
+#include "architecture/architecture_helpers.hpp"
 #include "debug/debug.hpp"
 
 using namespace Architecture::Type;
@@ -13,10 +14,113 @@ using namespace Decoding;
 
 DecodeStage::DecodeStage() {
 	token = initial_token;
+
+	// Initialization of the register map
+	for (uint16_t id = 0; id < architectural_register_count; id++) {
+		#pragma HLS unroll
+		register_map[id] = id;
+	}
+
+	// Initialization of the free aliases
+	for (uint16_t id = architectural_register_count; id < physical_register_count; id++) {
+		#pragma HLS unroll
+		free_aliases[id - architectural_register_count] = id;
+		free_aliases_empty = false;
+	}
+	free_aliases_top = physical_register_count - architectural_register_count;
+	if (free_aliases_bot == free_aliases_top)
+		free_aliases_full = true;
+}
+
+void DecodeStage::free_aliases_push_back(physical_reg_t entry) {
+	#pragma HLS inline
+
+	free_aliases[free_aliases_top] = entry;
+	free_aliases_top++;
+	free_aliases_empty = false;
+	if (free_aliases_bot == free_aliases_top)
+		free_aliases_full = true;
+}
+
+void DecodeStage::free_aliases_pop() {
+	#pragma HLS inline
+
+	free_aliases_bot++;
+	free_aliases_full = false;
+	if (free_aliases_bot == free_aliases_top)
+		free_aliases_empty = true;
+}
+
+void DecodeStage::get_register_alias(const reg_t& id, physical_reg_t* alias) {
+	#pragma HLS inline
+
+	*alias = register_map[id];
+}
+
+void DecodeStage::create_register_alias(const reg_t& id, physical_reg_t* alias, bit_t* blocking) {
+	#pragma HLS inline
+
+	if (free_aliases_empty) {
+		*blocking = true;
+	}
+	else {
+		physical_reg_t new_alias = free_aliases[free_aliases_bot];
+		free_aliases_pop();
+		*alias = register_map[id] = new_alias;
+		*blocking = free_aliases_empty;
+	}
+
+	#ifndef __SYNTHESIS__
+	json json_map = json::object();
+	for (uint16_t id = 0 ; id < architectural_register_count ; id++)
+		json_map.push_back({ to_string(static_cast<reg_t>(id)), register_map[id].to_uint() });
+	json array = json::array();
+	for (uint32_t i = free_aliases_bot, do_loop = !free_aliases_empty ; i != free_aliases_top || do_loop ; i = (i + 1) % physical_register_count, do_loop = false)
+		array.push_back(free_aliases[i].to_uint());
+	Debugger::add_cycle_event({
+		{ "Creating alias",
+			{
+				{ "Architectural register",    to_string(id)    },
+				{ "Physical register created", alias->to_uint() },
+				{ "Current mapping",           json_map         },
+				{ "Free registers", {
+					{ "Empty", free_aliases_empty.to_bool() },
+					{ "Full",  free_aliases_full.to_bool()  },
+					{ "List",  array                        }
+				} }
+			}
+		}
+	});
+	#endif // __SYNTHESIS__
+}
+
+void DecodeStage::free_register_alias(const physical_reg_t& id) {
+	#pragma HLS inline
+	free_aliases_push_back(id);
+
+	#ifndef __SYNTHESIS__
+	json array = json::array();
+	for (uint32_t i = free_aliases_bot, do_loop = !free_aliases_empty ; i != free_aliases_top || do_loop ; i = (i + 1) % physical_register_count, do_loop = false)
+		array.push_back(free_aliases[i].to_uint());
+	Debugger::add_cycle_event({
+		{ "Freeing alias",
+			{
+				{ "Architectural register", to_string(id) },
+				{ "Free registers", {
+					{ "Empty", free_aliases_empty.to_bool() },
+					{ "Full",  free_aliases_full.to_bool()  },
+					{ "List",  array                        }
+				} }
+			}
+		}
+	});
+	#endif // __SYNTHESIS__
 }
 
 void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit, bit_t* decode_ran) {
 	#pragma HLS inline
+	#pragma array_partition variable=register_map complete
+	#pragma array_partition variable=free_aliases complete
 
 	bit_t do_smth = from_fetch.has_fetched;
 
@@ -90,9 +194,9 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		program_counter_t  pc_offset;
 		bit_t              invalid_instruction = false;
 
-		bit_t use_dest;
-		bit_t use_src1;
-		bit_t use_src2;
+		bit_t use_dest = false;
+		bit_t use_src1 = false;
+		bit_t use_src2 = false;
 
 		switch (type) {
 		case Architecture::Type::R:
@@ -164,9 +268,9 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		to_issue->use_dest                = use_dest;
 		to_issue->use_src1                = use_src1;
 		to_issue->use_src2                = use_src2;
-		if (use_src1) register_map.get_alias(src1, &to_issue->src1);
-		if (use_src2) register_map.get_alias(src2, &to_issue->src2);
-		if (use_dest) register_map.create_alias(dest, &to_issue->dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
+		if (use_src1) get_register_alias(src1, &to_issue->src1);
+		if (use_src2) get_register_alias(src2, &to_issue->src2);
+		if (use_dest) create_register_alias(dest, &to_issue->dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
 		to_issue->invalid                 = invalid_instruction;
 
 		to_commit->add_to_rob = true;
