@@ -37,11 +37,14 @@ class Pipeline {
 	CommitStage commit_stage;
 
 	// Inter stage structures
-	DECL_IS(FetchToDecode,  fetch_to_decode);
-	DECL_IS(DecodeToFetch,  decode_to_fetch);
-	DECL_IS(DecodeToIssue,  decode_to_issue);
-	DECL_IS(DecodeToCommit, decode_to_commit);
-	DECL_IS(CommitToCommit, commit_to_commit);
+	DECL_IS(FetchToDecode,    fetch_to_decode);
+	DECL_IS(DecodeToFetch,    decode_to_fetch);
+	DECL_IS(DecodeToIssue,    decode_to_issue);
+	DECL_IS(DecodeToCommit,   decode_to_commit);
+	DECL_IS(IssueToWriteBack, issue_to_write_back);
+	DECL_IS(WriteBackToIssue, write_back_to_issue);
+	DECL_IS(CommitToIssue,    commit_to_issue);
+	DECL_IS(CommitToCommit,   commit_to_commit);
 public:
 	Pipeline();
 

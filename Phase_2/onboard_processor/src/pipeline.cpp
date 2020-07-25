@@ -36,6 +36,7 @@ void Pipeline::interface(memory_t memory, bit_t* stop) {
 
 	fetch_stage. interface(memory, IS_IN(decode_to_fetch), &IS_OUT(fetch_to_decode), &fetch_ran);
 	decode_stage.interface(IS_IN(fetch_to_decode), &IS_OUT(decode_to_fetch), &IS_OUT(decode_to_issue), &IS_OUT(decode_to_commit), &decode_ran);
+	issue_stage. interface(IS_IN(decode_to_issue), IS_IN(write_back_to_issue), IS_IN(commit_to_issue), &IS_OUT(issue_to_write_back), &issue_ran);
 	commit_stage.interface(IS_IN(decode_to_commit), IS_IN(commit_to_commit), &IS_OUT(commit_to_commit), stop, &commit_ran);
 
 	// For C-simulation: transfer of the inter-stage structures from the
@@ -44,6 +45,9 @@ void Pipeline::interface(memory_t memory, bit_t* stop) {
 	TRANSFER_IS(decode_to_fetch);
 	TRANSFER_IS(decode_to_issue);
 	TRANSFER_IS(decode_to_commit);
+	TRANSFER_IS(issue_to_write_back);
+	TRANSFER_IS(write_back_to_issue);
+	TRANSFER_IS(commit_to_issue);
 	TRANSFER_IS(commit_to_commit);
 
 	#ifdef DBG_SYNTH

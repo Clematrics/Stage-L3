@@ -19,7 +19,6 @@ class CommitStage {
 	void reorder_buffer_push_back(ReorderBufferEntry entry);
 	void reorder_buffer_pop();
 	void reorder_buffer_push_and_pop(ReorderBufferEntry new_entry);
-	ReorderBufferEntry reorder_buffer_first();
 
 public:
 	CommitStage();

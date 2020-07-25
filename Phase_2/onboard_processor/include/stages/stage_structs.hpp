@@ -12,6 +12,16 @@
 *    Intra-stage structures
 **************************************************************************** */
 
+struct IssueTableEntry {
+	bit_t          used;
+	bit_t          use_src1;
+	bit_t          use_src2;
+	bit_t          src1_ready;
+	bit_t          src2_ready;
+	physical_reg_t src1;
+	physical_reg_t src2;
+};
+
 struct ReorderBufferEntry {
 	instruction_token_t token; // is not useful, since the token is the same as the entry's index in the ROB
 	bit_t               done;
@@ -63,7 +73,9 @@ struct IssueToWriteBack {
 };
 
 struct WriteBackToIssue {
-
+	bool           has_a_src_ready;
+	physical_reg_t src_ready;
+	word_t         result;
 };
 
 struct CommitToCommit {

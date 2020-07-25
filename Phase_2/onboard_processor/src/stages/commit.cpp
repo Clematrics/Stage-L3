@@ -67,8 +67,8 @@ void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_co
 	/* There are four possible operations
 	* operation = 0b00 -> nothing to do with the ROB
 	* operation = 0b01 -> only dequeue from the ROB
-	* operation = 0b00 -> only queue into the ROB
-	* operation = 0b00 -> queue and dequeue simultaneously
+	* operation = 0b10 -> only queue into the ROB
+	* operation = 0b11 -> queue and dequeue simultaneously
 	*/
 	ap_uint<2> operation = (can_queue, can_dequeue);
 	switch (operation) {
