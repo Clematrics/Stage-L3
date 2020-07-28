@@ -9,13 +9,38 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": false,
+                    "Issue table": [],
+                    "Free entries": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
                     "ROB": [],
                     "To commit": {
                         "ROB was empty": true,
                         "First entry token": 0,
-                        "First entry is done": true,
-                        "First entry is invalid": true
+                        "First entry is done": false,
+                        "First entry is invalid": false
                     }
                 }
             }
@@ -24,13 +49,13 @@
             {
                 "Creating alias": {
                     "Architectural register": "tp",
-                    "Physical register created": 32,
+                    "Physical register created": 37,
                     "Current mapping": {
                         "zero": 0,
                         "ra": 1,
                         "sp": 2,
                         "gp": 3,
-                        "tp": 32,
+                        "tp": 37,
                         "t0": 5,
                         "t1": 6,
                         "t2": 7,
@@ -63,11 +88,6 @@
                         "Empty": false,
                         "Full": false,
                         "List": [
-                            33,
-                            34,
-                            35,
-                            36,
-                            37,
                             38,
                             39,
                             40,
@@ -115,7 +135,7 @@
                         "Use destination": true,
                         "Use source 1": true,
                         "Use source 2": true,
-                        "Physical destination": 32,
+                        "Physical destination": 37,
                         "Physical source 1": 5,
                         "Physical source 2": 19,
                         "Invalid instruction": false
@@ -128,13 +148,38 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": false,
+                    "Issue table": [],
+                    "Free entries": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
                     "ROB": [],
                     "To commit": {
                         "ROB was empty": true,
                         "First entry token": 0,
-                        "First entry is done": true,
-                        "First entry is invalid": true
+                        "First entry is done": false,
+                        "First entry is invalid": false
                     }
                 }
             }
@@ -147,7 +192,49 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        }
+                    ],
+                    "Free entries": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 0,
+                    "Invalid instruction": false,
                     "ROB": [
                         [
                             "0",
@@ -158,8 +245,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 0,
-                    "Invalid instruction": false,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -173,13 +258,13 @@
             {
                 "Creating alias": {
                     "Architectural register": "zero",
-                    "Physical register created": 33,
+                    "Physical register created": 38,
                     "Current mapping": {
-                        "zero": 33,
+                        "zero": 38,
                         "ra": 1,
                         "sp": 2,
                         "gp": 3,
-                        "tp": 32,
+                        "tp": 37,
                         "t0": 5,
                         "t1": 6,
                         "t2": 7,
@@ -212,11 +297,6 @@
                         "Empty": false,
                         "Full": false,
                         "List": [
-                            34,
-                            35,
-                            36,
-                            37,
-                            38,
                             39,
                             40,
                             41,
@@ -263,9 +343,9 @@
                         "Use destination": true,
                         "Use source 1": true,
                         "Use source 2": false,
-                        "Physical destination": 33,
+                        "Physical destination": 38,
                         "Physical source 1": 9,
-                        "Physical source 2": 19,
+                        "Physical source 2": 32,
                         "Invalid instruction": false
                     },
                     "To commit": {
@@ -273,6 +353,46 @@
                         "Token": 1,
                         "Invalid instruction": false
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        }
+                    ],
+                    "Free entries": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -304,7 +424,63 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        }
+                    ],
+                    "Free entries": [
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 1,
+                    "Invalid instruction": false,
                     "ROB": [
                         [
                             "0",
@@ -323,8 +499,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 1,
-                    "Invalid instruction": false,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -352,7 +526,7 @@
                         "Use destination": false,
                         "Use source 1": true,
                         "Use source 2": true,
-                        "Physical destination": 33,
+                        "Physical destination": 5,
                         "Physical source 1": 8,
                         "Physical source 2": 2,
                         "Invalid instruction": false
@@ -362,6 +536,60 @@
                         "Token": 2,
                         "Invalid instruction": false
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        }
+                    ],
+                    "Free entries": [
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -401,7 +629,77 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 2,
+                    "Invalid instruction": false,
                     "ROB": [
                         [
                             "0",
@@ -428,8 +726,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 2,
-                    "Invalid instruction": false,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -443,13 +739,13 @@
             {
                 "Creating alias": {
                     "Architectural register": "t6",
-                    "Physical register created": 34,
+                    "Physical register created": 39,
                     "Current mapping": {
-                        "zero": 33,
+                        "zero": 38,
                         "ra": 1,
                         "sp": 2,
                         "gp": 3,
-                        "tp": 32,
+                        "tp": 37,
                         "t0": 5,
                         "t1": 6,
                         "t2": 7,
@@ -476,17 +772,12 @@
                         "t3": 28,
                         "t4": 29,
                         "t5": 30,
-                        "t6": 34
+                        "t6": 39
                     },
                     "Free registers": {
                         "Empty": false,
                         "Full": false,
                         "List": [
-                            35,
-                            36,
-                            37,
-                            38,
-                            39,
                             40,
                             41,
                             42,
@@ -532,9 +823,9 @@
                         "Use destination": true,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 34,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 39,
+                        "Physical source 1": 37,
+                        "Physical source 2": 32,
                         "Invalid instruction": false
                     },
                     "To commit": {
@@ -542,6 +833,74 @@
                         "Token": 3,
                         "Invalid instruction": false
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -589,7 +948,91 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 3,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 0,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 37,
+                            "src2": 32
+                        }
+                    ],
+                    "Free entries": [
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 3,
+                    "Invalid instruction": false,
                     "ROB": [
                         [
                             "0",
@@ -624,8 +1067,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 3,
-                    "Invalid instruction": false,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -653,9 +1094,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 34,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 60,
+                        "Physical source 1": 29,
+                        "Physical source 2": 16,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -663,6 +1104,73 @@
                         "Token": 4,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -718,7 +1226,90 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 4,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 29,
+                            "src2": 16
+                        }
+                    ],
+                    "Free entries": [
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 4,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -761,8 +1352,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 4,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -776,13 +1365,13 @@
             {
                 "Creating alias": {
                     "Architectural register": "zero",
-                    "Physical register created": 35,
+                    "Physical register created": 40,
                     "Current mapping": {
-                        "zero": 35,
+                        "zero": 40,
                         "ra": 1,
                         "sp": 2,
                         "gp": 3,
-                        "tp": 32,
+                        "tp": 37,
                         "t0": 5,
                         "t1": 6,
                         "t2": 7,
@@ -809,17 +1398,12 @@
                         "t3": 28,
                         "t4": 29,
                         "t5": 30,
-                        "t6": 34
+                        "t6": 39
                     },
                     "Free registers": {
                         "Empty": false,
                         "Full": false,
                         "List": [
-                            36,
-                            37,
-                            38,
-                            39,
-                            40,
                             41,
                             42,
                             43,
@@ -860,13 +1444,13 @@
                         "Is Func7 0b0000000": true,
                         "Is Func7 0b0000001": false,
                         "Is Func7 0b0100000": false,
-                        "Packed immediate": 131080,
+                        "Packed immediate": 4294311936,
                         "Use destination": true,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 40,
+                        "Physical source 1": 29,
+                        "Physical source 2": 16,
                         "Invalid instruction": false
                     },
                     "To commit": {
@@ -874,6 +1458,72 @@
                         "Token": 5,
                         "Invalid instruction": false
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -937,7 +1587,89 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 5,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 29,
+                            "src2": 16
+                        }
+                    ],
+                    "Free entries": [
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 5,
+                    "Invalid instruction": false,
                     "ROB": [
                         [
                             "0",
@@ -988,8 +1720,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 5,
-                    "Invalid instruction": false,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -1017,9 +1747,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 60,
+                        "Physical source 1": 29,
+                        "Physical source 2": 16,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -1027,6 +1757,71 @@
                         "Token": 6,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -1098,7 +1893,88 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 10,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 29,
+                            "src2": 16
+                        }
+                    ],
+                    "Free entries": [
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 6,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -1157,8 +2033,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 6,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -1186,9 +2060,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 60,
+                        "Physical source 1": 29,
+                        "Physical source 2": 16,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -1196,6 +2070,70 @@
                         "Token": 7,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -1275,7 +2213,87 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 11,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 29,
+                            "src2": 16
+                        }
+                    ],
+                    "Free entries": [
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 7,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -1342,8 +2360,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 7,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -1371,9 +2387,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 5,
+                        "Physical source 1": 37,
+                        "Physical source 2": 32,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -1381,6 +2397,69 @@
                         "Token": 8,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -1468,7 +2547,86 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 12,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 37,
+                            "src2": 32
+                        }
+                    ],
+                    "Free entries": [
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 8,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -1543,8 +2701,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 8,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -1572,9 +2728,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 5,
+                        "Physical source 1": 37,
+                        "Physical source 2": 32,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -1582,6 +2738,68 @@
                         "Token": 9,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -1677,7 +2895,85 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 13,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 37,
+                            "src2": 32
+                        }
+                    ],
+                    "Free entries": [
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 9,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -1760,8 +3056,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 9,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -1789,9 +3083,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 62,
+                        "Physical source 1": 14,
+                        "Physical source 2": 48,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -1799,6 +3093,67 @@
                         "Token": 10,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -1902,7 +3257,84 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 14,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 14,
+                            "src2": 48
+                        }
+                    ],
+                    "Free entries": [
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 10,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -1993,8 +3425,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 10,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -2022,9 +3452,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 62,
+                        "Physical source 1": 14,
+                        "Physical source 2": 48,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -2032,6 +3462,66 @@
                         "Token": 11,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -2143,7 +3633,83 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 15,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 14,
+                            "src2": 48
+                        }
+                    ],
+                    "Free entries": [
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 11,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -2242,8 +3808,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 11,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -2271,9 +3835,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 62,
+                        "Physical source 1": 14,
+                        "Physical source 2": 48,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -2281,6 +3845,65 @@
                         "Token": 12,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        12,
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -2400,7 +4023,82 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 16,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 14,
+                            "src2": 48
+                        }
+                    ],
+                    "Free entries": [
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 12,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -2507,8 +4205,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 12,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -2536,9 +4232,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 62,
+                        "Physical source 1": 14,
+                        "Physical source 2": 48,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -2546,6 +4242,64 @@
                         "Token": 13,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        13,
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -2673,7 +4427,81 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 17,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 14,
+                            "src2": 48
+                        }
+                    ],
+                    "Free entries": [
+                        14,
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 13,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -2788,8 +4616,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 13,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -2817,9 +4643,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 62,
+                        "Physical source 1": 14,
+                        "Physical source 2": 48,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -2827,6 +4653,63 @@
                         "Token": 14,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        14,
+                        15
+                    ]
                 }
             },
             {
@@ -2962,7 +4845,80 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 18,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 14,
+                            "src2": 48
+                        }
+                    ],
+                    "Free entries": [
+                        15
+                    ]
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 14,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -3085,8 +5041,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 14,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -3114,9 +5068,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 5,
+                        "Physical source 1": 37,
+                        "Physical source 2": 32,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -3124,6 +5078,62 @@
                         "Token": 15,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": [
+                        15
+                    ]
                 }
             },
             {
@@ -3267,7 +5277,78 @@
                 }
             },
             {
+                "Issue stage": {
+                    "Entry allocated": true,
+                    "Entry deallocated": false,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        },
+                        {
+                            "used": true,
+                            "pc": 19,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 720896,
+                            "use_src1": false,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 37,
+                            "src2": 32
+                        }
+                    ],
+                    "Free entries": []
+                }
+            },
+            {
                 "Commit stage": {
+                    "Queued token": 15,
+                    "Invalid instruction": true,
                     "ROB": [
                         [
                             "0",
@@ -3398,8 +5479,6 @@
                             }
                         ]
                     ],
-                    "Queued token": 15,
-                    "Invalid instruction": true,
                     "To commit": {
                         "ROB was empty": false,
                         "First entry token": 0,
@@ -3427,9 +5506,9 @@
                         "Use destination": false,
                         "Use source 1": false,
                         "Use source 2": false,
-                        "Physical destination": 35,
-                        "Physical source 1": 8,
-                        "Physical source 2": 2,
+                        "Physical destination": 1,
+                        "Physical source 1": 3,
+                        "Physical source 2": 32,
                         "Invalid instruction": true
                     },
                     "To commit": {
@@ -3437,6 +5516,60 @@
                         "Token": 0,
                         "Invalid instruction": true
                     }
+                }
+            },
+            {
+                "Issue stage": {
+                    "Entry allocated": false,
+                    "Entry deallocated": true,
+                    "Issue table": [
+                        {
+                            "used": true,
+                            "pc": 0,
+                            "func3": 0,
+                            "is_func7_0b0000000": true,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 65541,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 5,
+                            "src2": 19
+                        },
+                        {
+                            "used": true,
+                            "pc": 1,
+                            "func3": 4,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 380927,
+                            "use_src1": true,
+                            "use_src2": false,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 9,
+                            "src2": 32
+                        },
+                        {
+                            "used": true,
+                            "pc": 2,
+                            "func3": 2,
+                            "is_func7_0b0000000": false,
+                            "is_func7_0b0000001": false,
+                            "is_func7_0b0100000": false,
+                            "packed_immediate": 716796,
+                            "use_src1": true,
+                            "use_src2": true,
+                            "src1_ready": false,
+                            "src2_ready": false,
+                            "src1": 8,
+                            "src2": 2
+                        }
+                    ],
+                    "Free entries": []
                 }
             },
             {

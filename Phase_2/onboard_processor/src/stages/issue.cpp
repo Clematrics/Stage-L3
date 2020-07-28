@@ -23,21 +23,21 @@ IssueStage::IssueStage() {
 	free_entries_full  = true;
 }
 
-void IssueStage::free_entries_push_back(issue_table_ptr_t entry) {
-	#pragma HLS inline
-	free_entries[free_entries_top] = entry;
-	free_entries_top++;
-	free_entries_empty = false;
-	if (free_entries_bot == free_entries_top)
-		free_entries_full = true;
-}
-
 void IssueStage::free_entries_pop() {
 	#pragma HLS inline
 	free_entries_bot++;
 	free_entries_full = false;
 	if (free_entries_bot == free_entries_top)
 		free_entries_empty = true;
+}
+
+void IssueStage::free_entries_push(issue_table_ptr_t entry) {
+	#pragma HLS inline
+	free_entries[free_entries_top] = entry;
+	free_entries_top++;
+	free_entries_empty = false;
+	if (free_entries_bot == free_entries_top)
+		free_entries_full = true;
 }
 
 void IssueStage::free_entries_push_and_pop(issue_table_ptr_t new_entry) {
@@ -83,20 +83,15 @@ ap_uint<16> log2_16bits(const ap_uint<16>& in) {
 	return final_res;
 }
 
-void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_write_back, CommitToIssue from_commit, IssueToWriteBack* to_write_back, bit_t* issue_ran) {
+#ifdef DBG_SYNTH
+void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_write_back, CommitToIssue from_commit, IssueToWriteBack* to_write_back, IssueStatus* status) {
+#else
+void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_write_back, CommitToIssue from_commit, IssueToWriteBack* to_write_back) {
+#endif
 	#pragma HLS inline
 	#pragma HLS array_partition variable=register_file complete
 	#pragma HLS array_partition variable=issue_table   complete
 	#pragma HLS array_partition variable=free_entries  complete
-
-	// TODO : update ready instructions if a new one is ready
-	if (from_write_back.has_a_src_ready) {
-		for (uint16_t index = 0; index < issue_table_entries_count; index++) {
-			#pragma HLS unroll
-			issue_table[index].src1_ready = issue_table[index].src1 == from_write_back.src_ready;
-			issue_table[index].src2_ready = issue_table[index].src2 == from_write_back.src_ready;
-		}
-	}
 
 	// Selecting a ready instruction
 	ap_uint<issue_table_entries_count> ready_entries_bitset = 0;
@@ -125,7 +120,7 @@ void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_writ
 	switch (is_entry_allocated)   {
 	case 0b00:                                               break;
 	case 0b01: free_entries_pop();                           break;
-	case 0b10: free_entries_push_back(ready_entry_index);    break;
+	case 0b10: free_entries_push(ready_entry_index);         break;
 	case 0b11: free_entries_push_and_pop(ready_entry_index); break;
 	}
 
@@ -133,12 +128,20 @@ void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_writ
 	if (is_entry_allocated) {
 		issue_table[new_entry_index] = (IssueTableEntry){
 			true,
+
+			from_decode.pc,
+			from_decode.func3,
+			from_decode.is_func7_0b0000000,
+			from_decode.is_func7_0b0000001,
+			from_decode.is_func7_0b0100000,
+			from_decode.packed_immediate,
+
 			from_decode.use_src1,
 			from_decode.use_src2,
-			true, // TODO : retrieve the status of src_1 to check if it is already ready
-			true, // TODO : retrieve the status of src_2 to check if it is already ready
+			from_decode.src1_ready,
+			from_decode.src2_ready,
 			from_decode.src1,
-			from_decode.src2,
+			from_decode.src2
 			// ...
 		};
 	}
@@ -146,22 +149,71 @@ void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_writ
 	// Deallocate the ready instruction and pass it through the compute units
 	if (is_entry_deallocated) {
 		issue_table[ready_entry_index].used = false;
+		// TODO : make compute units
+
+		// TODO : send results to write back
+	}
+
+	// TODO : update ready instructions if a new one is ready
+	// Updating is done after having allocated the new instruction, because the sources' status could have changed
+	// between the time an instruction is decoded and queued in the issue table
+	if (from_write_back.has_a_src_ready) {
+		for (uint16_t index = 0; index < issue_table_entries_count; index++) {
+			#pragma HLS unroll
+			issue_table[index].src1_ready = issue_table[index].src1 == from_write_back.src_ready;
+			issue_table[index].src2_ready = issue_table[index].src2 == from_write_back.src_ready;
+		}
 	}
 
 	// TODO : Block if there are no more free entries
 
-	// TODO : make compute units
-
-	// TODO : send results to write back
-
 	#ifndef __SYNTHESIS__
+	json json_issue_table = json::array();
+	for (uint16_t i = 0; i < issue_table_entries_count; i++) {
+		if (issue_table[i].used) {
+			json_issue_table.push_back({
+				{ "used",               issue_table[i].used.to_bool()               },
+				{ "pc",                 issue_table[i].pc.to_uint()                 },
+				{ "func3",              issue_table[i].func3.to_uint()              },
+				{ "is_func7_0b0000000", issue_table[i].is_func7_0b0000000.to_bool() },
+				{ "is_func7_0b0000001", issue_table[i].is_func7_0b0000001.to_bool() },
+				{ "is_func7_0b0100000", issue_table[i].is_func7_0b0100000.to_bool() },
+				{ "packed_immediate",   issue_table[i].packed_immediate.to_uint()   },
+				{ "use_src1",           issue_table[i].use_src1.to_bool()           },
+				{ "use_src2",           issue_table[i].use_src2.to_bool()           },
+				{ "src1_ready",         issue_table[i].src1_ready.to_bool()         },
+				{ "src2_ready",         issue_table[i].src2_ready.to_bool()         },
+				{ "src1",               issue_table[i].src1.to_uint()               },
+				{ "src2",               issue_table[i].src2.to_uint()               }
+			});
+		}
+	}
+	json json_free_entries = json::array();
+	for (uint32_t i = free_entries_bot, do_loop = !free_entries_empty ; i != free_entries_top || do_loop ; i = (i + 1) % issue_table_entries_count, do_loop = false) {
+		json_free_entries.push_back(free_entries[i].to_uint());
+	}
 	Debugger::add_cycle_event({
 		{ "Issue stage",
 			{
-				{ "Entry allocated",   is_entry_allocated   },
-				{ "Entry deallocated", is_entry_deallocated }
+				{ "Entry allocated",   is_entry_allocated.to_bool()   },
+				{ "Entry deallocated", is_entry_deallocated.to_bool() },
+				{ "Issue table",       json_issue_table               },
+				{ "Free entries",      json_free_entries              }
 			}
 		}
 	});
 	#endif // __SYNTHESIS__
+
+	#ifdef DBG_SYNTH
+	for (uint16_t i = 0; i < physical_register_count; i++)
+		status->register_file[i] = register_file[i];
+	for (uint16_t i = 0; i < issue_table_entries_count; i++)
+		status->issue_table[i]   = issue_table[i];
+	for (uint16_t i = 0; i < issue_table_entries_count; i++)
+		status->free_entries[i]  = free_entries[i];
+	status->free_entries_bot     = free_entries_bot;
+	status->free_entries_top     = free_entries_top;
+	status->free_entries_empty   = free_entries_empty;
+	status->free_entries_full    = free_entries_full;
+	#endif
 }

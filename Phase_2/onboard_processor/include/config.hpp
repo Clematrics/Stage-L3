@@ -7,5 +7,5 @@
 
 #ifdef __SYNTHESIS__
 // Comment the following macro to enable release mode
-//  #define DBG_SYNTH
+#define DBG_SYNTH
 #endif // __SYNTHESIS__

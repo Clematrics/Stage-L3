@@ -8,7 +8,11 @@
 
 FetchStage::FetchStage() {}
 
-void FetchStage::interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode, bit_t* fetch_ran) {
+#ifdef DBG_SYNTH
+void FetchStage::interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode, FetchStatus* status) {
+#else
+void FetchStage::interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode) {
+#endif
 	#pragma HLS inline
 
 	bit_t do_smth = from_decode.has_next_pc;
@@ -35,5 +39,8 @@ void FetchStage::interface(memory_t memory, DecodeToFetch& from_decode, FetchToD
 	else {
 		to_decode->has_fetched = false;
 	}
-	*fetch_ran = do_smth;
+	#ifdef DBG_SYNTH
+	status->program_counter = program_counter;
+	status->did_smth        = do_smth;
+	#endif
 }

@@ -79,8 +79,8 @@ int main() {
     do {
 		while (is_running()); // wait for the IP to finish a cycle
 
-		dump_memory();
-		print_memory();
+		// dump_memory();
+		// print_memory();
 		dumpDebugInfo(&processor);
 
 		run();

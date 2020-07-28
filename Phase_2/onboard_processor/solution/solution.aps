@@ -11,7 +11,7 @@
         <config_export format="ip_catalog" rtl="verilog" use_netlist="" vivado_optimization_level="2" vivado_phys_opt="place" vivado_report_level="0"/>
     </config>
     <UIConfigurations>
-        <UIAutosynConf boardInfo="PYNQ-Z1 (xc7z020clg400-1) " hideTrivialOp="true" isBasedOnBoard="true" isSolutionDirty="true" isStopAskAgain="false" showDetailDesignViewer="false">
+        <UIAutosynConf boardInfo="PYNQ-Z1 (xc7z020clg400-1) " hideTrivialOp="true" isBasedOnBoard="true" isSolutionDirty="false" isStopAskAgain="false" showDetailDesignViewer="false">
             <Platform>xilinx/zynq/zynq</Platform>
             <Platform>xilinx/zynq/zynq_fpv6</Platform>
             <customLibs/>
@@ -43,7 +43,7 @@
         </UIAutoSimConf>
     </UIConfigurations>
     <ExportDesign askAgain="true" evaluate="false" flow="false" flowChoice="syn" formatName="ip_catalog" rtl="verilog" rtlButton="true" rtlCombo="verilog">
-        <Format formatName="ip_catalog"/>
+        <Format formatName="ip_catalog" description="" vendor="" library="" ipname="" version="" driver_input_dir="" display_name="" taxonomy=""/>
         <Format formatName="sysgen"/>
         <Format formatName="sysgen_ise"/>
         <Format formatName="syn_dcp"/>
@@ -70,7 +70,7 @@
         <library name="DefaultPlatform" value="xilinx/zynq/zynq_fpv6"/>
     </libraryList>
     <clockList>
-        <clock default="false" name="default" uncertainty="12.5%" period="15"/>
+        <clock name="default" default="false" uncertainty="12.5%" period="15"/>
     </clockList>
 </solution>
 

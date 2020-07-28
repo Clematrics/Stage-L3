@@ -13,21 +13,21 @@ CommitStage::CommitStage() {
 	reorder_buffer_full  = false;
 }
 
-void CommitStage::reorder_buffer_push_back(ReorderBufferEntry entry) {
-	#pragma HLS inline
-	reorder_buffer[reorder_buffer_top] = entry;
-	reorder_buffer_top++;
-	reorder_buffer_empty = false;
-	if (reorder_buffer_bot == reorder_buffer_top)
-		reorder_buffer_full = true;
-}
-
 void CommitStage::reorder_buffer_pop() {
 	#pragma HLS inline
 	reorder_buffer_bot++;
 	reorder_buffer_full = false;
 	if (reorder_buffer_bot == reorder_buffer_top)
 		reorder_buffer_empty = true;
+}
+
+void CommitStage::reorder_buffer_push(ReorderBufferEntry entry) {
+	#pragma HLS inline
+	reorder_buffer[reorder_buffer_top] = entry;
+	reorder_buffer_top++;
+	reorder_buffer_empty = false;
+	if (reorder_buffer_bot == reorder_buffer_top)
+		reorder_buffer_full = true;
 }
 
 void CommitStage::reorder_buffer_push_and_pop(ReorderBufferEntry new_entry) {
@@ -37,7 +37,11 @@ void CommitStage::reorder_buffer_push_and_pop(ReorderBufferEntry new_entry) {
 	reorder_buffer_top++;
 }
 
-void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_commit, CommitToCommit* to_commit, bit_t* stop, bit_t* commit_ran) {
+#ifdef DBG_SYNTH
+void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_commit, CommitToCommit* to_commit, bit_t* stop, CommitStatus* status) {
+#else
+void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_commit, CommitToCommit* to_commit, bit_t* stop) {
+#endif
 	#pragma HLS inline
 	#pragma HLS array_partition variable=reorder_buffer complete
 
@@ -74,7 +78,7 @@ void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_co
 	switch (operation) {
 	case 0b00:                                         break;
 	case 0b01: reorder_buffer_pop();                   break;
-	case 0b10: reorder_buffer_push_back(new_entry);    break;
+	case 0b10: reorder_buffer_push(new_entry);         break;
 	case 0b11: reorder_buffer_push_and_pop(new_entry); break;
 	}
 
@@ -85,16 +89,6 @@ void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_co
 
 	#ifndef __SYNTHESIS__
 	json obj = json({});
-	json array = json::array();
-	for (uint32_t i = reorder_buffer_bot, do_loop = !reorder_buffer_empty ; i != reorder_buffer_top || do_loop ; i = (i + 1) % reorder_buffer_count, do_loop = false)
-		array.push_back({ std::to_string(i - reorder_buffer_bot),
-			{
-				{ "Token",   reorder_buffer[i].token.to_uint()   },
-				{ "Done",    reorder_buffer[i].done.to_bool()    },
-				{ "Invalid", reorder_buffer[i].invalid.to_bool() },
-			}
-		});
-	obj.push_back({ "ROB", array });
 	if (can_queue) {
 		obj.push_back({ "Queued token",        new_entry.token.to_uint()   });
 		obj.push_back({ "Invalid instruction", new_entry.invalid.to_bool() });
@@ -103,6 +97,16 @@ void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_co
 		obj.push_back({ "Dequeued token",      first_entry.token.to_uint()   });
 		obj.push_back({ "Invalid instruction", first_entry.invalid.to_bool() });
 	}
+	json array = json::array();
+	for (uint32_t i = reorder_buffer_bot, do_loop = !reorder_buffer_empty ; i != reorder_buffer_top || do_loop ; i = (i + 1) % reorder_buffer_count, do_loop = false)
+		array.push_back({ std::to_string(i - reorder_buffer_bot),
+			{
+				{ "Token",   reorder_buffer[i].token.to_uint()   },
+				{ "Done",    reorder_buffer[i].done.to_bool()    },
+				{ "Invalid", reorder_buffer[i].invalid.to_bool() }
+			}
+		});
+	obj.push_back({ "ROB", array });
 	obj.push_back({ "To commit",
 		{
 			{ "ROB was empty",          to_commit->rob_was_empty.to_bool()                },
@@ -118,5 +122,12 @@ void CommitStage::interface(DecodeToCommit& from_decode, CommitToCommit& from_co
 	});
 	#endif // __SYNTHESIS__
 
-	*commit_ran = true;
+	#ifdef DBG_SYNTH
+	for (uint16_t i = 0; i < reorder_buffer_count; i++)
+		status->reorder_buffer[i] = reorder_buffer[i];
+	status->reorder_buffer_bot    = reorder_buffer_bot;
+	status->reorder_buffer_top    = reorder_buffer_top;
+	status->reorder_buffer_empty  = reorder_buffer_empty;
+	status->reorder_buffer_full   = reorder_buffer_full;
+	#endif
 }

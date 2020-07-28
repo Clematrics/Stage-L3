@@ -21,6 +21,8 @@ DecodeStage::DecodeStage() {
 		register_map[id] = id;
 	}
 
+	ready_registers = 0;
+
 	// Initialization of the free aliases
 	for (uint16_t id = architectural_register_count; id < physical_register_count; id++) {
 		#pragma HLS unroll
@@ -32,16 +34,6 @@ DecodeStage::DecodeStage() {
 		free_aliases_full = true;
 }
 
-void DecodeStage::free_aliases_push_back(physical_reg_t entry) {
-	#pragma HLS inline
-
-	free_aliases[free_aliases_top] = entry;
-	free_aliases_top++;
-	free_aliases_empty = false;
-	if (free_aliases_bot == free_aliases_top)
-		free_aliases_full = true;
-}
-
 void DecodeStage::free_aliases_pop() {
 	#pragma HLS inline
 
@@ -49,6 +41,16 @@ void DecodeStage::free_aliases_pop() {
 	free_aliases_full = false;
 	if (free_aliases_bot == free_aliases_top)
 		free_aliases_empty = true;
+}
+
+void DecodeStage::free_aliases_push(physical_reg_t entry) {
+	#pragma HLS inline
+
+	free_aliases[free_aliases_top] = entry;
+	free_aliases_top++;
+	free_aliases_empty = false;
+	if (free_aliases_bot == free_aliases_top)
+		free_aliases_full = true;
 }
 
 void DecodeStage::get_register_alias(const reg_t& id, physical_reg_t* alias) {
@@ -96,7 +98,7 @@ void DecodeStage::create_register_alias(const reg_t& id, physical_reg_t* alias, 
 
 void DecodeStage::free_register_alias(const physical_reg_t& id) {
 	#pragma HLS inline
-	free_aliases_push_back(id);
+	free_aliases_push(id);
 
 	#ifndef __SYNTHESIS__
 	json array = json::array();
@@ -117,10 +119,16 @@ void DecodeStage::free_register_alias(const physical_reg_t& id) {
 	#endif // __SYNTHESIS__
 }
 
-void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit, bit_t* decode_ran) {
+#ifdef DBG_SYNTH
+void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit, DecodeStatus* status) {
+#else
+void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit) {
+#endif
 	#pragma HLS inline
 	#pragma array_partition variable=register_map complete
 	#pragma array_partition variable=free_aliases complete
+
+	// TODO : update ready registers from write back and commit
 
 	bit_t do_smth = from_fetch.has_fetched;
 
@@ -258,6 +266,13 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		}
 
 		bit_t blocked_register_map = false;
+		physical_reg_t physical_dest;
+		physical_reg_t physical_src1;
+		physical_reg_t physical_src2;
+		if (use_src1) get_register_alias(src1, &physical_src1);
+		if (use_src2) get_register_alias(src2, &physical_src2);
+		if (use_dest) create_register_alias(dest, &physical_dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
+
 		to_issue->has_decoded_instruction = true;
 		to_issue->pc                      = from_fetch.pc;
 		to_issue->func3                   = func3;
@@ -268,9 +283,11 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		to_issue->use_dest                = use_dest;
 		to_issue->use_src1                = use_src1;
 		to_issue->use_src2                = use_src2;
-		if (use_src1) get_register_alias(src1, &to_issue->src1);
-		if (use_src2) get_register_alias(src2, &to_issue->src2);
-		if (use_dest) create_register_alias(dest, &to_issue->dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
+		to_issue->dest                    = physical_dest;
+		to_issue->src1                    = physical_src1;
+		to_issue->src2                    = physical_src2;
+		to_issue->src1_ready              = ready_registers.get_bit(physical_src1);
+		to_issue->src2_ready              = ready_registers.get_bit(physical_src2);
 		to_issue->invalid                 = invalid_instruction;
 
 		to_commit->add_to_rob = true;
@@ -323,5 +340,17 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		to_issue->has_decoded_instruction = false;
 		to_commit->add_to_rob             = false;
 	}
-	*decode_ran = do_smth;
+
+	#ifdef DBG_SYNTH
+	for (uint16_t i = 0; i < architectural_register_count; i++)
+		status->register_map[i] = register_map[i];
+	status->ready_registers    = ready_registers;
+	for (uint16_t i = 0; i < physical_register_count; i++)
+		status->free_aliases[i] = free_aliases[i];
+	status->free_aliases_bot    = free_aliases_bot;>
+	status->free_aliases_top    = free_aliases_top;
+	status->free_aliases_empty  = free_aliases_empty;
+	status->free_aliases_full   = free_aliases_full;
+	status->did_smth            = do_smth;
+	#endif
 }

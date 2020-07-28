@@ -38,13 +38,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="43"/>
-    <Option Name="WTModelSimExportSim" Val="43"/>
-    <Option Name="WTQuestaExportSim" Val="43"/>
-    <Option Name="WTIesExportSim" Val="43"/>
-    <Option Name="WTVcsExportSim" Val="43"/>
-    <Option Name="WTRivieraExportSim" Val="43"/>
-    <Option Name="WTActivehdlExportSim" Val="43"/>
+    <Option Name="WTXSimExportSim" Val="45"/>
+    <Option Name="WTModelSimExportSim" Val="45"/>
+    <Option Name="WTQuestaExportSim" Val="45"/>
+    <Option Name="WTIesExportSim" Val="45"/>
+    <Option Name="WTVcsExportSim" Val="45"/>
+    <Option Name="WTRivieraExportSim" Val="45"/>
+    <Option Name="WTActivehdlExportSim" Val="45"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -69,8 +69,8 @@
         <CompFileExtendedInfo CompFileName="processor.bd" FileRelPathName="ip/processor_processing_system7_0_0/processor_processing_system7_0_0.xci">
           <Proxy FileSetName="processor_processing_system7_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="processor.bd" FileRelPathName="ip/processor_processor_0_6/processor_processor_0_6.xci">
-          <Proxy FileSetName="processor_processor_0_6"/>
+        <CompFileExtendedInfo CompFileName="processor.bd" FileRelPathName="ip/processor_processor_0_7/processor_processor_0_7.xci">
+          <Proxy FileSetName="processor_processor_0_7"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/processor/hdl/processor_wrapper.v">
@@ -117,9 +117,9 @@
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
-    <FileSet Name="processor_processor_0_6" Type="BlockSrcs" RelSrcDir="$PSRCDIR/processor_processor_0_6">
+    <FileSet Name="processor_processor_0_7" Type="BlockSrcs" RelSrcDir="$PSRCDIR/processor_processor_0_7">
       <Config>
-        <Option Name="TopModule" Val="processor_processor_0_6"/>
+        <Option Name="TopModule" Val="processor_processor_0_7"/>
         <Option Name="UseBlackboxStub" Val="1"/>
       </Config>
     </FileSet>
@@ -163,7 +163,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="processor_processor_0_6_synth_1" Type="Ft3:Synth" SrcSet="processor_processor_0_6" Part="xc7z020clg400-1" ConstrsSet="processor_processor_0_6" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/processor_processor_0_6_synth_1" IncludeInArchive="true">
+    <Run Id="processor_processor_0_7_synth_1" Type="Ft3:Synth" SrcSet="processor_processor_0_7" Part="xc7z020clg400-1" ConstrsSet="processor_processor_0_7" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/processor_processor_0_7_synth_1" IncludeInArchive="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019">
           <Desc>Vivado Synthesis Defaults</Desc>
@@ -210,7 +210,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="processor_processor_0_6_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="processor_processor_0_6" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="processor_processor_0_6_synth_1" IncludeInArchive="false" GenFullBitstream="true">
+    <Run Id="processor_processor_0_7_impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="processor_processor_0_7" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" SynthRun="processor_processor_0_7_synth_1" IncludeInArchive="false" GenFullBitstream="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019">
           <Desc>Default settings for Implementation.</Desc>

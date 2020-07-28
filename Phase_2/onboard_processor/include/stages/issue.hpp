@@ -4,6 +4,8 @@
 *    Header file for the issue stage
 **************************************************************************** */
 
+#include "config.hpp"
+#include "debug/debug.hpp"
 #include "stage_structs.hpp"
 
 class IssueStage {
@@ -16,10 +18,14 @@ class IssueStage {
 	bit_t free_entries_empty;
 	bit_t free_entries_full;
 
-	void free_entries_push_back(issue_table_ptr_t entry);
 	void free_entries_pop();
+	void free_entries_push(issue_table_ptr_t entry);
 	void free_entries_push_and_pop(issue_table_ptr_t new_entry);
 public:
 	IssueStage();
-	void interface(DecodeToIssue from_decode, WriteBackToIssue from_write_back, CommitToIssue from_commit, IssueToWriteBack* to_write_back, bit_t* issue_ran);
+	#ifdef DBG_SYNTH
+	void interface(DecodeToIssue from_decode, WriteBackToIssue from_write_back, CommitToIssue from_commit, IssueToWriteBack* to_write_back, IssueStatus* status);
+	#else
+	void interface(DecodeToIssue from_decode, WriteBackToIssue from_write_back, CommitToIssue from_commit, IssueToWriteBack* to_write_back);
+	#endif
 };
