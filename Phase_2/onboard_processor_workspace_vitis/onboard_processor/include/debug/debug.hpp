@@ -6,3 +6,4 @@
 
 #include "debug/debug_helpers.hpp"
 #include "debug/debug_synthesis.hpp"
+#include "debug/json.hpp"

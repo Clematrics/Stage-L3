@@ -12,8 +12,10 @@
 #include <iostream>
 #include <streambuf>
 
+#include "debug/json.hpp"
+
 struct custom_streambuf : std::streambuf {
-    static const uint32_t buf_size = 4096;
+    static const uint32_t buf_size = 65536;
     static const uint32_t chunk_size = 2048;
     using buffer_t = std::array<char_type, buf_size>;
 	buffer_t* buf;
@@ -31,25 +33,21 @@ protected:
     void flush() {
         uint32_t todo = ptr;
         uint32_t todo_chunk = todo == 0 ? 0 : (todo % chunk_size == 0 ? (todo / chunk_size) : (todo / chunk_size + 1));
-        // std::cout << "flushing... \n";
         for (uint16_t i = 0; i < todo_chunk; i++) {
             for (uint16_t j = 0; j < chunk_size; j++) {
                 std::cout << buf->at(i * chunk_size + j);
             }
-            // std::cout << "chunck ends...\n";
             sleep(1); // sleep 1 second
         }
         ptr = 0;
     }
 
     int sync() override {
-        // std::cout << "sync... \n";
         flush();
         return 0;
     }
 
     std::streamsize xsputn(const char_type* s, std::streamsize n) override {
-        // std::cout << "xsputn..." << n << "\n";
         std::streamsize m = n;
         uint32_t s_index = 0;
         while (m > 0) {
@@ -76,4 +74,4 @@ protected:
     }
 };
 
-void dumpDebugInfo(XProcessor* instance);
+json dump_debug_info(XProcessor* instance);
