@@ -1,51 +1,54 @@
 \documentclass[a4paper]{article}
-\usepackage[left=1cm,right=1cm]{geometry}
+\usepackage[left=.5cm,right=.5cm]{geometry}
 
+\usepackage{calc}
 \usepackage{tikz}
 \usetikzlibrary{arrows, calc, fit, positioning}
 
 \begin{document}
 \begin{center}
 	\begin{tikzpicture}[>=latex, remember picture]
-		\node[draw] (fetch) {
+		\node[draw, fill=gray!40] (fetch) {
 			\begin{tikzpicture}
 				\node {Fetch};
 			\end{tikzpicture}
 		};
-		\node[draw] [below=of fetch] (decode) {
+		\node[draw, fill=gray!40] [below=of fetch] (decode) {
 			\begin{tikzpicture}
 				\node {Decode};
 			\end{tikzpicture}
 		};
-		\node[draw] [below=of decode] (issue) {
+		\node[draw, fill=gray!40] [below=of decode] (issue) {
 			\begin{tikzpicture}[node distance=.8cm, remember picture]
 				\node (issue_base) {};
 				\node (issue_title) [right=of issue_base] {Issue};
 				\node (issue_table) [below=of issue_base] {
 					\begin{tabular}{|c|c|c|c|}
 						\hline
-						\hphantom{hello} \tikz \node (cell_anchor) {}; & \hphantom{hello} & \hphantom{hello} & \hphantom{hello} \\
+						\tikz \node (cell_anchor) {}; \hphantom{hello} & \hphantom{hello} & \hphantom{hello} & \hphantom{hello} \\
 						\hline & & & \\
 						\hline & & & \\
 						\hline
 					\end{tabular}
 				};
-				\node at (issue_table.north) [anchor=south] {Table};
-			\end{tikzpicture}
-		};
-		\node [below=of issue] (units) {
-			\begin{tikzpicture}[remember picture]
-				\node[draw] [minimum width=2cm] (bu) {Branch unit};
-				\node[draw] [minimum width=2cm, left=of bu] (alu) {ALU};
-				\node[draw] [minimum width=2cm, right=of bu] (mu) {Memory unit};
+				\node at (issue_table.north) [anchor=south] {Instruction table};
+				\node [below=1cm of issue_table] (units) {
+					\begin{tikzpicture}[remember picture]
+						\newlength{\unittextlength}
+						\setlength{\unittextlength}{\widthof{\ Memory unit\ }}
+						\node[draw] [minimum width=\unittextlength] (bu) {Branch unit};
+						\node[draw] [minimum width=\unittextlength, left=of bu] (alu) {ALU};
+						\node[draw] [minimum width=\unittextlength, right=of bu] (mu) {Memory unit};
+					\end{tikzpicture}
+				};
 			\end{tikzpicture}
 		};
 		\node[draw] [left=2cm of issue] (register_file) {Register file};
 		\node[draw] at (decode-|register_file) (register_mapping) {Register mapping};
-		\node[draw] [below=of units] (write_back) {Write back};
-		\node[draw] [below=of write_back] (commit) {Commit};
+		\node[draw, fill=gray!40] [below=of issue] (write_back) {Write back};
+		\node[draw, fill=gray!40] [below=of write_back] (commit) {Commit};
 
-		\node[draw] [right=3cm of commit] (reorder_buffer) {
+		\node[draw] [right=4cm of commit] (reorder_buffer) {
 			\begin{tikzpicture}
 				\node {Reorder buffer};
 			\end{tikzpicture}
@@ -54,33 +57,27 @@
 		\draw[->]  (fetch.north)        ++(0,1) -- node[right] {memory} (fetch.north);
 		\draw[->]  (fetch.240)          -- node[left]  {instruction} (fetch.240|-decode.north);
 		\draw[->]  (fetch.300)          -- node[right] {pc}          (fetch.300|-decode.north);
-		\draw[->]  (decode.5)           -- ++(1,0) |- node[right, pos=0.25] {next pc} (fetch.15);
+		\draw[->]  (decode.5)           -- ++(1.1,0) |- node[right, pos=0.25] {next pc} (fetch.15);
 		\draw[->]  (decode.240)         -- node[left, align=center] {decoded\\instruction} (decode.240|-issue.north);
-		\draw[<->] (decode.355)         -| node[right, align=center] {generate\\instruction id} node[right, align=center, pos=0.75] {enqueue\\instruction} node[above right,pos=1] {\scriptsize +} (reorder_buffer);
+		\draw[->]  (decode.355)         -| node[above, align=center] {generate\\instruction id} node[right, align=center, pos=0.75] {enqueue\\instruction} node[above right,pos=1] {\scriptsize +} (reorder_buffer);
 		\draw[<->] (decode)             -- node[above] {rename} (register_mapping);
 		\draw[<->] (issue)              -- node[below, align=center] {update\\available\\sources} (register_file);
 		\draw[->]  (reorder_buffer)     -- node[below, align=center] {dequeue\\instruction} node[below left,pos=0] {-} (commit);
-		\draw[->]  (issue_table.south)  |- ($(bu) +(0,0.5)$) node [left, pos=0.25, align=center] {take ready\\instruction} -- (bu.north) ;
-		\draw[->]  (issue_table.south)  |- ($(alu)+(0,0.5)$) -- (alu.north);
-		\draw[->]  (issue_table.south)  |- ($(mu) +(0,0.5)$) -- (mu.north) ;
-		\draw[->]  (bu)                 -- ++(0,-0.5) -| node [right, pos=0.75] {result} (write_back);
+		\draw[->]  (issue_table.south)  |- ($(bu) +(0,0.6)$) node[above right,pos=0.15] {-} node [pos=0.25, align=center] {take ready\ \ instruction} -- (bu.north) ;
+		\draw[->]  (issue_table.south)  |- ($(alu)+(0,0.6)$) -- (alu.north);
+		\draw[->]  (issue_table.south)  |- ($(mu) +(0,0.6)$) -- (mu.north) ;
+		\draw[->]  (bu)                 -- ++(0,-0.5) -| node [left, pos=0.75] {result} (write_back);
 		\draw[->]  (alu)                -- ++(0,-0.5) -| (write_back);
 		\draw[->]  (mu)                 -- ++(0,-0.5) -| (write_back);
-		\draw[->]  (write_back.175)     -| node[left, align=center, pos=0.65] {write\\result} (register_file);
+		\draw[->]  (write_back.175)     -| node[above, align=center, pos=0.325] {write result} (register_file);
 		\draw[->]  (write_back.185)     -| node[below, align=center, pos=0.25] {next pc} ($(register_mapping.west)-(0.5,0)$) |- (fetch);
 		\draw[->]  (write_back)         -- node[left, align=center] {mark\\instruction done} (commit);
-		\draw[->]  (commit.173)         -| node[above, pos=0.35] {write load result} ($(register_file)-(1.5,0)$) -- (register_file);
+		\draw[->]  (commit.173)         -| node[above, pos=0.28] {write load result} (register_file-|register_mapping.west) -- (register_file);
 		\draw[->]  (commit.187)         -| node[below, pos=0.25] {free register} ($(register_mapping.west)-(1,0)$) -- (register_mapping);
 
 		\draw[->, dashed] (decode.15) -- ++(.5,0) |- node[pos=0.25,rotate=180,above,sloped] {block} (fetch.345);
 		\draw[->, dashed] (reorder_buffer.115) |- node[pos=0.25,left] {block} (decode.345);
 		\draw[->, dashed] (decode.300|-issue.north) -- node[right] {block} (decode.300);
-		\node (bu_anchor)  at ($(bu.east)+(.2,0)$) {};
-		\node (alu_anchor) at ($(alu.east)+(.2,0)$) {};
-		\node (mu_anchor)  at ($(mu.west)-(.2,0)$) {};
-		\draw[->, dashed] (bu.east)  -- (bu_anchor)  -- node[left,pos=0.75] {block} (bu_anchor|-issue.south);
-		\draw[->, dashed] (alu.east) -- (alu_anchor) -- node[left,pos=0.75] {block} (alu_anchor|-issue.south);
-		\draw[->, dashed] (mu.west)  -- (mu_anchor)  -- node[right,pos=0.75] {block} (mu_anchor|-issue.south);
 
 		\draw[->] (decode.240|-issue.north) -- ++(0,-0.5) -| (cell_anchor|-issue_table.north) -- ++(0,-0.15) node [above right] {\scriptsize +};
 
