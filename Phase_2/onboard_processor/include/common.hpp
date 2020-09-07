@@ -77,6 +77,7 @@ typedef ap_int<word_bits>      signed_word_t;
 typedef ap_uint<2 * word_bits> double_word_t;
 
 typedef ap_uint<word_bits - 2> program_counter_t;     // The program counter is aligned on 32 bits: the two lower bits of the address are ignored
+typedef ap_uint<word_bits - 2> address_t;             // All addresses are aligned on 32 bits: the two lower bits are ignored
 
 /* ****************************************************************************
 *    RISC-V implementation constants and types

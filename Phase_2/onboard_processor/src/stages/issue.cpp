@@ -117,7 +117,7 @@ void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_writ
 	* operation = 0b11 -> an entry is allocated, and another is deallocated
 	*/
 	ap_uint<2> operation = (is_entry_deallocated, is_entry_allocated);
-	switch (is_entry_allocated)   {
+	switch (operation)   {
 	case 0b00:                                               break;
 	case 0b01: free_entries_pop();                           break;
 	case 0b10: free_entries_push(ready_entry_index);         break;

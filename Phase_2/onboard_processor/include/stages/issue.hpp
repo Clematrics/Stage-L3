@@ -7,6 +7,7 @@
 #include "config.hpp"
 #include "debug/debug.hpp"
 #include "stage_structs.hpp"
+#include "components/compute_unit.hpp"
 
 class IssueStage {
 	word_t register_file[physical_register_count];
@@ -21,6 +22,8 @@ class IssueStage {
 	void free_entries_pop();
 	void free_entries_push(issue_table_ptr_t entry);
 	void free_entries_push_and_pop(issue_table_ptr_t new_entry);
+
+	ComputeUnit compute_unit;
 public:
 	IssueStage();
 	#ifdef DBG_SYNTH

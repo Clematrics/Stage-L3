@@ -34,4 +34,9 @@ namespace Architecture {
 		MUL, MULH, MULHSU, MULHU, DIV, DIVU, REM, REMU,
 		unknown_name
 	)
+
+	SCOPED_ENUM(InstructionCategory,
+		load, fence, alui, auipc, store, alu, lui, branch, jalr, jal, system,
+		unknown_kind
+	)
 }

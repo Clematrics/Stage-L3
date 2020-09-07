@@ -6,28 +6,32 @@
 **************************************************************************** */
 
 #include "common.hpp"
+#include "architecture/architecture.hpp"
 #include "architecture/decoding.hpp"
+
+using namespace Architecture::InstructionCategory;
 
 /* ****************************************************************************
 *    Intra-stage structures
 **************************************************************************** */
 
 struct IssueTableEntry {
-	bit_t              used;
+	bit_t               used;
 
-	program_counter_t  pc;
-	func3_t            func3;
-	bit_t              is_func7_0b0000000;
-	bit_t              is_func7_0b0000001;
-	bit_t              is_func7_0b0100000;
-	packed_immediate_t packed_immediate;
+	program_counter_t   pc;
+	InstructionCategory category;
+	func3_t             func3;
+	bit_t               is_func7_0b0000000;
+	bit_t               is_func7_0b0000001;
+	bit_t               is_func7_0b0100000;
+	packed_immediate_t  packed_immediate;
 
-	bit_t              use_src1;
-	bit_t              use_src2;
-	bit_t              src1_ready;
-	bit_t              src2_ready;
-	physical_reg_t     src1;
-	physical_reg_t     src2;
+	bit_t               use_src1;
+	bit_t               use_src2;
+	bit_t               src1_ready;
+	bit_t               src2_ready;
+	physical_reg_t      src1;
+	physical_reg_t      src2;
 };
 
 struct ReorderBufferEntry {
@@ -52,24 +56,25 @@ struct DecodeToFetch {
 };
 
 struct DecodeToIssue {
-	bit_t              has_decoded_instruction;
-	program_counter_t  pc;
-	func3_t            func3;
-	bit_t              is_func7_0b0000000;
-	bit_t              is_func7_0b0000001;
-	bit_t              is_func7_0b0100000;
-	packed_immediate_t packed_immediate;
+	bit_t               has_decoded_instruction;
+	program_counter_t   pc;
+	InstructionCategory category;
+	func3_t             func3;
+	bit_t               is_func7_0b0000000;
+	bit_t               is_func7_0b0000001;
+	bit_t               is_func7_0b0100000;
+	packed_immediate_t  packed_immediate;
 
-	bit_t              use_dest;
-	bit_t              use_src1;
-	bit_t              use_src2;
-	physical_reg_t     dest;
-	physical_reg_t     src1;
-	physical_reg_t     src2;
-	bit_t              src1_ready;
-	bit_t              src2_ready;
+	bit_t               use_dest;
+	bit_t               use_src1;
+	bit_t               use_src2;
+	physical_reg_t      dest;
+	physical_reg_t      src1;
+	physical_reg_t      src2;
+	bit_t               src1_ready;
+	bit_t               src2_ready;
 
-	bit_t              invalid; // If unknown instruction
+	bit_t               invalid; // If unknown instruction
 };
 
 struct DecodeToCommit {

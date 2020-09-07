@@ -10,6 +10,7 @@
 #include "debug/debug.hpp"
 
 using namespace Architecture::Type;
+using namespace Architecture::InstructionCategory;
 using namespace Decoding;
 
 DecodeStage::DecodeStage() {
@@ -146,7 +147,10 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 
 		const bool is_func7_0b0x0000x = !(func7 & 0b1011110);
 
-		Type type = Architecture::Type::unknown_type; // Default instruction type
+		Type type                    = Architecture::Type::unknown_type; // Default instruction type
+		InstructionCategory category = Architecture::InstructionCategory::unknown_kind; // Default instruction category
+
+		bit_t invalid_instruction = false;
 
 		bit_t is_jmp               = false;
 		bit_t is_jmp_address_known = false;
@@ -155,26 +159,34 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 			switch (opcode_high) {
 			case Opcode::Suffix::High::load_fence_auipc:
 				switch (opcode_low) {
-				case Opcode::Suffix::Low::h00_load : type = Architecture::Type::I;  break;
-				case Opcode::Suffix::Low::h00_001  :                                break;
-				case Opcode::Suffix::Low::h00_010  :                                break;
-				case Opcode::Suffix::Low::h00_fence: type = Architecture::Type::I;  break;
-				case Opcode::Suffix::Low::h00_alui : type = Architecture::Type::I;  break;
-				case Opcode::Suffix::Low::h00_auipc: type = Architecture::Type::U;  break;
-				case Opcode::Suffix::Low::h00_110  :                                break;
-				case Opcode::Suffix::Low::h00_111  :                                break;
+				case Opcode::Suffix::Low::h00_load : type     = Architecture::Type::I;
+				                                     category = Architecture::InstructionCategory::load;  break;
+				case Opcode::Suffix::Low::h00_001  :                                                      break;
+				case Opcode::Suffix::Low::h00_010  :                                                      break;
+				case Opcode::Suffix::Low::h00_fence: type     = Architecture::Type::I;
+				                                     category = Architecture::InstructionCategory::fence;
+				                                     invalid_instruction = func3 != 0b000;                break;
+				case Opcode::Suffix::Low::h00_alui : type     = Architecture::Type::I;
+				                                     category = Architecture::InstructionCategory::alui;  break;
+				case Opcode::Suffix::Low::h00_auipc: type     = Architecture::Type::U;
+				                                     category = Architecture::InstructionCategory::auipc; break;
+				case Opcode::Suffix::Low::h00_110  :                                                      break;
+				case Opcode::Suffix::Low::h00_111  :                                                      break;
 				}
 				break;
 			case Opcode::Suffix::High::store_alu_lui:
 				switch (opcode_low) {
-				case Opcode::Suffix::Low::h01_store: type = Architecture::Type::S;  break;
-				case Opcode::Suffix::Low::h01_001  :                                break;
-				case Opcode::Suffix::Low::h01_010  :                                break;
-				case Opcode::Suffix::Low::h01_011  :                                break;
-				case Opcode::Suffix::Low::h01_alu  : type = Architecture::Type::R;  break;
-				case Opcode::Suffix::Low::h01_lui  : type = Architecture::Type::U;  break;
-				case Opcode::Suffix::Low::h01_110  :                                break;
-				case Opcode::Suffix::Low::h01_111  :                                break;
+				case Opcode::Suffix::Low::h01_store: type     = Architecture::Type::S;
+				                                     category = Architecture::InstructionCategory::store; break;
+				case Opcode::Suffix::Low::h01_001  :                                                      break;
+				case Opcode::Suffix::Low::h01_010  :                                                      break;
+				case Opcode::Suffix::Low::h01_011  :                                                      break;
+				case Opcode::Suffix::Low::h01_alu  : type     = Architecture::Type::R;
+				                                     category = Architecture::InstructionCategory::alu;   break;
+				case Opcode::Suffix::Low::h01_lui  : type     = Architecture::Type::U;
+				                                     category = Architecture::InstructionCategory::lui;   break;
+				case Opcode::Suffix::Low::h01_110  :                                                      break;
+				case Opcode::Suffix::Low::h01_111  :                                                      break;
 				}
 				break;
 			case Opcode::Suffix::High::unused_10:
@@ -182,17 +194,23 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 			case Opcode::Suffix::High::branch_jal_r_system:
 				switch (opcode_low) {
 				case Opcode::Suffix::Low::h11_branch: type = Architecture::Type::B;
-				                                      is_jmp = true;                break;
+				                                      category = Architecture::InstructionCategory::branch;
+				                                      is_jmp = true;                                        break;
 				case Opcode::Suffix::Low::h11_jalr  : type = Architecture::Type::I;
-				                                      is_jmp = true;                break;
-				case Opcode::Suffix::Low::h11_010   :                               break;
+				                                      category = Architecture::InstructionCategory::jalr;
+				                                      is_jmp = true;                                        break;
+				case Opcode::Suffix::Low::h11_010   :                                                       break;
 				case Opcode::Suffix::Low::h11_jal   : type = Architecture::Type::J;
+				                                      category = Architecture::InstructionCategory::jal;
 				                                      is_jmp = true;
-				                                      is_jmp_address_known = true;  break;
-				case Opcode::Suffix::Low::h11_system: type = Architecture::Type::I; break;
-				case Opcode::Suffix::Low::h11_101   :                               break;
-				case Opcode::Suffix::Low::h11_110   :                               break;
-				case Opcode::Suffix::Low::h11_111   :                               break;
+				                                      is_jmp_address_known = true;                          break;
+				case Opcode::Suffix::Low::h11_system: type = Architecture::Type::I;
+				                                      category = Architecture::InstructionCategory::system;
+				                                      invalid_instruction = dest != Register::x0 || src1 != Register::x0;
+													                                                        break;
+				case Opcode::Suffix::Low::h11_101   :                                                       break;
+				case Opcode::Suffix::Low::h11_110   :                                                       break;
+				case Opcode::Suffix::Low::h11_111   :                                                       break;
 				}
 				break;
 			}
@@ -200,12 +218,12 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 
 		packed_immediate_t packed_immediate;
 		program_counter_t  pc_offset;
-		bit_t              invalid_instruction = false;
 
 		bit_t use_dest = false;
 		bit_t use_src1 = false;
 		bit_t use_src2 = false;
 
+		// TODO : performances : plutôt qu'utiliser des enums, utiliser des flags ?
 		switch (type) {
 		case Architecture::Type::R:
 			use_src1 = true;
@@ -273,8 +291,9 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		if (use_src2) get_register_alias(src2, &physical_src2);
 		if (use_dest) create_register_alias(dest, &physical_dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
 
-		to_issue->has_decoded_instruction = true;
+		to_issue->has_decoded_instruction = !invalid_instruction; // Only add the instruction to the issue table if it is a valid instruction
 		to_issue->pc                      = from_fetch.pc;
+		to_issue->category                = category;
 		to_issue->func3                   = func3;
 		to_issue->is_func7_0b0000000      = is_func7_0b0x0000x && !func7.test(5) && !func7.test(0);
 		to_issue->is_func7_0b0000001      = is_func7_0b0x0000x && !func7.test(5) &&  func7.test(0);
