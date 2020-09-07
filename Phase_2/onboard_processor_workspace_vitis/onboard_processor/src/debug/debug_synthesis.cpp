@@ -22,12 +22,12 @@ inline int get_value(int value, int index, int pack_size, int bits) {
 }
 
 json dump_register_map(XProcessor* instance) {
-	json map = json::array();
+	json map = json::object();
 
 	int v;
 	for (uint16_t i = 0; i < architectural_register_count; i++) {
 		XProcessor_Read_dbg_decode_status_register_map_V_Words(instance, pack(i, 4), &v, 1);
-		map.push_back({ { std::to_string(i), std::to_string(get_value(v, i, 4, 6)) } });
+		map.push_back({ std::to_string(i), std::to_string(get_value(v, i, 4, 6)) });
 	}
 
 	return map;
@@ -62,19 +62,19 @@ json dump_free_aliases(XProcessor* instance) {
 }
 
 json dump_register_file(XProcessor* instance) {
-	json map = json::array();
+	json map = json::object();
 
 	int v;
 	for (uint16_t i = 0; i < physical_register_count; i++) {
 		XProcessor_Read_dbg_issue_status_register_file_V_Words(instance, i, &v, 1);
-		map.push_back({ { std::to_string(i), v } });
+		map.push_back({ std::to_string(i), v });
 	}
 
 	return map;
 }
 
 json dump_issue_table(XProcessor* instance) {
-	json arr = json::array();
+	json obj = json::object();
 
 	int used, pc, func3, is_func7_0b0000000, is_func7_0b0000001, is_func7_0b0100000,
 	packed_immediate, use_src1, use_src2, src1, src2, src1_ready, src2_ready;
@@ -94,7 +94,7 @@ json dump_issue_table(XProcessor* instance) {
 		XProcessor_Read_dbg_issue_status_issue_table_src1_ready_V_Words(instance, pack(i, 4), &src1_ready, 1);
 		XProcessor_Read_dbg_issue_status_issue_table_src2_ready_V_Words(instance, pack(i, 4), &src2_ready, 1);
 
-		arr.push_back({
+		obj.push_back({ std::to_string(i), {
 			{ "used",               static_cast<bool>(get_value(used, i, 4, 1)) },
 			{ "pc",                 get_value(pc, i, 1, 30) },
 			{ "func3",              get_value(func3, i, 4, 3) },
@@ -108,10 +108,10 @@ json dump_issue_table(XProcessor* instance) {
 			{ "src2",               get_value(src2, i, 4, 6) },
 			{ "src1_ready",         static_cast<bool>(get_value(src1_ready, i, 4, 1)) },
 			{ "src2_ready",         static_cast<bool>(get_value(src2_ready, i, 4, 1)) }
-		});
+		} });
 	}
 
-	return arr;
+	return obj;
 }
 
 json dump_free_entries(XProcessor* instance) {
@@ -163,8 +163,8 @@ json dump_debug_info(XProcessor* instance) {
 			{ "register_map",       dump_register_map(instance) },
 			{ "ready_registers",    dump_ready_registers(instance) },
 			{ "free_aliases",       dump_free_aliases(instance) },
-			{ "free_aliases_bot",   static_cast<bool>(XProcessor_Get_dbg_decode_status_free_aliases_bot_V(instance)) },
-			{ "free_aliases_top",   static_cast<bool>(XProcessor_Get_dbg_decode_status_free_aliases_top_V(instance)) },
+			{ "free_aliases_bot",   XProcessor_Get_dbg_decode_status_free_aliases_bot_V(instance) },
+			{ "free_aliases_top",   XProcessor_Get_dbg_decode_status_free_aliases_top_V(instance) },
 			{ "free_aliases_empty", static_cast<bool>(XProcessor_Get_dbg_decode_status_free_aliases_empty_V(instance)) },
 			{ "free_aliases_full",  static_cast<bool>(XProcessor_Get_dbg_decode_status_free_aliases_full_V(instance)) },
 			{ "did_smth",           static_cast<bool>(XProcessor_Get_dbg_decode_status_did_smth_V(instance)) }
@@ -173,8 +173,8 @@ json dump_debug_info(XProcessor* instance) {
 			{ "register_file",      dump_register_file(instance) },
 			{ "issue_table",        dump_issue_table(instance) },
 			{ "free_entries",       dump_free_entries(instance) },
-			{ "free_entries_bot",   static_cast<bool>(XProcessor_Get_dbg_issue_status_free_entries_bot_V(instance)) },
-			{ "free_entries_top",   static_cast<bool>(XProcessor_Get_dbg_issue_status_free_entries_top_V(instance)) },
+			{ "free_entries_bot",   XProcessor_Get_dbg_issue_status_free_entries_bot_V(instance) },
+			{ "free_entries_top",   XProcessor_Get_dbg_issue_status_free_entries_top_V(instance) },
 			{ "free_entries_empty", static_cast<bool>(XProcessor_Get_dbg_issue_status_free_entries_empty_V(instance)) },
 			{ "free_entries_full",  static_cast<bool>(XProcessor_Get_dbg_issue_status_free_entries_full_V(instance)) }
 		} },
@@ -183,8 +183,8 @@ json dump_debug_info(XProcessor* instance) {
 		} },
 		{ "commit status", {
 			{ "reorder_buffer",       dump_reorder_buffer(instance) },
-			{ "reorder_buffer_bot",   static_cast<bool>(XProcessor_Get_dbg_commit_status_reorder_buffer_bot_V(instance)) },
-			{ "reorder_buffer_top",   static_cast<bool>(XProcessor_Get_dbg_commit_status_reorder_buffer_top_V(instance)) },
+			{ "reorder_buffer_bot",   XProcessor_Get_dbg_commit_status_reorder_buffer_bot_V(instance) },
+			{ "reorder_buffer_top",   XProcessor_Get_dbg_commit_status_reorder_buffer_top_V(instance) },
 			{ "reorder_buffer_empty", static_cast<bool>(XProcessor_Get_dbg_commit_status_reorder_buffer_empty_V(instance)) },
 			{ "reorder_buffer_full",  static_cast<bool>(XProcessor_Get_dbg_commit_status_reorder_buffer_full_V(instance)) }
 		} },

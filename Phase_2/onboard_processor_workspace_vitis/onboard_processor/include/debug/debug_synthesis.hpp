@@ -32,13 +32,21 @@ public:
 protected:
     void flush() {
         uint32_t todo = ptr;
-        uint32_t todo_chunk = todo == 0 ? 0 : (todo % chunk_size == 0 ? (todo / chunk_size) : (todo / chunk_size + 1));
+        uint32_t todo_chunk = todo / chunk_size;
         for (uint16_t i = 0; i < todo_chunk; i++) {
             for (uint16_t j = 0; j < chunk_size; j++) {
                 std::cout << buf->at(i * chunk_size + j);
             }
-            sleep(1); // sleep 1 second
+            usleep(100000); // sleep 100 millisecond
         }
+
+        if (todo % chunk_size != 0) { // incomplete chunk
+        	for (uint16_t j = 0; j < todo % chunk_size; j++) {
+				std::cout << buf->at(todo_chunk * chunk_size + j);
+			}
+        	usleep(100000); // sleep 100 millisecond
+        }
+
         ptr = 0;
     }
 
