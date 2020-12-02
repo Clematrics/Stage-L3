@@ -12,8 +12,8 @@ class Debugger {
 	static json report;
 public:
 	static void new_cycle();
-	static void add_asm_line(std::string line);
-	static void add_cycle_event(json object);
+	static void add_asm_line(const std::string& line);
+	static void add_cycle_event(const std::string& name, const json object);
 	static json get_report();
 };
 

@@ -16,16 +16,16 @@ json Debugger::report = {
 
 void Debugger::new_cycle() {
 	cycles++;
-	report["Cycles"].push_back({ std::to_string(cycles), json::array() });
+	report["Cycles"].push_back({ std::to_string(cycles), json::object() });
 }
 
-void Debugger::add_asm_line(std::string line) {
+void Debugger::add_asm_line(const std::string& line) {
 	report["Assembly"].push_back(line);
 }
 
-void Debugger::add_cycle_event(const json object) {
+void Debugger::add_cycle_event(const std::string& name, const json object) {
 	json& current_cycle = report["Cycles"][std::to_string(cycles)];
-	current_cycle.push_back(object);
+	current_cycle.push_back({ name, object });
 
 	// std::cout << std::to_string(cycles) << " : " << std::setw(4) << object << '\n' << std::flush;
 }

@@ -8,6 +8,15 @@
 #include "debug/debug.hpp"
 
 IssueStage::IssueStage() {
+	#pragma HLS array_partition variable=register_file complete
+	#pragma HLS array_partition variable=issue_table   complete
+	#pragma HLS array_partition variable=free_entries  complete
+
+	// Initializing register file
+	for (uint16_t id = 0; id < physical_register_count; id++) {
+		register_file[id] = 0;
+	}
+
 	// Initializing issue table
 	for (uint16_t id = 0; id < issue_table_entries_count; id++) {
 		issue_table[id] = (IssueTableEntry){ false };
@@ -33,6 +42,8 @@ void IssueStage::free_entries_pop() {
 
 void IssueStage::free_entries_push(issue_table_ptr_t entry) {
 	#pragma HLS inline
+	#pragma HLS array_partition variable=free_entries  complete
+
 	free_entries[free_entries_top] = entry;
 	free_entries_top++;
 	free_entries_empty = false;
@@ -42,6 +53,8 @@ void IssueStage::free_entries_push(issue_table_ptr_t entry) {
 
 void IssueStage::free_entries_push_and_pop(issue_table_ptr_t new_entry) {
 	#pragma HLS inline
+	#pragma HLS array_partition variable=free_entries  complete
+
 	free_entries[free_entries_top] = new_entry;
 	free_entries_bot++;
 	free_entries_top++;
@@ -84,14 +97,16 @@ ap_uint<16> log2_16bits(const ap_uint<16>& in) {
 }
 
 #ifdef DBG_SYNTH
-void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_write_back, CommitToIssue from_commit, IssueToWriteBack* to_write_back, IssueStatus* status) {
+void IssueStage::interface(const DecodeToIssue& from_decode, const WriteBackToIssue& from_write_back, const CommitToIssue& from_commit, IssueToWriteBack* to_write_back, IssueStatus* status) {
 #else
-void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_write_back, CommitToIssue from_commit, IssueToWriteBack* to_write_back) {
+void IssueStage::interface(const DecodeToIssue& from_decode, const WriteBackToIssue& from_write_back, const CommitToIssue& from_commit, IssueToWriteBack* to_write_back) {
 #endif
 	#pragma HLS inline
 	#pragma HLS array_partition variable=register_file complete
 	#pragma HLS array_partition variable=issue_table   complete
 	#pragma HLS array_partition variable=free_entries  complete
+
+	// TODO : update register file (the zero physical register must not be updated)
 
 	// Selecting a ready instruction
 	ap_uint<issue_table_entries_count> ready_entries_bitset = 0;
@@ -128,20 +143,24 @@ void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_writ
 	if (is_entry_allocated) {
 		issue_table[new_entry_index] = (IssueTableEntry){
 			true,
+			from_decode.token,
 
 			from_decode.pc,
+			from_decode.category,
 			from_decode.func3,
 			from_decode.is_func7_0b0000000,
 			from_decode.is_func7_0b0000001,
 			from_decode.is_func7_0b0100000,
 			from_decode.packed_immediate,
 
+			from_decode.use_dest,
 			from_decode.use_src1,
 			from_decode.use_src2,
-			from_decode.src1_ready,
-			from_decode.src2_ready,
+			from_decode.dest,
 			from_decode.src1,
-			from_decode.src2
+			from_decode.src2,
+			from_decode.src1_ready,
+			from_decode.src2_ready
 			// ...
 		};
 	}
@@ -149,58 +168,83 @@ void IssueStage::interface(DecodeToIssue from_decode, WriteBackToIssue from_writ
 	// Deallocate the ready instruction and pass it through the compute units
 	if (is_entry_deallocated) {
 		issue_table[ready_entry_index].used = false;
-		// TODO : make compute units
+		IssueTableEntry& entry = issue_table[ready_entry_index];
 
-		// TODO : send results to write back
+		ComputeUnitInput  compute_unit_input;
+		ComputeUnitOutput compute_unit_output;
+
+		compute_unit_input.pc                 = entry.pc;
+		compute_unit_input.category           = entry.category;
+		compute_unit_input.func3              = entry.func3;
+		compute_unit_input.is_func7_0b0000000 = entry.is_func7_0b0000000;
+		compute_unit_input.is_func7_0b0000001 = entry.is_func7_0b0000001;
+		compute_unit_input.is_func7_0b0100000 = entry.is_func7_0b0100000;
+		compute_unit_input.src1_value         = entry.use_src1 ? register_file[entry.src1] : static_cast<word_t>(0);
+		compute_unit_input.src2_value         = entry.use_src2 ? register_file[entry.src2] : static_cast<word_t>(0);
+		compute_unit_input.packed_immediate   = entry.packed_immediate;
+
+		compute_unit.interface(compute_unit_input, &compute_unit_output);
+
+		to_write_back->executed_instruction = true;
+		to_write_back->token                = entry.token;
+		to_write_back->has_result           = compute_unit_output.has_result;
+		to_write_back->result               = compute_unit_output.result;
+		to_write_back->dest                 = entry.dest;
+		to_write_back->has_next_pc          = compute_unit_output.has_next_pc;
+		to_write_back->next_pc              = compute_unit_output.next_pc;
+		to_write_back->invalid              = compute_unit_output.invalid;
+		to_write_back->is_load              = compute_unit_output.is_load;
+		to_write_back->is_store             = compute_unit_output.is_store;
+		to_write_back->is_byte_operation    = compute_unit_output.is_byte_operation;
+		to_write_back->is_half_operation    = compute_unit_output.is_half_operation;
+		to_write_back->is_word_operation    = compute_unit_output.is_word_operation;
+		to_write_back->is_unsigned_extended = compute_unit_output.is_unsigned_extended;
+		to_write_back->address              = compute_unit_output.address;
+	}
+	else {
+		to_write_back->executed_instruction = false;
 	}
 
-	// TODO : update ready instructions if a new one is ready
 	// Updating is done after having allocated the new instruction, because the sources' status could have changed
 	// between the time an instruction is decoded and queued in the issue table
 	if (from_write_back.has_a_src_ready) {
+		register_file[from_write_back.src_ready] = from_write_back.result;
 		for (uint16_t index = 0; index < issue_table_entries_count; index++) {
 			#pragma HLS unroll
-			issue_table[index].src1_ready = issue_table[index].src1 == from_write_back.src_ready;
-			issue_table[index].src2_ready = issue_table[index].src2 == from_write_back.src_ready;
+			issue_table[index].src1_ready |= issue_table[index].src1 == from_write_back.src_ready;
+			issue_table[index].src2_ready |= issue_table[index].src2 == from_write_back.src_ready;
 		}
 	}
 
 	// TODO : Block if there are no more free entries
 
 	#ifndef __SYNTHESIS__
-	json json_issue_table = json::array();
-	for (uint16_t i = 0; i < issue_table_entries_count; i++) {
-		if (issue_table[i].used) {
-			json_issue_table.push_back({
-				{ "used",               issue_table[i].used.to_bool()               },
-				{ "pc",                 issue_table[i].pc.to_uint()                 },
-				{ "func3",              issue_table[i].func3.to_uint()              },
-				{ "is_func7_0b0000000", issue_table[i].is_func7_0b0000000.to_bool() },
-				{ "is_func7_0b0000001", issue_table[i].is_func7_0b0000001.to_bool() },
-				{ "is_func7_0b0100000", issue_table[i].is_func7_0b0100000.to_bool() },
-				{ "packed_immediate",   issue_table[i].packed_immediate.to_uint()   },
-				{ "use_src1",           issue_table[i].use_src1.to_bool()           },
-				{ "use_src2",           issue_table[i].use_src2.to_bool()           },
-				{ "src1_ready",         issue_table[i].src1_ready.to_bool()         },
-				{ "src2_ready",         issue_table[i].src2_ready.to_bool()         },
-				{ "src1",               issue_table[i].src1.to_uint()               },
-				{ "src2",               issue_table[i].src2.to_uint()               }
-			});
-		}
+	json json_register_file = json::object();
+	for (uint16_t i = 0; i < physical_register_count; i++) {
+		json_register_file.push_back({ std::to_string(i), string_all(register_file[i].to_uint()) });
 	}
+
+	json json_issue_table = json::object();
+	for (uint16_t i = 0; i < issue_table_entries_count; i++) {
+		json_issue_table.push_back({ std::to_string(i), to_json(issue_table[i]) });
+	}
+
 	json json_free_entries = json::array();
-	for (uint32_t i = free_entries_bot, do_loop = !free_entries_empty ; i != free_entries_top || do_loop ; i = (i + 1) % issue_table_entries_count, do_loop = false) {
+	FOR_CYCLE_BUFFER(free_entries, issue_table_entries_count) {
 		json_free_entries.push_back(free_entries[i].to_uint());
 	}
-	Debugger::add_cycle_event({
-		{ "Issue stage",
-			{
-				{ "Entry allocated",   is_entry_allocated.to_bool()   },
-				{ "Entry deallocated", is_entry_deallocated.to_bool() },
-				{ "Issue table",       json_issue_table               },
-				{ "Free entries",      json_free_entries              }
-			}
-		}
+
+	Debugger::add_cycle_event("Issue stage", {
+		{ "Register file",      json_register_file            },
+		{ "Issue table",        json_issue_table              },
+		{ "Free entries",       json_free_entries             },
+		{ "Free entries bot",   free_entries_bot.to_uint()    },
+		{ "Free entries top",   free_entries_top.to_uint()    },
+		{ "Free entries empty", free_entries_empty.to_bool()  },
+		{ "Free entries full",  free_entries_full.to_bool()   },
+		// Decisions
+		{ "Entry allocated",   is_entry_allocated.to_bool()   },
+		{ "Entry deallocated", is_entry_deallocated.to_bool() },
 	});
 	#endif // __SYNTHESIS__
 

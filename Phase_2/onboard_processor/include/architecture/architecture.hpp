@@ -36,7 +36,6 @@ namespace Architecture {
 	)
 
 	SCOPED_ENUM(InstructionCategory,
-		load, fence, alui, auipc, store, alu, lui, branch, jalr, jal, system,
-		unknown_kind
+		load, fence, alui, auipc, store, alu, lui, branch, jalr, jal, system
 	)
 }

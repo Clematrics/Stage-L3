@@ -23,8 +23,8 @@ class CommitStage {
 public:
 	CommitStage();
 	#ifdef DBG_SYNTH
-	void interface(DecodeToCommit& from_decode, CommitToCommit& from_commit, CommitToCommit* to_commit, bit_t* stop, CommitStatus* status);
+	void interface(memory_t memory, const DecodeToCommit& from_decode, const WriteBackToCommit& from_write_back, const CommitToCommit& from_commit, CommitToIssue* to_issue, CommitToCommit* to_commit, bit_t* stop, CommitStatus* status);
 	#else
-	void interface(DecodeToCommit& from_decode, CommitToCommit& from_commit, CommitToCommit* to_commit, bit_t* stop);
+	void interface(memory_t memory, const DecodeToCommit& from_decode, const WriteBackToCommit& from_write_back, const CommitToCommit& from_commit, CommitToIssue* to_issue, CommitToCommit* to_commit, bit_t* stop);
 	#endif
 };

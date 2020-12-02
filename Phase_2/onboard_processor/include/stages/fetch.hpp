@@ -13,8 +13,8 @@ class FetchStage {
 public:
 	FetchStage();
 	#ifdef DBG_SYNTH
-	void interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode, FetchStatus* status);
+	void interface(memory_t memory, const DecodeToFetch& from_decode, const WriteBackToFetch& from_write_back, FetchToDecode* to_decode, FetchStatus* status);
 	#else
-	void interface(memory_t memory, DecodeToFetch& from_decode, FetchToDecode* to_decode);
+	void interface(memory_t memory, const DecodeToFetch& from_decode, const WriteBackToFetch& from_write_back, FetchToDecode* to_decode);
 	#endif
 };

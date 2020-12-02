@@ -1,5 +1,9 @@
 #pragma once
 
+/* ****************************************************************************
+*    Header file for the compute unit
+**************************************************************************** */
+
 #include "common.hpp"
 #include "architecture/architecture.hpp"
 #include "debug/debug.hpp"
@@ -37,6 +41,6 @@ struct ComputeUnitOutput {
 class ComputeUnit {
 public:
 	ComputeUnit();
-	void interface(ComputeUnitInput& input, ComputeUnitOutput* output);
+	void interface(const ComputeUnitInput& input, ComputeUnitOutput* output);
 private:
 };

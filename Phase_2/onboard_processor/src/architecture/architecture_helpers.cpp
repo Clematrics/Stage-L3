@@ -105,3 +105,20 @@ std::string to_string(const reg_t& reg, bool nice_names) {
 	default: return "Unknown";
 	}
 }
+
+std::string to_string(InstructionCategory category) {
+	switch (category) {
+	case Architecture::InstructionCategory::load:   return "load";
+	case Architecture::InstructionCategory::fence:  return "fence";
+	case Architecture::InstructionCategory::alui:   return "alui";
+	case Architecture::InstructionCategory::auipc:  return "auipc";
+	case Architecture::InstructionCategory::store:  return "store";
+	case Architecture::InstructionCategory::alu:    return "alu";
+	case Architecture::InstructionCategory::lui:    return "lui";
+	case Architecture::InstructionCategory::branch: return "branch";
+	case Architecture::InstructionCategory::jalr:   return "jalr";
+	case Architecture::InstructionCategory::jal:    return "jal";
+	case Architecture::InstructionCategory::system: return "system";
+	default: return "Unknown";
+	}
+}

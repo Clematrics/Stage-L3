@@ -1,10 +1,15 @@
+/* ****************************************************************************
+*    Source file for the compute unit
+**************************************************************************** */
+
 #include "components/compute_unit.hpp"
 
 #include "architecture/immediate_packing.hpp"
 
 ComputeUnit::ComputeUnit() {}
 
-void ComputeUnit::interface(ComputeUnitInput& input, ComputeUnitOutput* output) {
+void ComputeUnit::interface(const ComputeUnitInput& input, ComputeUnitOutput* output) {
+	#pragma HLS inline
 	// TODO : do not make all computations simultaneously to decrease power usage
 
 	word_t immediate_i = unpack_I_immediate(input.packed_immediate);
@@ -46,6 +51,7 @@ void ComputeUnit::interface(ComputeUnitInput& input, ComputeUnitOutput* output) 
 	word_t load_address                = input.src1_value + immediate_i;
 	// store
 	word_t store_address               = input.src1_value + immediate_s;
+	word_t store_value                 = input.src2_value;
 	// addi
 	word_t addi_res                    = input.src1_value + immediate_i;
 	// slti
@@ -143,6 +149,7 @@ void ComputeUnit::interface(ComputeUnitInput& input, ComputeUnitOutput* output) 
 		if (input.func3.get_bit(2)) {
 			output->invalid = true;
 		} else {
+			output->result   = store_value;
 			output->is_store = true;
 			output->address  = store_address(31, 2);
 			switch (input.func3) {

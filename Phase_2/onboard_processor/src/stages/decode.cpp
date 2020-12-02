@@ -14,7 +14,11 @@ using namespace Architecture::InstructionCategory;
 using namespace Decoding;
 
 DecodeStage::DecodeStage() {
-	token = initial_token;
+	#pragma array_partition variable=register_map complete
+	#pragma array_partition variable=free_aliases complete
+
+	token           = initial_token;
+	ready_registers = 0;
 
 	// Initialization of the register map
 	for (uint16_t id = 0; id < architectural_register_count; id++) {
@@ -22,15 +26,19 @@ DecodeStage::DecodeStage() {
 		register_map[id] = id;
 	}
 
-	ready_registers = 0;
+	// Initialization of the ready flags
+	ready_registers = -1; // all registers are marked as ready so computing can begin
 
-	// Initialization of the free aliases
+	// Initialization of the free aliases - 0 must NOT be in the free aliases
 	for (uint16_t id = architectural_register_count; id < physical_register_count; id++) {
 		#pragma HLS unroll
 		free_aliases[id - architectural_register_count] = id;
-		free_aliases_empty = false;
 	}
+
+	free_aliases_bot = 0;
 	free_aliases_top = physical_register_count - architectural_register_count;
+
+	free_aliases_empty = false;
 	if (free_aliases_bot == free_aliases_top)
 		free_aliases_full = true;
 }
@@ -46,6 +54,7 @@ void DecodeStage::free_aliases_pop() {
 
 void DecodeStage::free_aliases_push(physical_reg_t entry) {
 	#pragma HLS inline
+	#pragma array_partition variable=free_aliases complete
 
 	free_aliases[free_aliases_top] = entry;
 	free_aliases_top++;
@@ -56,12 +65,15 @@ void DecodeStage::free_aliases_push(physical_reg_t entry) {
 
 void DecodeStage::get_register_alias(const reg_t& id, physical_reg_t* alias) {
 	#pragma HLS inline
+	#pragma array_partition variable=register_map complete
 
 	*alias = register_map[id];
 }
 
 void DecodeStage::create_register_alias(const reg_t& id, physical_reg_t* alias, bit_t* blocking) {
 	#pragma HLS inline
+	#pragma array_partition variable=register_map complete
+	#pragma array_partition variable=free_aliases complete
 
 	if (free_aliases_empty) {
 		*blocking = true;
@@ -73,63 +85,62 @@ void DecodeStage::create_register_alias(const reg_t& id, physical_reg_t* alias, 
 		*blocking = free_aliases_empty;
 	}
 
-	#ifndef __SYNTHESIS__
-	json json_map = json::object();
-	for (uint16_t id = 0 ; id < architectural_register_count ; id++)
-		json_map.push_back({ to_string(static_cast<reg_t>(id)), register_map[id].to_uint() });
-	json array = json::array();
-	for (uint32_t i = free_aliases_bot, do_loop = !free_aliases_empty ; i != free_aliases_top || do_loop ; i = (i + 1) % physical_register_count, do_loop = false)
-		array.push_back(free_aliases[i].to_uint());
-	Debugger::add_cycle_event({
-		{ "Creating alias",
-			{
-				{ "Architectural register",    to_string(id)    },
-				{ "Physical register created", alias->to_uint() },
-				{ "Current mapping",           json_map         },
-				{ "Free registers", {
-					{ "Empty", free_aliases_empty.to_bool() },
-					{ "Full",  free_aliases_full.to_bool()  },
-					{ "List",  array                        }
-				} }
-			}
-		}
-	});
-	#endif // __SYNTHESIS__
+	// #ifndef __SYNTHESIS__
+	// json json_map = json::object();
+	// for (uint16_t id = 0 ; id < architectural_register_count ; id++) {
+	// 	json_map.push_back({ to_string(static_cast<reg_t>(id)), register_map[id].to_uint() });
+	// }
+
+	// json array = json::array();
+	// FOR_CYCLE_BUFFER(free_aliases, physical_register_count) {
+	// 	array.push_back(free_aliases[i].to_uint());
+	// }
+
+	// Debugger::add_cycle_event("Creating alias", {
+	// 	{ "Architectural register",    to_string(id)    },
+	// 	{ "Physical register created", alias->to_uint() },
+	// 	{ "Current mapping",           json_map         },
+	// 	{ "Free registers", {
+	// 		{ "Empty", free_aliases_empty.to_bool() },
+	// 		{ "Full",  free_aliases_full.to_bool()  },
+	// 		{ "List",  array                        }
+	// 	} }
+	// });
+	// #endif // __SYNTHESIS__
 }
 
 void DecodeStage::free_register_alias(const physical_reg_t& id) {
 	#pragma HLS inline
 	free_aliases_push(id);
 
-	#ifndef __SYNTHESIS__
-	json array = json::array();
-	for (uint32_t i = free_aliases_bot, do_loop = !free_aliases_empty ; i != free_aliases_top || do_loop ; i = (i + 1) % physical_register_count, do_loop = false)
-		array.push_back(free_aliases[i].to_uint());
-	Debugger::add_cycle_event({
-		{ "Freeing alias",
-			{
-				{ "Architectural register", to_string(id) },
-				{ "Free registers", {
-					{ "Empty", free_aliases_empty.to_bool() },
-					{ "Full",  free_aliases_full.to_bool()  },
-					{ "List",  array                        }
-				} }
-			}
-		}
-	});
-	#endif // __SYNTHESIS__
+	// #ifndef __SYNTHESIS__
+	// json array = json::array();
+	// FOR_CYCLE_BUFFER(free_aliases, physical_register_count) {
+	// 	array.push_back(free_aliases[i].to_uint());
+	// }
+
+	// Debugger::add_cycle_event("Freeing alias", {
+	// 	{ "Architectural register", to_string(id) },
+	// 	{ "Free registers", {
+	// 		{ "Empty", free_aliases_empty.to_bool() },
+	// 		{ "Full",  free_aliases_full.to_bool()  },
+	// 		{ "List",  array                        }
+	// 	} }
+	// });
+	// #endif // __SYNTHESIS__
 }
 
 #ifdef DBG_SYNTH
-void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit, DecodeStatus* status) {
+void DecodeStage::interface(const FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit, DecodeStatus* status) {
 #else
-void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit) {
+void DecodeStage::interface(const FetchToDecode& from_fetch, DecodeToFetch* to_fetch, DecodeToIssue* to_issue, DecodeToCommit* to_commit) {
 #endif
 	#pragma HLS inline
 	#pragma array_partition variable=register_map complete
 	#pragma array_partition variable=free_aliases complete
 
 	// TODO : update ready registers from write back and commit
+	// TODO : unmap unused registers, except if it is zero
 
 	bit_t do_smth = from_fetch.has_fetched;
 
@@ -148,7 +159,7 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		const bool is_func7_0b0x0000x = !(func7 & 0b1011110);
 
 		Type type                    = Architecture::Type::unknown_type; // Default instruction type
-		InstructionCategory category = Architecture::InstructionCategory::unknown_kind; // Default instruction category
+		InstructionCategory category = Architecture::InstructionCategory::system; // Default instruction category
 
 		bit_t invalid_instruction = false;
 
@@ -206,7 +217,8 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 				                                      is_jmp_address_known = true;                          break;
 				case Opcode::Suffix::Low::h11_system: type = Architecture::Type::I;
 				                                      category = Architecture::InstructionCategory::system;
-				                                      invalid_instruction = dest != Register::x0 || src1 != Register::x0;
+				                                      invalid_instruction =    dest != Architecture::Register::x0
+													                        || src1 != Architecture::Register::x0;
 													                                                        break;
 				case Opcode::Suffix::Low::h11_101   :                                                       break;
 				case Opcode::Suffix::Low::h11_110   :                                                       break;
@@ -289,9 +301,15 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		physical_reg_t physical_src2;
 		if (use_src1) get_register_alias(src1, &physical_src1);
 		if (use_src2) get_register_alias(src2, &physical_src2);
-		if (use_dest) create_register_alias(dest, &physical_dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
+		if (use_dest) {
+			if (dest.is_zero())
+				physical_dest = 0;
+			else
+				create_register_alias(dest, &physical_dest, &blocked_register_map); // TODO : smth with blocking : block previous stages, add inter-stage registers to hold temporary results ?
+		}
 
 		to_issue->has_decoded_instruction = !invalid_instruction; // Only add the instruction to the issue table if it is a valid instruction
+		to_issue->token                   = token;
 		to_issue->pc                      = from_fetch.pc;
 		to_issue->category                = category;
 		to_issue->func3                   = func3;
@@ -307,52 +325,11 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		to_issue->src2                    = physical_src2;
 		to_issue->src1_ready              = ready_registers.get_bit(physical_src1);
 		to_issue->src2_ready              = ready_registers.get_bit(physical_src2);
-		to_issue->invalid                 = invalid_instruction;
 
 		to_commit->add_to_rob = true;
 		to_commit->token      = token;
 		to_commit->invalid    = invalid_instruction;
 		token++;
-
-		#ifndef __SYNTHESIS__
-		Debugger::add_cycle_event({
-			{ "Decode stage",
-				{
-					{ "To fetch",
-						{
-							{ "Has a next pc", to_fetch->has_next_pc.to_bool() },
-							{ "Next pc",       to_fetch->next_pc.to_uint()     }
-						}
-					},
-					{ "To issue",
-						{
-							{ "Has decoded an instruction", to_issue->has_decoded_instruction.to_bool()                  },
-							{ "Program counter",            to_issue->pc.to_uint()                                       },
-							{ "Func 3",                     to_issue->func3.to_uint()                                    },
-							{ "Is Func7 0b0000000",         to_issue->is_func7_0b0000000.to_bool()                       },
-							{ "Is Func7 0b0000001",         to_issue->is_func7_0b0000001.to_bool()                       },
-							{ "Is Func7 0b0100000",         to_issue->is_func7_0b0100000.to_bool()                       },
-							{ "Packed immediate",           unpack_immediate(type, to_issue->packed_immediate).to_uint() },
-							{ "Use destination",            to_issue->use_dest.to_bool()                                 },
-							{ "Use source 1",               to_issue->use_src1.to_bool()                                 },
-							{ "Use source 2",               to_issue->use_src2.to_bool()                                 },
-							{ "Physical destination",       to_issue->dest.to_uint()                                     },
-							{ "Physical source 1",          to_issue->src1.to_uint()                                     },
-							{ "Physical source 2",          to_issue->src2.to_uint()                                     },
-							{ "Invalid instruction",        to_issue->invalid.to_bool()                                  }
-						}
-					},
-					{ "To commit",
-						{
-							{ "Add instruction to ROB", to_commit->add_to_rob.to_bool() },
-							{ "Token",                  to_commit->token.to_uint()      },
-							{ "Invalid instruction",    to_commit->invalid.to_bool()    }
-						}
-					}
-				}
-			}
-		});
-		#endif // __SYNTHESIS__
 	}
 	else {
 		to_fetch->has_next_pc             = false;
@@ -360,13 +337,35 @@ void DecodeStage::interface(FetchToDecode& from_fetch, DecodeToFetch* to_fetch, 
 		to_commit->add_to_rob             = false;
 	}
 
+	#ifndef __SYNTHESIS__
+	json json_register_map = json::object();
+	for (uint16_t i = 0; i < architectural_register_count; i++) {
+		json_register_map.push_back({ std::to_string(i), register_map[i].to_uint() });
+	}
+
+	json json_free_aliases = json::array();
+	FOR_CYCLE_BUFFER(free_aliases, physical_register_count) {
+		json_free_aliases.push_back(free_aliases[i].to_uint());
+	}
+
+	Debugger::add_cycle_event("Decode stage", {
+		{ "Register map",       json_register_map                                 },
+		{ "Ready registers",    string_bin<64>(ready_registers.to_uint64(), true) },
+		{ "Free aliases",       json_free_aliases                                 },
+		{ "Free aliases bot",   free_aliases_bot.to_uint()                        },
+		{ "Free aliases top",   free_aliases_top.to_uint()                        },
+		{ "Free aliases empty", free_aliases_empty.to_bool()                      },
+		{ "Free aliases full",  free_aliases_full.to_bool()                       }
+	});
+	#endif // __SYNTHESIS__
+
 	#ifdef DBG_SYNTH
 	for (uint16_t i = 0; i < architectural_register_count; i++)
 		status->register_map[i] = register_map[i];
 	status->ready_registers    = ready_registers;
 	for (uint16_t i = 0; i < physical_register_count; i++)
 		status->free_aliases[i] = free_aliases[i];
-	status->free_aliases_bot    = free_aliases_bot;>
+	status->free_aliases_bot    = free_aliases_bot;
 	status->free_aliases_top    = free_aliases_top;
 	status->free_aliases_empty  = free_aliases_empty;
 	status->free_aliases_full   = free_aliases_full;
